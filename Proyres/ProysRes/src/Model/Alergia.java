@@ -1,19 +1,18 @@
 package Model;
 
-pimport java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Alergia {
-	
+
 	private String nombre;
-	private ArrayList <Plato> listaPlatos;
-	
-    
-    public Alergia(String nombre, Plato plato) {
-    	
-    	this.nombre = nombre;
-    	this.listaPlatos =new ArrayList<Plato>();
-    	
-    }
+	private ArrayList<Plato> listaPlatos;
+
+	public Alergia(String nombre, Plato plato) {
+
+		this.nombre = nombre;
+		this.listaPlatos = new ArrayList<Plato>();
+
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -30,22 +29,18 @@ public class Alergia {
 	public void setListaPlatos(ArrayList<Plato> listaPlatos) {
 		this.listaPlatos = listaPlatos;
 	}
-	
+
 	public void mostrar() {
 		System.out.println("Nombre:" + this.getNombre());
 		for (Plato p : listaPlatos) {
-			if ( p != null) {
+			if (p != null) {
 				p.mostrar();
 			}
 		}
 	}
-	
-	public void addPlato ( Plato plato) {
-		listaPlatos.add(plato);
-		}
-	
-	
-    
-	
-}
 
+	public void addPlato(Plato plato) {
+		listaPlatos.add(plato);
+	}
+
+}
