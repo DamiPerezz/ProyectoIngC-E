@@ -1,0 +1,17 @@
+{
+    "nombre": "Juan",
+    "edad": 30,
+    "email": "juan@example.com",
+    "hobbies": [
+      "Leer",
+      "Ver películas",
+      "Jugar videojuegos"
+    ],
+    "direccion": {
+      "calle": "Calle Falsa",
+      "numero": "123",
+      "ciudad": "Ciudad Ficticia",
+      "pais": "País Inexistente"
+    }
+  }
+  

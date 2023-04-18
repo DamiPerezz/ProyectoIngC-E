@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Acceder a un archivo JSON desde JavaScript</title>
+  </head>
+  <body>
+    <script>
+      fetch("EjemploJSON.json")
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // Aquí puedes hacer lo que quieras con los datos, por ejemplo:
+          // - Mostrarlos en la página web
+          // - Almacenarlos en una variable
+          // - Realizar operaciones con ellos
+        })
+        .catch(error => {
+          console.error("Error al leer el archivo JSON:", error);
+        });
+    </script>
+  </body>
+</html>
+
