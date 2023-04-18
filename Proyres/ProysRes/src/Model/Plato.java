@@ -37,4 +37,9 @@ public class Plato {
 		this.nombrePlato = nombrePlato;
 	}
 
+	public void mostrar() {
+		System.out.println("Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio()  );
+		
+	}
+
 }
