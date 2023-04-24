@@ -2,45 +2,44 @@ package Model;
 
 import java.util.ArrayList;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+
 public class Alergia {
 
-	private String nombre;
-	private ArrayList<Plato> listaPlatos;
+	private JSONObject jsonAlergias = new JSONObject();
 
-	public Alergia(String nombre, Plato plato) {
+	public Alergia() {
 
-		this.nombre = nombre;
-		this.listaPlatos = new ArrayList<Plato>();
+		try {
 
-	}
+			FileWriter file = new FileWriter("listaAlergias.json");
 
-	public String getNombre() {
-		return nombre;
-	}
+			file.write(jsonAlergias.toString());
+			file.flush();
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+		} catch (Exception e) {
 
-	public ArrayList<Plato> getListaPlatos() {
-		return listaPlatos;
-	}
-
-	public void setListaPlatos(ArrayList<Plato> listaPlatos) {
-		this.listaPlatos = listaPlatos;
-	}
-
-	public void mostrar() {
-		System.out.println("Nombre:" + this.getNombre());
-		for (Plato p : listaPlatos) {
-			if (p != null) {
-				p.mostrar();
-			}
+			e.printStackTrace();
 		}
+
 	}
 
-	public void addPlato(Plato plato) {
-		listaPlatos.add(plato);
+	public void addAlergia(String alergia) {
+
+		jsonAlergias.put(alergia, true);
+
+	}
+
+	public void removeAlergia(String alergia) {
+
+		jsonAlergias.remove(alergia);
+
 	}
 
 }
