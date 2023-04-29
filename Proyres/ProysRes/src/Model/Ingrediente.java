@@ -1,22 +1,25 @@
 package Model;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+import org.json.JSONObject;
+import com.google.gson.*;
 
 public class Ingrediente {
-
+	
 	private String nombre;
-	private String nutriente;
-	private ArrayList<Plato> listaPlatos;
-	private ArrayList<Alergia> listaAlergias;
-
-	public Ingrediente(String nombre, String nutriente) {
+	
+	public Ingrediente(String nombre) {
 		super();
-
 		this.nombre = nombre;
-		this.nutriente = nutriente;
-		this.listaPlatos = new ArrayList<Plato>();
-		this.listaAlergias = new ArrayList<Alergia>();
-
+		
+	}
+	public Ingrediente() {
+		super();
+		
+		
 	}
 
 	public String getNombre() {
@@ -26,20 +29,73 @@ public class Ingrediente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public String getNutrinete(String nutriente) {
-		return nutriente;
+	public int GetIndex() {
+		String texto= " ";
+		try {
+			
+			FileReader fichero = new FileReader("listaIngredientes.txt");
+			 Scanner scanner = new Scanner(fichero);
+	            while (scanner.hasNextLine()) {
+	                texto = scanner.nextLine();
+	                System.out.println(texto);
+	            }
+	            scanner.close();
+				
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		String[] ingredientes = texto.split(":");
+		int index= ingredientes.length;
+		
+		return index;
 	}
 
-	public void setNutrinete(String nutriente) {
-		this.nutriente = nutriente;
+	public Ingrediente[] MostrarIngredientes() {
+		String texto= " ";
+		try {
+			
+			FileReader fichero = new FileReader("listaIngredientes.txt");
+			 Scanner scanner = new Scanner(fichero);
+	            while (scanner.hasNextLine()) {
+	                texto = scanner.nextLine();
+	                System.out.println(texto);
+	            }
+	            scanner.close();
+				
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		String[] ingredientes = texto.split(":");
+		Ingrediente[] listaIngredientes = new Ingrediente[ingredientes.length];
+		
+		for(int i=0;i<ingredientes.length;i++) {
+			Ingrediente ing = new Ingrediente(ingredientes[i]);
+			listaIngredientes[i] = ing;
+		}
+		return listaIngredientes;
 	}
-
-	public ArrayList<Plato> getListaPlatos() {
-		return listaPlatos;
+	
+	public void AñadirIngrediente() {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca nombre del nuevo ingrediente:");
+		String nombre= sc.next();
+		
+		
+		try {
+			FileWriter file = new FileWriter("listaIngredientes.txt",true);	
+			
+			file.write(nombre + ":");
+			file.flush();
+			file.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
-
-	public ArrayList<Alergia> getListaAlergia() {
-		return listaAlergias;
+	public String toString() {
+		
+		return this.nombre ;
 	}
+	
 }
