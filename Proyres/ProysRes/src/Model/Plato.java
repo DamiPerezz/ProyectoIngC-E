@@ -1,50 +1,39 @@
 package Model;
 
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.FileWriter;
+import java.util.Scanner;
 
 public class Plato {
 
-	private int precio;
-	private ArrayList<Ingrediente> listaIngredientes = new ArrayList();
-	private String nombrePlato;
+	String nombre;
+	int precio;
+	JSONObject listaIngredientes;
 
-	public Plato(int precio, Ingrediente ingrediente, String nombrePlato) {
-		super();
+	public Plato(String nombre, int precio, JSONObject listaIngredientes) {
+
+		this.nombre = nombre;
 		this.precio = precio;
-		listaIngredientes.add(ingrediente);
-		this.nombrePlato = nombrePlato;
-	}
+		this.listaIngredientes = listaIngredientes;
 
-	public int getPrecio() {
-		return precio;
-	}
+		/*try {
 
-	public void setPrecio(int precio) {
-		this.precio = precio;
-	}
+			FileWriter file = new FileWriter("nombredelarchivo");
 
-	public String getIngrediente() {
-		return null;
-	}
+			file.write(obj.toString());
+			file.flush();
 
-	public void setIngrediente(String ingrediente) {
-		
-	}
+		} catch (Exception e) {
 
-	public String getNombrePlato() {
-		return nombrePlato;
-	}
-
-	public void setNombrePlato(String nombrePlato) {
-		this.nombrePlato = nombrePlato;
-	}
-
-	
-	
-	
-	public void mostrar() {
-		System.out.println("Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio()  );
-		
+			e.printStackTrace();
+		}
+	*/	
 	}
 
 }
