@@ -1,15 +1,17 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Plato {
 
 	private int precio;
-	private String Ingrediente;
+	private ArrayList<Ingrediente> listaIngredientes = new ArrayList();
 	private String nombrePlato;
 
-	public Plato(int precio, String ingrediente, String nombrePlato) {
+	public Plato(int precio, Ingrediente ingrediente, String nombrePlato) {
 		super();
 		this.precio = precio;
-		Ingrediente = ingrediente;
+		listaIngredientes.add(ingrediente);
 		this.nombrePlato = nombrePlato;
 	}
 
@@ -22,11 +24,11 @@ public class Plato {
 	}
 
 	public String getIngrediente() {
-		return Ingrediente;
+		return null;
 	}
 
 	public void setIngrediente(String ingrediente) {
-		Ingrediente = ingrediente;
+		
 	}
 
 	public String getNombrePlato() {
@@ -37,6 +39,9 @@ public class Plato {
 		this.nombrePlato = nombrePlato;
 	}
 
+	
+	
+	
 	public void mostrar() {
 		System.out.println("Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio()  );
 		

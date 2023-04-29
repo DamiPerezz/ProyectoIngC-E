@@ -18,6 +18,7 @@ public class Alergia {
 
 		try {
 
+			
 			FileWriter file = new FileWriter("listaAlergias.json");
 
 			file.write(jsonAlergias.toString());
@@ -30,16 +31,8 @@ public class Alergia {
 
 	}
 
-	public void addAlergia(String alergia) {
+	
 
-		jsonAlergias.put(alergia, true);
 
-	}
-
-	public void removeAlergia(String alergia) {
-
-		jsonAlergias.remove(alergia);
-
-	}
 
 }
