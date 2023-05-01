@@ -17,7 +17,6 @@ public class Alergia {
 	public Alergia() {
 
 		try {
-
 			
 			FileWriter file = new FileWriter("listaAlergias.json");
 
@@ -30,9 +29,5 @@ public class Alergia {
 		}
 
 	}
-
-	
-
-
 
 }

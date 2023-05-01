@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.json.JSONObject;
-import com.google.gson.*;
+
 
 public class Ingrediente {
 	

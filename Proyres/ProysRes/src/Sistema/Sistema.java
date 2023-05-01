@@ -22,7 +22,7 @@ public class Sistema {
 		
 		plato.put("salsaDeTomate", "Salsa de tomate");
 		
-		Plato p1 = new Plato("EspaguetisDeCalabacin", 15 , plato);
+		
 		
 		
 
