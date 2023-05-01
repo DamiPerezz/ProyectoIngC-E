@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Plato {
 
 	private int precio;
-	private Ingrediente[] listaIngredientes;
+	private ArrayList <Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
 	private String nombrePlato;
 	private int NOPlato;
 
@@ -23,10 +23,38 @@ public class Plato {
 	public Plato(String nombrePlato, int precio, Ingrediente[] ingrediente,int NOPlato ) {
 		super();
 		this.precio = precio;
-		this.listaIngredientes= listaIngredientes;
+		for(Ingrediente i: ingrediente) {
+		this.listaIngredientes.add(i);
+		}
 		this.nombrePlato = nombrePlato;
 		this.NOPlato= NOPlato;
 	}
+	
+	public Plato(String nombrePlato, int precio,int NOPlato ) {
+		super();
+		this.precio = precio;
+		
+		this.nombrePlato = nombrePlato;
+		this.NOPlato= NOPlato;
+	}
+	
+	
+	
+	
+	public void addIngrediente(Ingrediente ingrediente) {
+		
+		listaIngredientes.add(ingrediente);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public int getPrecio() {
 		return precio;
