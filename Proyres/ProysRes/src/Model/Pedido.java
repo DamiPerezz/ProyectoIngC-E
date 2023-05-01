@@ -15,7 +15,11 @@ public class Pedido {
 		private ArrayList<Plato> listaPlatos;
 		private ArrayList<Menu> listaMenus;
 		
-		
+		public static void main (String [] args) {
+			
+			Pedido origen = new Pedido(0);
+			AñadirPedidoAJSON(origen);
+		}
 
 		public Pedido(int NIdentificacion,ArrayList<Plato> listaPlatos, ArrayList<Menu> listaMenus) {
 			super();
@@ -27,6 +31,9 @@ public class Pedido {
 			super();
 			this.NIdentificacion= NIdentificacion;
 			this.listaPlatos = listaPlatos;
+		}
+		public Pedido(int NIdentificacion) {
+			super();
 		}
 		
 		
@@ -94,20 +101,43 @@ public class Pedido {
 			PlatosPedido.add(AgregarPlato(nombrePlato));
 			
 			//Sacar NOIdentificación
-			
+			int NIdentificacion = SacarIDPedido();
 			//Crear instancia del pedido y guardarla en JSON
 			
-			AñadirPedidoAJSON();
+			Pedido p = new Pedido(NIdentificacion,PlatosPedido);
+			
+			AñadirPedidoAJSON(p);
 			
 			
 		}
 		public int SacarIDPedido() {
+			String txt="";
+			try {
+				FileReader fichero = new FileReader("listaPedidos.json");
+				Scanner sc = new Scanner(fichero);
+				
+				while (sc.hasNextLine()) {
+			        txt += sc.nextLine();
+			     sc.close();   
+			      }
+				
+			}catch(Exception er) {
+				er.getMessage();
+			}
+			JSONArray PedidosJSONArr = new JSONArray (txt);
+			JSONObject ultimoObjeto = PedidosJSONArr.getJSONObject(PedidosJSONArr.length() -1);
+			int num = ultimoObjeto.getInt("NIdentificacion");
 			
 			
+			//Saque todos pedidos JSON de la lista de objetos JSON
 			
-			return
+			//Coja el ultimo objeto del arrayList y saca su atributo NPedido
+			
+			//Añade 1 al NPedido
+			
+			return num;
 		}
-		public void AñadirPedidoAJSON (Pedido p) {
+		public static void AñadirPedidoAJSON (Pedido p) {
 			
 			JSONObject jsonPedido = new JSONObject();
 			jsonPedido.put("NIdentifiacion",p.NIdentificacion);
@@ -129,8 +159,6 @@ public class Pedido {
 			
 			
 		}
-		
-		
 		public Plato AgregarPlato(String nombrePlato) {
 			ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato() ;
 			
@@ -148,18 +176,11 @@ public class Pedido {
 			return p;
 			
 		}
-		
 		public String toString() {
 			
 			return "----------------------" + "\n" + "- " + this.NIdentificacion + "\n" + "- " + this.listaPlatos + "- " + this.listaMenus +  "\n" +"----------------------";
-		}
+		}	
 		
-		public void CrearJSONPedido(Pedido p) {
-			
-			
-			
-			
-		}
 		
 		
 		
