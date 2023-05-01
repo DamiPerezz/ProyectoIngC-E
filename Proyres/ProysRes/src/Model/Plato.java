@@ -125,8 +125,8 @@ public class Plato {
 	}
 	
 	
-	public void mostrar() {
-		System.out.println("Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio()  );
+	public String toString() {
+		return "Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio() ;
 		
 	}
 
