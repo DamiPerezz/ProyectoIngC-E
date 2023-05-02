@@ -33,7 +33,6 @@ public class Plato {
 	public Plato(String nombrePlato, int precio,int NOPlato ) {
 		super();
 		this.precio = precio;
-		
 		this.nombrePlato = nombrePlato;
 		this.NOPlato= NOPlato;
 	}

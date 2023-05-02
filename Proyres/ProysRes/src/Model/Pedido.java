@@ -16,11 +16,12 @@ public class Pedido {
 
 	private ArrayList<Menu> listaMenus;
 	private ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
+	private static JSONObject listaPedidos = new JSONObject();
 
 	public static void main(String[] args) {
 
-			Pedido origen = new Pedido(0);
-			AñadirPedidoAJSON(origen);
+		Pedido origen = new Pedido(0);
+		AñadirPedidoAJSON(origen);
 
 	}
 
@@ -165,17 +166,49 @@ public class Pedido {
 
 	public static void AñadirPedidoAJSON(Pedido p) {
 
+		JSONArray jsonArray = new JSONArray();
+
+		String texto = "";
+		String l;
+
+		try {
+
+			FileReader fr = new FileReader("listaPedidos.json");
+			BufferedReader br = new BufferedReader(fr);
+
+			while ((l = br.readLine()) != null) {
+
+				texto = l;
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println(e);
+
+		}
+
 		JSONObject jsonPedido = new JSONObject();
-		jsonPedido.put("NIdentifiacion", p.NIdentificacion);
+		jsonPedido.put("NIdentificacion", p.NIdentificacion);
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
 
+		JSONObject pedidosAnteriores = new JSONObject(texto);
+
+		jsonArray = pedidosAnteriores.getJSONArray("listaDeFacturas");
+
+		jsonArray.put(jsonPedido);
+
+		listaPedidos.put("listaDeFacturas", jsonArray);
+
 		try {
-			File fichero = new File("listaPedidos.json");
-			FileWriter writer = new FileWriter(fichero, true);
+
+			FileWriter writer = new FileWriter("listaPedidos.json", false);
 
 			// Escribir el objeto JSON en el archivo
-			writer.write(jsonPedido.toString());
+
+			writer.write(listaPedidos.toString());
+			writer.flush();
 
 			// Cerrar el objeto FileWriter
 			writer.close();
