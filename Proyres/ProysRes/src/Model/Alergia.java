@@ -57,7 +57,59 @@ public class Alergia {
 
 	}
 
+	public void mostrarListaAlergias() { // muestra la lista de alergias disponibles al cliente
+		String texto = " ";
+		try {
 
+			File fichero = new File("listaAlergias.json");
+
+			Scanner scanner = new Scanner(fichero);
+
+			while (scanner.hasNextLine()) {
+				texto = scanner.nextLine();
+				JSONObject jsonAlergias = new JSONObject(texto);
+				JSONArray listaAlergias = jsonAlergias.getJSONArray("alergias");
+
+				System.out.println("Alergias disponibles:");
+
+				for (int i = 0; i < listaAlergias.length(); i++) {
+					JSONObject alergiaJson = listaAlergias.getJSONObject(i);
+					String nombreAlergia = alergiaJson.getString("nombre");
+					System.out.println((i + 1) + ". " + nombreAlergia);
+
+					// System.out.println(texto);s
+				}
+			}
+			scanner.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void mostrarPlatosAlergia() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Seleccione una alergia:");
+
+		mostrarListaAlergias();
+
+		int opcionUsuario = in.nextInt();
+
+		try {
+
+			File Platos = new File("listaPlatos.json");
+			Scanner sc = new Scanner(Platos);
+			String texto = "";
+
+			while (sc.hasNextLine()) {
+				texto += sc.nextLine();
+			}
+			sc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public String LeerAlergia() {
 		
