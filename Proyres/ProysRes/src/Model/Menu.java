@@ -8,6 +8,16 @@ import org.json.JSONObject;
 
 public class Menu {
 
+	public String precio;
+	public String[] platos;
+	
+	public Menu(String precio, String[] platos) {
+		super();
+	this.precio = precio;
+	this.platos = platos;
+	
+	
+	}
 	 public static void main(String[] args) {
 
 
@@ -104,6 +114,8 @@ public class Menu {
 		         e.printStackTrace();
 		      }
 	   }
+
+	
 	}
 
 

@@ -59,6 +59,51 @@ public class Pedido {
 	public Pedido(int NIdentificacion) {
 		super();
 	}
+	
+	public Menu[] SacarInstanciasMenu() {
+		
+		String txt = "";
+		// Leer listaPlatos
+		try {
+			FileReader fichero = new FileReader("menus.json");
+
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				txt += sc.nextLine();
+				sc.close();
+			}
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		
+		JSONArray MenusArr = new JSONArray(txt);
+		Menu[] menus = new Menu[MenusArr.length()];
+		String precio;
+		for(int i=0;i<MenusArr.length();i++) {
+			JSONObject m = MenusArr.getJSONObject(i);
+			 precio = m.getString("precio");
+			JSONArray Platos = new JSONArray("platos");
+			String[] listaPlatos = new String[Platos.length()];
+
+			for (int j = 0; j < listaPlatos.length; j++) {
+				String p = Platos.getString(j);
+				listaPlatos[j] = p;
+			}
+			try {
+				Menu menu = new Menu(precio, listaPlatos);
+				menus[i] = menu;
+				
+			}catch(Exception ex) {
+				System.out.println("Error al crear menu");
+			}
+			
+			
+		}
+		return menus;
+		
+	}
 
 	public ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
