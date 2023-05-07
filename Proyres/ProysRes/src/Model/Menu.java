@@ -1,7 +1,6 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import org.json.JSONArray;
@@ -12,8 +11,7 @@ public class Menu {
 	 public static void main(String[] args) {
 
 
-	      // Crear un objeto JSON para el restaurante
-	      JSONObject menus = new JSONObject();
+	    
 
 	      // Crear un objeto JSON para el primer menú
 	      JSONObject menu1 = new JSONObject();
@@ -25,8 +23,6 @@ public class Menu {
 	      menu1.put("precio", "12 euros");
 
 
-	      // Agregar el primer menú al objeto JSON del restaurante
-	      menus.put("menu 1", menu1);
 
 	      // Crear un objeto JSON para el segundo menú
 	      JSONObject menu2 = new JSONObject();
@@ -38,8 +34,7 @@ public class Menu {
 	      menu2.put("precio", "12 euros");
 
 
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 2", menu2);
+	     
 	      
 	      // Crear un objeto JSON para el segundo menú
 	      JSONObject menu3 = new JSONObject();
@@ -50,9 +45,6 @@ public class Menu {
 	      menu3.put("platos", platos3);
 	      menu3.put("precio", "12 euros");
 
-
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 3", menu3);
 	      
 	   // Crear un objeto JSON para el cuarto menú
 	      JSONObject menu4 = new JSONObject();
@@ -64,8 +56,6 @@ public class Menu {
 	      menu4.put("precio", "12 euros");
 
 
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 4", menu4);
 	      
 	      // Crear un objeto JSON para el quinto menú
 	      JSONObject menu5 = new JSONObject();
@@ -76,10 +66,7 @@ public class Menu {
 	      menu5.put("platos", platos5);
 	      menu5.put("precio", "12 euros");
 
-	      
 
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 5", menu5);
 	      
 	      // Crear un objeto JSON para el sexto menú
 	      JSONObject menu6 = new JSONObject();
@@ -91,9 +78,6 @@ public class Menu {
 	      menu6.put("precio", "12 euros");
 
 
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 6", menu6);
-	      
 	      // Crear un objeto JSON para el septimo menú
 	      JSONObject menu7 = new JSONObject();
 	      JSONArray platos7 = new JSONArray();
@@ -103,22 +87,24 @@ public class Menu {
 	      menu7.put("platos", platos7);
 	      menu7.put("precio", "12 euros");
 
-
-	      // Agregar el segundo menú al objeto JSON del restaurante
-	      menus.put("menu 7", menu7);
+	      JSONArray menuArray = new JSONArray();
+	        menuArray.put(menu1);
+	        menuArray.put(menu2);
+	        menuArray.put(menu3);
+	        menuArray.put(menu4);
+	        menuArray.put(menu5);
+	        menuArray.put(menu6);
+	        menuArray.put(menu7);
 
 	      try (FileWriter file = new FileWriter("menus.json")) {
-		         file.write(menu1.toString());
-		         file.write(menu2.toString());
-		         file.write(menu3.toString());
-		         file.write(menu4.toString());
-		         file.write(menu5.toString());
-		         file.write(menu6.toString());
-		         file.write(menu7.toString());
+		         file.write(menuArray.toString());
+		       
 		         System.out.println("Menús guardados en el archivo menus.json");
 		      } catch (IOException e) {
 		         e.printStackTrace();
 		      }
 	   }
 	}
+
+
 
