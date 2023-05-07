@@ -59,6 +59,9 @@ public class Pedido {
 	public Pedido(int NIdentificacion) {
 		super();
 	}
+	public Pedido() {
+		super();
+	}
 	
 	public Menu[] SacarInstanciasMenu() {
 		

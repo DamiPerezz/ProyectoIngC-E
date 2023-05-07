@@ -1,5 +1,5 @@
 package Ventana;
-
+import Model.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,24 +40,34 @@ public class AppVentana {
         añadirPlatoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Llamar al método de la clase Plato
+            	Plato pl = new Plato();
+            	pl.AñadirPlato();
             }
         });
-
+       
+        
         crearPedidoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Llamar al método de la clase Pedido
+                // Llamar al método de la clase Pedido 
+            	 Pedido p = new Pedido();
+            	p.CrearPedido();
             }
         });
         
         añadirIngredientesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Llamar al método de la clase Ingredientes
+            	Ingrediente i = new Ingrediente();
+            	i.AñadirIngrediente();
+            	
             }
         });
 
         añadirTaperButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Llamar al método de la clase Ingredientes
+            	
+            	
             }
         });
 
