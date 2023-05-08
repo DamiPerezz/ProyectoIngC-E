@@ -13,7 +13,7 @@ import java.io.FileWriter;
 
 public class Alergia {
 
-	private static JSONObject jsonAlergias = new JSONObject();
+	private JSONObject jsonAlergias = new JSONObject();
 
 	private ArrayList<Alergia> listaAlergias = new ArrayList<Alergia>();
 	private Alergia nombreAlergia;
@@ -73,7 +73,7 @@ public class Alergia {
 
 	}
 
-	public static void main(String[]args) {
+	public void mostrarListaPlatos() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Seleccione una alergia:");
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();
