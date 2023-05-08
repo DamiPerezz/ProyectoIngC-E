@@ -48,15 +48,6 @@ public class Plato {
 		listaIngredientes.add(ingrediente);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public int getPrecio() {
 		return precio;

@@ -73,7 +73,7 @@ public class Alergia {
 
 	}
 
-	public void mostrarListaPlatos() {
+	public static void main (String[]args) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Seleccione una alergia:");
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();

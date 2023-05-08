@@ -74,8 +74,11 @@ public class Ingrediente {
 		}
 		return listaIngredientes;
 	}
-	
-	public void AñadirIngrediente() {
+	public static void main(String[]args) {
+		
+		AñadirIngrediente();
+	}
+	public static void AñadirIngrediente() {
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca nombre del nuevo ingrediente:");

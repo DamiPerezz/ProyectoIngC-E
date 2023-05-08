@@ -1,1 +1,1 @@
-{"NOPlato":0,"precio":15,"listaIngredientes":[{"nombre":"Patata"},{"nombre":"Mayonesa"},{"nombre":"Atun"},{"nombre":"Aceituna"}],"nombrePlato":"EnsaladillaRusa"}{"NOPlato":1,"precio":22,"listaIngredientes":[{"nombre":"Carne"},{"nombre":"Patata"}],"nombrePlato":"Solomillo"}
+[{"NOPlato":0,"precio":15,"listaIngredientes":[{"nombre":"Patata"},{"nombre":"Mayonesa"},{"nombre":"Atun"},{"nombre":"Aceituna"}],"nombrePlato":"EnsaladillaRusa"},{"NOPlato":1,"precio":22,"listaIngredientes":[{"nombre":"Carne"},{"nombre":"Patata"}],"nombrePlato":"Solomillo"}]

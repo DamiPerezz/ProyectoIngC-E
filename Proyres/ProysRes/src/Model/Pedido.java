@@ -22,10 +22,9 @@ public class Pedido {
 
 		Pedido r = new Pedido();
 		r.CrearPedido();
-
 	}
 
-	public void imprimirRecibo() {
+	public  void imprimirRecibo() {
 
 		int factura = 0;
 
@@ -67,8 +66,8 @@ public class Pedido {
 		//Preguntar opcion 1,2 o 3
 	int opcion = OpcionesDePedido();
 	boolean SeguirPedido = true;
-	ArrayList<Plato> PlatosPedido = null;
-	ArrayList<Menu> MenusPedido = null;
+	ArrayList<Plato> PlatosPedido = new ArrayList<Plato>();
+	ArrayList<Menu> MenusPedido = new ArrayList<Menu>();
 		//Bucle de pedir plato/Menu
 	
 		while(SeguirPedido==true) {
@@ -82,6 +81,7 @@ public class Pedido {
 				SeguirPedido=false;
 			}//Preguntar si ha termiando de pedir
 			SeguirPedido=FinDelPedido();
+			opcion=OpcionesDePedido();
 		}
 		//Terminar pedido, guardalo e imprimir recibo
 		
@@ -120,7 +120,7 @@ public class Pedido {
 		for(int i=0;i<MenusArr.length();i++) {
 			JSONObject m = MenusArr.getJSONObject(i);
 			 precio = m.getString("precio");
-			JSONArray Platos = new JSONArray("platos");
+			JSONArray Platos = m.getJSONArray("platos");
 			String[] listaPlatos = new String[Platos.length()];
 
 			for (int j = 0; j < listaPlatos.length; j++) {
@@ -155,7 +155,7 @@ public class Pedido {
 		// Creamos el JSON Array de los platos
 		JSONArray platosArr = new JSONArray(txt);
 		ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
-		for (int i = 0; i < txt.length(); i++) {
+		for (int i = 0; i < platosArr.length(); i++) {
 			JSONObject platoJSON = platosArr.getJSONObject(i);
 			int precio = platoJSON.getInt("precio");
 			String nombrePlato = platoJSON.getString("nombrePlato");
@@ -188,6 +188,8 @@ public class Pedido {
 		if (respuesta== "Y" || respuesta== "N") {
 			if(respuesta== "Y")
 				respBool=true;
+			if(respuesta=="N")
+				System.out.println("Gracias por tu visita ;)");
 		}else {	
 			System.out.println("Respuesta invalida");
 		}
@@ -268,11 +270,10 @@ public class Pedido {
 			er.getMessage();
 		}
 
-		// JSONArray PedidosJSONArr = new JSONArray (txt);
-		JSONObject ultimoObjeto = new JSONObject(txt);
-		// JSONObject ultimoObjeto =
-		// PedidosJSONArr.getJSONObject(PedidosJSONArr.length() -1);
-		int num = ultimoObjeto.getInt("NIdentifiacion");
+		JSONArray PedidosJSONArr = new JSONArray (txt);
+		int index = PedidosJSONArr.length() -1;
+		JSONObject ultimoObjeto = PedidosJSONArr.getJSONObject(index);
+		int num = ultimoObjeto.getInt("NIdentificacion");
 
 		// Saque todos pedidos JSON de la lista de objetos JSON
 		// Damián, te recomiendo que los saque a través de otro método, pues voy a usar
@@ -287,26 +288,23 @@ public class Pedido {
 
 	public static void AñadirPedidoAJSON(Pedido p) {
 
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArrayNew = new JSONArray();
 
 		String texto = "";
 		String l;
 
 		try {
+			FileReader fichero = new FileReader("listaPlatos.json");
 
-			FileReader fr = new FileReader("listaPedidos.json");
-			BufferedReader br = new BufferedReader(fr);
+			Scanner sc = new Scanner(fichero);
 
-			while ((l = br.readLine()) != null) {
-
-				texto = l;
-
+			while (sc.hasNextLine()) {
+				texto += sc.nextLine();
+				sc.close();
 			}
 
-		} catch (Exception e) {
-
-			System.out.println(e);
-
+		} catch (Exception ex) {
+			ex.getMessage();
 		}
 
 		JSONObject jsonPedido = new JSONObject();
@@ -314,21 +312,20 @@ public class Pedido {
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
 
-		JSONObject pedidosAnteriores = new JSONObject(texto);
-	
-		jsonArray = pedidosAnteriores.getJSONArray("listaDeFacturas");
+		JSONArray pedidosAnteriores = new JSONArray(texto);
 
-		jsonArray.put(jsonPedido);
+		jsonArrayNew.put(pedidosAnteriores);
+		jsonArrayNew.put(jsonPedido);
 
-		listaPedidos.put("listaDeFacturas", jsonArray);
+		
 
 		try {
 
-			FileWriter writer = new FileWriter("listaPedidos.json", false);
+			FileWriter writer = new FileWriter("listaPedidos.json");
 
 			// Escribir el objeto JSON en el archivo
 
-			writer.write(listaPedidos.toString());
+			writer.write(jsonArrayNew.toString());
 			writer.flush();
 
 			// Cerrar el objeto FileWriter

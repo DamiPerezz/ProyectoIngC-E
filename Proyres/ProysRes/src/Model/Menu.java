@@ -18,11 +18,16 @@ public class Menu {
 	
 	
 	}
+	public String toString () {
+		
+		
+		return "Precio: " + precio + "Platos : " + platos;
+		
+		
+	}
 	 public static void main(String[] args) {
 
-
-	    
-
+   
 	      // Crear un objeto JSON para el primer menú
 	      JSONObject menu1 = new JSONObject();
 	      JSONArray platos1 = new JSONArray();

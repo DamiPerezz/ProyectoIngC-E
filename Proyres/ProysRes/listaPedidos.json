@@ -1,1 +1,1 @@
-{"listaDeFacturas":[{"listaPlatos":[],"listaMenus":[],"NIdentificacion":0},{"listaPlatos":[],"listaMenus":[],"NIdentificacion":0}]}
+[[{"NOPlato":0,"precio":15,"listaIngredientes":[{"nombre":"Patata"},{"nombre":"Mayonesa"},{"nombre":"Atun"},{"nombre":"Aceituna"}],"nombrePlato":"EnsaladillaRusa"},{"NOPlato":1,"precio":22,"listaIngredientes":[{"nombre":"Carne"},{"nombre":"Patata"}],"nombrePlato":"Solomillo"}],{"listaPlatos":[{"precio":22,"nombrePlato":"Solomillo"}],"listaMenus":[{}],"NIdentificacion":1}]
