@@ -73,55 +73,74 @@ public class Alergia {
 
 	}
 
-	public void mostrarListaPlatos() {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		System.out.println("Seleccione una alergia:");
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();
-		arrayListAlergias.add("gluten");
-		arrayListAlergias.add("marisco");
-		arrayListAlergias.add("frutosSecos");
-		arrayListAlergias.add("lactosa");
-		arrayListAlergias.add("huevos");
-		arrayListAlergias.add("pescado");
-		arrayListAlergias.add("soja");
-		arrayListAlergias.add("vegetariano");
-		// nota: crear un json con las alergias que existen en el restaurante. Éste
-		// array es temporal, al igual que en mostrarListaAlergias
-
-		mostrarListaAlergias();
-
-		int opcionUsuario = in.nextInt();
+		int opcionUsuario;
+		int h = 0; // usado para ir guardando con un nº asociado cada plato
+		JSONObject listaPlatos = new JSONObject();
 		String texto = "";
-		try {
+		String platosFiltrados = "";
+		String alergiasFiltradas = "";
+		do {
+			System.out.println("Seleccione una alergia:");
 
-			File Platos = new File("listaAlergias.json");
-			Scanner sc = new Scanner(Platos);
+			arrayListAlergias.add("gluten");
+			arrayListAlergias.add("marisco");
+			arrayListAlergias.add("frutosSecos");
+			arrayListAlergias.add("lactosa");
+			arrayListAlergias.add("huevos");
+			arrayListAlergias.add("pescado");
+			arrayListAlergias.add("soja");
+			arrayListAlergias.add("vegetariano");
+			// nota: crear un json con las alergias que existen en el restaurante. Éste
+			// array es temporal, al igual que en mostrarListaAlergias
 
-			while (sc.hasNextLine()) {
-				texto += sc.nextLine();
+			mostrarListaAlergias();
+
+			opcionUsuario = in.nextInt();
+
+			try {
+
+				File Platos = new File("listaAlergias.json");
+				Scanner sc = new Scanner(Platos);
+
+				while (sc.hasNextLine()) {
+					texto += sc.nextLine();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			sc.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-	
-		JSONArray listaAlergias = new JSONArray(texto);
+			listaPlatos = new JSONObject();
 
-		JSONObject alergiaJson = listaAlergias.getJSONObject(opcionUsuario);
+			JSONArray listaAlergias = new JSONArray(texto);
 
-		JSONObject listaPlatos = alergiaJson.getJSONObject(arrayListAlergias.get(opcionUsuario));
+			JSONObject alergiaJson = listaAlergias.getJSONObject(opcionUsuario);
+
+			listaPlatos = alergiaJson.getJSONObject(arrayListAlergias.get(opcionUsuario));
+
+			System.out.println("Presione Y para añadir una nueva alergia");
+
+			alergiasFiltradas +=  ", " + listaPlatos.getString("nombre");
+
+			for (int i = 0; i < listaPlatos.length() - 1; i++) {
+				platosFiltrados += h + 1 + ". " + listaPlatos.getString("p" + (i + 1)) + '\n';
+				h++;
+			}
+		} while (in.next().charAt(0) == 'Y');
 
 		System.out.print("Menú apto para las siguientes alergias: ");
 
-		System.out.println(arrayListAlergias.get(opcionUsuario));// Esto en un futuro será un for de todas las alergias
+		System.out.println(alergiasFiltradas);// Esto en un futuro será un for de todas las alergias
 																	// elegidas
 
-		for (int q = 0; q < listaPlatos.length(); q++) {
 
-			System.out.println(listaPlatos.getString("p" + (q + 1)));
 
-		}
+			System.out.println(platosFiltrados);
+
+		
 
 	}
 
