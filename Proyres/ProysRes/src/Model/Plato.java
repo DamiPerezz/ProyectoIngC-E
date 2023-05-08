@@ -36,6 +36,9 @@ public class Plato {
 		this.nombrePlato = nombrePlato;
 		this.NOPlato= NOPlato;
 	}
+	public Plato() {
+		super();
+	}
 	
 	
 	

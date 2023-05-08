@@ -20,8 +20,8 @@ public class Pedido {
 
 	public static void main(String[] args) {
 
-		Pedido origen = new Pedido(0);
-		AñadirPedidoAJSON(origen);
+		Pedido r = new Pedido();
+		r.CrearPedido();
 
 	}
 
@@ -58,6 +58,82 @@ public class Pedido {
 
 	public Pedido(int NIdentificacion) {
 		super();
+	}
+	public Pedido() {
+		super();
+	}
+		public  void CrearPedido() {
+		
+		//Preguntar opcion 1,2 o 3
+	int opcion = OpcionesDePedido();
+	boolean SeguirPedido = true;
+	ArrayList<Plato> PlatosPedido = null;
+	ArrayList<Menu> MenusPedido = null;
+		//Bucle de pedir plato/Menu
+	
+		while(SeguirPedido==true) {
+			switch(opcion) {
+			case 1:
+	//Añadir Plato
+				PlatosPedido.add(AñadirPlatoAlPedido());
+			case 2:
+				MenusPedido.add(AñadirMenuAlPedido());
+			case 3:	
+				SeguirPedido=false;
+			}//Preguntar si ha termiando de pedir
+			SeguirPedido=FinDelPedido();
+		}
+		//Terminar pedido, guardalo e imprimir recibo
+		
+				int NIdentificacion = sacarIDPedido() + 1;
+				// Crear instancia del pedido y guardarla en JSON
+
+				Pedido p = new Pedido(NIdentificacion, PlatosPedido,MenusPedido);
+		
+				AñadirPedidoAJSON(p);
+
+		
+
+	}
+	
+	public Menu[] SacarInstanciasMenu() {
+		
+		String txt = "";
+		// Leer listaPlatos
+		try {
+			FileReader fichero = new FileReader("menus.json");
+
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				txt += sc.nextLine();
+				sc.close();
+			}
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		
+		JSONArray MenusArr = new JSONArray(txt);
+		Menu[] menus = new Menu[MenusArr.length()];
+		String precio;
+		for(int i=0;i<MenusArr.length();i++) {
+			JSONObject m = MenusArr.getJSONObject(i);
+			 precio = m.getString("precio");
+			JSONArray Platos = new JSONArray("platos");
+			String[] listaPlatos = new String[Platos.length()];
+
+			for (int j = 0; j < listaPlatos.length; j++) {
+				String p = Platos.getString(j);
+				listaPlatos[j] = p;
+			}
+			Menu menu = new Menu(precio, listaPlatos);
+			menus[i] = menu;
+			
+			
+		}
+		return menus;
+		
 	}
 
 	public ArrayList<Plato> SacarInstanciasPlato() {
@@ -104,9 +180,35 @@ public class Pedido {
 		}
 		return listaPlatos;
 	}
-
-	public void CrearPedido() {
-
+	public boolean FinDelPedido() {
+		System.out.println("¿Quieres continuar con el pedido?" + "\n" + "[Y]/[N]");
+		Scanner teclado = new Scanner(System.in);
+		String respuesta= teclado.next();
+		boolean respBool=false;
+		if (respuesta== "Y" || respuesta== "N") {
+			if(respuesta== "Y")
+				respBool=true;
+		}else {	
+			System.out.println("Respuesta invalida");
+		}
+		
+		return respBool;
+	}
+	public int OpcionesDePedido() {
+		
+		System.out.println("Opciones");
+		System.out.println("[1] Añadir Plato");
+		System.out.println("[2] Añadir Menu");
+		System.out.println("[3] Finalizar pedido");
+		Scanner teclado = new Scanner(System.in);
+		int respuesta= teclado.nextInt();
+		
+		
+		return respuesta;
+				
+	}
+	public Plato AñadirPlatoAlPedido() {
+		
 		System.out.println("¿Que platos quieres añadir al pedido?");
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
 
@@ -117,19 +219,38 @@ public class Pedido {
 		// Falta metodo filtrar añadir
 		String nombrePlato = sc.next();
 
-		ArrayList<Plato> PlatosPedido = null;
-
-		PlatosPedido.add(AgregarPlato(nombrePlato));
-
-		// Sacar NOIdentificación
-		int NIdentificacion = sacarIDPedido();
-		// Crear instancia del pedido y guardarla en JSON
-
-		Pedido p = new Pedido(NIdentificacion, PlatosPedido);
-
-		AñadirPedidoAJSON(p);
-
+		return AgregarPlato(nombrePlato);
+		
+		
 	}
+	public Menu AñadirMenuAlPedido() {
+		Menu[] MenusDisponibles = SacarInstanciasMenu();
+	int i=0;
+		Menu MenuSeleccionado = null;
+		for (Menu m : MenusDisponibles) {
+			System.out.print("["+ i + "]" + " Precio: " + m.precio + "Platos : ");
+			for(int j=0;j<m.platos.length;j++) {
+				System.out.print(m.platos[j]);
+				
+			}
+			i++;
+		}
+		
+		System.out.println("\n" + "Selecciona el menu: ");
+		Scanner sc = new Scanner(System.in);
+		int num= sc.nextInt();
+		if(num>MenusDisponibles.length || num<0) {
+			System.out.println("Numero invalido");
+		} else {
+			MenuSeleccionado= MenusDisponibles[num];
+		}
+		
+		
+		return MenuSeleccionado;
+	}
+	
+
+	
 
 	public static int sacarIDPedido() {
 		String txt = "";
