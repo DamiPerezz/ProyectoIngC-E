@@ -89,6 +89,7 @@ public class Alergia {
 		do {
 			System.out.println("Seleccione una alergia:");
 
+			
 			arrayListAlergias.add("gluten");
 			arrayListAlergias.add("marisco");
 			arrayListAlergias.add("frutosSecos");
