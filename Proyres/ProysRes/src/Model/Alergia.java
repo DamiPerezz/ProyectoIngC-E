@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -73,11 +75,7 @@ public class Alergia {
 
 	}
 
-
-	
-
-	public void elegirPlato () {
-
+	public void filtrarPlatos(String[] args) {
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();
 		int opcionUsuario;
@@ -89,7 +87,6 @@ public class Alergia {
 		do {
 			System.out.println("Seleccione una alergia:");
 
-			
 			arrayListAlergias.add("gluten");
 			arrayListAlergias.add("marisco");
 			arrayListAlergias.add("frutosSecos");
@@ -128,24 +125,36 @@ public class Alergia {
 
 			System.out.println("Presione Y para añadir una nueva alergia");
 
-			alergiasFiltradas +=  ", " + listaPlatos.getString("nombre");
+			Pattern alergiaExpresion = Pattern.compile((arrayListAlergias.get(opcionUsuario)));
+			Matcher alergiaMatcher = alergiaExpresion.matcher(alergiasFiltradas);
+
+			if (alergiaMatcher.find()) {
+
+			} else {
+
+				alergiasFiltradas += ", " + listaPlatos.getString("nombre");
+
+			}
 
 			for (int i = 0; i < listaPlatos.length() - 1; i++) {
-				platosFiltrados += h + 1 + ". " + listaPlatos.getString("p" + (i + 1)) + '\n';
-				h++;
+
+				Pattern expresion = Pattern.compile(listaPlatos.getString("p" + (i + 1)) + '\n');
+				Matcher matcher = expresion.matcher(platosFiltrados);
+				if (matcher.find()) {
+
+				} else {
+					platosFiltrados += h + 1 + ". " + listaPlatos.getString("p" + (i + 1)) + '\n';
+					h++;
+				}
 			}
-		} while (in.next().charAt(0) == 'Y');
+		} while (in.next().toUpperCase().charAt(0) == 'Y');
 
 		System.out.print("Menú apto para las siguientes alergias: ");
 
 		System.out.println(alergiasFiltradas);// Esto en un futuro será un for de todas las alergias
-																	// elegidas
+												// elegidas
 
-
-
-			System.out.println(platosFiltrados);
-
-		
+		System.out.println(platosFiltrados);
 
 	}
 
