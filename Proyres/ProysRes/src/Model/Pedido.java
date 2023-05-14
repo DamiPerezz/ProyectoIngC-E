@@ -64,25 +64,29 @@ public class Pedido {
 		public  void CrearPedido() {
 		
 		//Preguntar opcion 1,2 o 3
-	int opcion = OpcionesDePedido();
+	int opcion;
 	boolean SeguirPedido = true;
 	ArrayList<Plato> PlatosPedido = new ArrayList<Plato>();
 	ArrayList<Menu> MenusPedido = new ArrayList<Menu>();
 		//Bucle de pedir plato/Menu
 	
 		while(SeguirPedido==true) {
+			opcion=OpcionesDePedido();
 			switch(opcion) {
 			case 1:
 	//Añadir Plato
 				PlatosPedido.add(AñadirPlatoAlPedido());
+				break;
 			case 2:
 				MenusPedido.add(AñadirMenuAlPedido());
+				break;
 			case 3:	
 				SeguirPedido=false;
 			}//Preguntar si ha termiando de pedir
-			SeguirPedido=FinDelPedido();
-			opcion=OpcionesDePedido();
+			//SeguirPedido=FinDelPedido();
+			
 		}
+		
 		//Terminar pedido, guardalo e imprimir recibo
 		
 				int NIdentificacion = sacarIDPedido() + 1;
@@ -92,7 +96,7 @@ public class Pedido {
 		
 				AñadirPedidoAJSON(p);
 
-		
+				System.out.println("Pedido realizado con exito!!");
 
 	}
 	
@@ -183,13 +187,15 @@ public class Pedido {
 	public boolean FinDelPedido() {
 		System.out.println("¿Quieres continuar con el pedido?" + "\n" + "[Y]/[N]");
 		Scanner teclado = new Scanner(System.in);
-		String respuesta= teclado.next();
+		String resp= teclado.next();
+		char respuesta= resp.charAt(0);
 		boolean respBool=false;
-		if (respuesta== "Y" || respuesta== "N") {
-			if(respuesta== "Y")
+		if (respuesta== 'Y' || respuesta== 'N') {
+			if(respuesta== 'Y')
 				respBool=true;
-			if(respuesta=="N")
+			if(respuesta=='N')
 				System.out.println("Gracias por tu visita ;)");
+				respBool=false;
 		}else {	
 			System.out.println("Respuesta invalida");
 		}
@@ -227,12 +233,12 @@ public class Pedido {
 	}
 	public Menu AñadirMenuAlPedido() {
 		Menu[] MenusDisponibles = SacarInstanciasMenu();
-	int i=0;
+		int i=0;
 		Menu MenuSeleccionado = null;
 		for (Menu m : MenusDisponibles) {
-			System.out.print("["+ i + "]" + " Precio: " + m.precio + "Platos : ");
+			System.out.println("["+ i + "]" + " Precio: " + m.precio + "Platos : ");
 			for(int j=0;j<m.platos.length;j++) {
-				System.out.print(m.platos[j]);
+				System.out.println(m.platos[j] + ", ");
 				
 			}
 			i++;
@@ -250,10 +256,6 @@ public class Pedido {
 		
 		return MenuSeleccionado;
 	}
-	
-
-	
-
 	public static int sacarIDPedido() {
 		String txt = "";
 		try {
@@ -285,16 +287,14 @@ public class Pedido {
 
 		return num;
 	}
-
 	public static void AñadirPedidoAJSON(Pedido p) {
 
-		JSONArray jsonArrayNew = new JSONArray();
+		
 
 		String texto = "";
-		String l;
-
+		
 		try {
-			FileReader fichero = new FileReader("listaPlatos.json");
+			FileReader fichero = new FileReader("listaPedidos.json");
 
 			Scanner sc = new Scanner(fichero);
 
@@ -312,9 +312,8 @@ public class Pedido {
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
 
-		JSONArray pedidosAnteriores = new JSONArray(texto);
+		JSONArray jsonArrayNew = new JSONArray(texto);  
 
-		jsonArrayNew.put(pedidosAnteriores);
 		jsonArrayNew.put(jsonPedido);
 
 		
