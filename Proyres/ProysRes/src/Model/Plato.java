@@ -43,6 +43,22 @@ public class Plato {
 	
 	
 	
+	public int getNOPlato() {
+		return NOPlato;
+	}
+
+	public void setNOPlato(int nOPlato) {
+		NOPlato = nOPlato;
+	}
+
+	public ArrayList<Ingrediente> getListaIngredientes() {
+		return listaIngredientes;
+	}
+
+	public void setListaIngredientes(ArrayList<Ingrediente> listaIngredientes) {
+		this.listaIngredientes = listaIngredientes;
+	}
+
 	public void addIngrediente(Ingrediente ingrediente) {
 		
 		listaIngredientes.add(ingrediente);
@@ -128,7 +144,6 @@ public class Plato {
 			JSONObject auxING = new JSONObject();
 			auxING.put("nombre", ing);
 			JSONIng.put(auxING);
-			
 		}
 		
 		JSONObject Plato = new JSONObject(); //JSONObject del Plato

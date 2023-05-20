@@ -288,12 +288,10 @@ public class Pedido {
 		return num;
 	}
 	public static void AñadirPedidoAJSON(Pedido p) {
-
-		
-
 		String texto = "";
 		
 		try {
+			
 			FileReader fichero = new FileReader("listaPedidos.json");
 
 			Scanner sc = new Scanner(fichero);
