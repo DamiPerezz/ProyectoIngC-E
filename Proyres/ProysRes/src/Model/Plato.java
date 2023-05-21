@@ -146,8 +146,11 @@ public class Plato {
 		Plato p = new Plato(plato,precio,ingredientesPlato,NOPlato, alergia);
 		//Saca toda la lista de platos del fichero y añade el nuevo plato
 		
+		JSONObject PlatJSON = new JSONObject(p);
+		
 		TotalPlatos.add(p);
 		//Lo convertimos a JSONArray
+		
 		
 		JSONArray ArrayPlatos = new JSONArray(TotalPlatos);
 		
@@ -218,7 +221,7 @@ public class Plato {
 				Ingrediente ingrediente = new Ingrediente(nombre);
 				listaIngredientes[j] = ingrediente;
 			}
-			String Alergia = platoJSON.getString("Alergia");
+			String Alergia = platoJSON.getString("alergia");
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
 		}

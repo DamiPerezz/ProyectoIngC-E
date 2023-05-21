@@ -312,7 +312,7 @@ public class Menu {
 				listaIngredientes[j] = ingrediente;
 
 			}
-			String Alergia = platoJSON.getString("Alergia");
+			String Alergia = platoJSON.getString("alergia");
 			
 
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);

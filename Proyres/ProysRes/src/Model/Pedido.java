@@ -103,7 +103,6 @@ public class Pedido {
 				System.out.println("Pedido realizado con exito!!");
 
 	}
-	
 	public Menu SacarInstanciasMenu(String dia) {
 		String text="";
 		 
@@ -193,7 +192,7 @@ public class Pedido {
 				Ingrediente ingrediente = new Ingrediente(nombre);
 				listaIngredientes[j] = ingrediente;
 			}
-			String Alergia = platoJSON.getString("Alergia");
+			String Alergia = platoJSON.getString("alergia");
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
 		}
@@ -282,7 +281,7 @@ public class Pedido {
 				m = null;
 			}
 			if(resp=='y') {
-				System.out.println("Pedido añadido!!");
+				System.out.println("Menu añadido!!");
 			}
 		} else {
 			System.out.println("Respuesta invalida");
