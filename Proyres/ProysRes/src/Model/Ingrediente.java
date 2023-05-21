@@ -58,7 +58,7 @@ public class Ingrediente {
 			 Scanner scanner = new Scanner(fichero);
 	            while (scanner.hasNextLine()) {
 	                texto = scanner.nextLine();
-	                System.out.println(texto);
+	                
 	            }
 	            scanner.close();
 				
