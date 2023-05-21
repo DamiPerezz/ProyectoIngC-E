@@ -1,5 +1,6 @@
 package Model;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class Plato {
 	private ArrayList <Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
 	private String nombrePlato;
 	private int NOPlato;
+	private String Alergia;
 
 	public static void main(String[] args) {
 		
@@ -21,7 +23,15 @@ public class Plato {
 		
 	}
 	
-	public Plato(String nombrePlato, int precio, Ingrediente[] ingrediente,int NOPlato ) {
+	public String getAlergia() {
+		return Alergia;
+	}
+
+	public void setAlergia(String alergia) {
+		Alergia = alergia;
+	}
+
+	public Plato(String nombrePlato, int precio, Ingrediente[] ingrediente,int NOPlato , String Alergia) {
 		super();
 		this.precio = precio;
 		for(Ingrediente i: ingrediente) {
@@ -29,6 +39,7 @@ public class Plato {
 		}
 		this.nombrePlato = nombrePlato;
 		this.NOPlato= NOPlato;
+		this.Alergia=Alergia;
 	}
 	
 	public Plato(String nombrePlato, int precio,int NOPlato ) {
@@ -92,7 +103,7 @@ public class Plato {
 	}
 
 	public static void AñadirPlato() {
-		
+		Plato aux = new Plato();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca nombre del nuevo plato:");
 		String plato= sc.next();									//Nombre del Plato
@@ -107,8 +118,11 @@ public class Plato {
 		for(int i=0;i<listaIngredientes.length;i++) {
 			System.out.println(listaIngredientes[i]);
 		}
-		
-		int NOPlato = 0; //NumeroPlato
+		ArrayList<Plato> TotalPlatos = aux.SacarInstanciasPlato();
+		int index = TotalPlatos.size() -1;
+		Plato ultPlato= TotalPlatos.get(index);
+		int ultNum = ultPlato.getNOPlato();
+		int NOPlato = ultNum + 1; //NumeroPlato
 	
 		//Añadir ingredientes
 		System.out.println("¿Cuantos ingredientes tiene tu plato?");
@@ -126,33 +140,42 @@ public class Plato {
 			
 		}
 		
+		System.out.println("¿Que alergia tiene asociada el plato?");
+		String alergia= sc.next();
 		
-		Plato p = new Plato(plato,precio,ingredientesPlato,NOPlato);
+		Plato p = new Plato(plato,precio,ingredientesPlato,NOPlato, alergia);
+		//Saca toda la lista de platos del fichero y añade el nuevo plato
+		
+		TotalPlatos.add(p);
+		//Lo convertimos a JSONArray
+		
+		JSONArray ArrayPlatos = new JSONArray(TotalPlatos);
+		
+//		JSONArray JSONIng = new JSONArray(); //JSONARRAY de Ingredientes
+//		
+//		for (Ingrediente ing:ingredientesPlato) {
+//			JSONObject auxING = new JSONObject();
+//			auxING.put("nombre", ing);
+//			JSONIng.put(auxING);
+//		}
+//		
+//		JSONObject Plato = new JSONObject(); //JSONObject del Plato
+//		Plato.put("nombrePlato",plato);
+//		Plato.put("precio",precio);
+//		Plato.put("NOPlato",NOPlato);
+//		Plato.put("listaIngredientes", JSONIng);
+//		Plato.put("Alergia",alergia);
 		
 		
-		
-		JSONArray JSONIng = new JSONArray(); //JSONARRAY de Ingredientes
-		
-		for (Ingrediente ing:ingredientesPlato) {
-			JSONObject auxING = new JSONObject();
-			auxING.put("nombre", ing);
-			JSONIng.put(auxING);
-		}
-		
-		JSONObject Plato = new JSONObject(); //JSONObject del Plato
-		Plato.put("nombrePlato",plato);
-		Plato.put("precio",precio);
-		Plato.put("NOPlato",NOPlato);
-		Plato.put("listaIngredientes", JSONIng);
 		
 		try {
 			File file = new File("listaPlatos.json");
 
 			// Crear el objeto FileWriter
-			FileWriter writer = new FileWriter(file,true);
+			FileWriter writer = new FileWriter(file);
 
 			// Escribir el objeto JSON en el archivo
-			writer.write(Plato.toString());
+			writer.write(ArrayPlatos.toString());
 
 			// Cerrar el objeto FileWriter
 			writer.close();
@@ -161,7 +184,46 @@ public class Plato {
 		}
 		
 	}
-	
+	public  ArrayList<Plato> SacarInstanciasPlato() {
+		String txt = "";
+		// Leer listaPlatos
+		try {
+			FileReader fichero = new FileReader("listaPlatos.json");
+
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				txt += sc.nextLine();
+				sc.close();
+			}
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		// Creamos el JSON Array de los platos
+		JSONArray platosArr = new JSONArray(txt);
+		
+		ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
+		for (int i = 0; i < platosArr.length(); i++) {
+			JSONObject platoJSON = platosArr.getJSONObject(i);
+			int precio = platoJSON.getInt("precio");
+			String nombrePlato = platoJSON.getString("nombrePlato");
+			int NOPlato = platoJSON.getInt("NOPlato");
+			// Creamos el JSONArray para sacar los valores de INgrediente
+			JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
+			Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
+			for (int j = 0; j < listaIngredientes.length; j++) {
+				JSONObject ing = lisIng.getJSONObject(j);
+				String nombre = ing.getString("nombre");
+				Ingrediente ingrediente = new Ingrediente(nombre);
+				listaIngredientes[j] = ingrediente;
+			}
+			String Alergia = platoJSON.getString("Alergia");
+			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
+			listaPlatos.add(p);
+		}
+		return listaPlatos;
+	}
 	
 	public String toString() {
 		return "Nombre:" + this.getNombrePlato() + "Ingrediente: "+ this.getIngrediente()+ "Precio: " +  this.getPrecio() ;

@@ -105,8 +105,8 @@ public class Pedido {
 	}
 	
 	public Menu SacarInstanciasMenu(String dia) {
-		
-		String txt = "";
+		String text="";
+		 
 		// Leer listaPlatos
 		try {
 			FileReader fichero = new FileReader("menusSemana/menu" + dia + ".json");
@@ -114,21 +114,51 @@ public class Pedido {
 			Scanner sc = new Scanner(fichero);
 
 			while (sc.hasNextLine()) {
-				txt += sc.nextLine();
+				text = sc.nextLine();
 				sc.close();
 			}
 
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-		
+		String txt= text;
 		JSONObject menuJSON = new JSONObject(txt);
-		Gson gson = new Gson();
-		Menu menu = gson.fromJson(menuJSON.toString(), Menu.class);
+		int price = menuJSON.getInt("precio");
+		String DiaSemana = menuJSON.getString("DiaSemana");
+		JSONArray listaPla= menuJSON.getJSONArray("listaPlatos");
+		
+		ArrayList<Plato> listaPlatos= new ArrayList<Plato>();
+		
+		//Bucle de instanciar JSONPlato a ArrayList Plato
+		for(int i=0;i<listaPla.length();i++) {
+			JSONObject platoJSON = listaPla.getJSONObject(i);
+			int precio = platoJSON.getInt("precio");
+			String nombrePlato = platoJSON.getString("nombrePlato");
+			int NOPlato = platoJSON.getInt("NOPlato");
+			// Creamos el JSONArray para sacar los valores de INgrediente
+			
+			
+			JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
+			Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
+			
+			
+			
+			for (int j = 0; j < listaIngredientes.length; j++) {
+				String nombre =  lisIng.getString(j);
+				Ingrediente ingrediente = new Ingrediente(nombre);
+				listaIngredientes[j] = ingrediente;
+			}
+			
+			String Alergia = platoJSON.getString("Alergia");
+			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
+			listaPlatos.add(p);
+		}
+		
+		Menu menu = new Menu(DiaSemana,price, listaPlatos);
 		return menu;
 		
 	}
-	public ArrayList<Plato> SacarInstanciasPlato() {
+ 	public  ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
 		// Leer listaPlatos
 		try {
@@ -152,23 +182,18 @@ public class Pedido {
 			int precio = platoJSON.getInt("precio");
 			String nombrePlato = platoJSON.getString("nombrePlato");
 			int NOPlato = platoJSON.getInt("NOPlato");
-
 			// Creamos el JSONArray para sacar los valores de INgrediente
 			JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
 			Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
-
 			for (int j = 0; j < listaIngredientes.length; j++) {
 				JSONObject ing = lisIng.getJSONObject(j);
 				String nombre = ing.getString("nombre");
-
 				Ingrediente ingrediente = new Ingrediente(nombre);
 				listaIngredientes[j] = ingrediente;
-
 			}
-
-			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato);
+			String Alergia = platoJSON.getString("Alergia");
+			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
-
 		}
 		return listaPlatos;
 	}
@@ -225,7 +250,7 @@ public class Pedido {
 		
 		Scanner sc = new Scanner(System.in);
 		Date date = new Date();
-		int dia= date.getDay();
+		int dia=0; //date.getDay();
 		Menu m = new Menu();
 		switch (dia) {
 			case 0:
@@ -306,10 +331,17 @@ public class Pedido {
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
+		//Sacamos los pedidos JSON guardados
+		JSONArray JSONPedidos = new JSONArray (texto);
+		
+		//Creamos el objeto JSON de la instancia
 		JSONObject jsonPedido = new JSONObject();
 		jsonPedido.put("NIdentificacion", p.NIdentificacion);
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
+		//añadimos el JSONObject al JSON Array
+		JSONPedidos.put(jsonPedido);
+		
 		try {
 			FileWriter writer = new FileWriter("listaPedidos.json");
 			// Escribir el objeto JSON en el archivo

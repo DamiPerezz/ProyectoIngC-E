@@ -1,1 +1,1 @@
-{"precio":22,"listaPlatos":[{"NOPlato":1,"precio":22,"listaIngredientes":["Carne","Patata"],"nombrePlato":"Solomillo"}],"DiaSemana":"Lunes"}
+{"precio":4,"listaPlatos":[{"NOPlato":0,"precio":7,"Alergia":"Gluten","listaIngredientes":["Pan","Aceite","Jamon","Tomate"],"nombrePlato":"TostadasConJamon"}],"DiaSemana":"Lunes"}

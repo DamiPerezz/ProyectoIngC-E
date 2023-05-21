@@ -223,19 +223,17 @@ public class Menu {
 		
 		System.out.println("¿Que platos quieres añadir al menu?");
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
-
 		for (Plato p : PlatosDisponibles) {
 			System.out.println("- " + p.getNombrePlato());
 		}
 		Scanner sc = new Scanner(System.in);
 		// Falta metodo filtrar añadir
 		String nombrePlato = sc.next();
-
-		return AgregarPlato(nombrePlato);
-		
-		
+		return AgregarPlato(nombrePlato);	
 	}
+	
 	public Plato AgregarPlato(String nombrePlato) {
+		
 	ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
 
 	Plato p = null;
@@ -253,7 +251,7 @@ public class Menu {
 
 }
 	
-	public ArrayList<Plato> SacarInstanciasPlato() {
+	public  ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
 		// Leer listaPlatos
 		try {
@@ -290,11 +288,13 @@ public class Menu {
 				listaIngredientes[j] = ingrediente;
 
 			}
+			String Alergia = platoJSON.getString("Alergia");
+			
 
-			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato);
+			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
-
 		}
+		
 		return listaPlatos;
 	}
 	
@@ -313,6 +313,7 @@ public class Menu {
     	plato.put("precio", p.getPrecio());
     	plato.put("nombrePlato", p.getNombrePlato());
     	plato.put("NOPlato", p.getNOPlato());
+    	plato.put("Alergia", p.getAlergia());
     	JSONArray Ingredientes = new JSONArray();
     	for(Ingrediente i: p.getListaIngredientes()) {
     		Ingredientes.put(i);
