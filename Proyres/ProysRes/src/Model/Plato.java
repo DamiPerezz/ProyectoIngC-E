@@ -8,7 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Plato {
-
+	
+	//Alergia
 	private int precio;
 	private ArrayList <Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
 	private String nombrePlato;
@@ -64,15 +65,7 @@ public class Plato {
 		listaIngredientes.add(ingrediente);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 	public int getPrecio() {
 		return precio;

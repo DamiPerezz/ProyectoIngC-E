@@ -6,14 +6,16 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+
 public class Pedido {
 
 	private int NIdentificacion;
-
 	private ArrayList<Menu> listaMenus;
 	private ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
 	private static JSONObject listaPedidos = new JSONObject();
@@ -94,18 +96,20 @@ public class Pedido {
 
 				Pedido p = new Pedido(NIdentificacion, PlatosPedido,MenusPedido);
 		
+				//Opciones extra
+				
 				AñadirPedidoAJSON(p);
 
 				System.out.println("Pedido realizado con exito!!");
 
 	}
 	
-	public Menu[] SacarInstanciasMenu() {
+	public Menu SacarInstanciasMenu(String dia) {
 		
 		String txt = "";
 		// Leer listaPlatos
 		try {
-			FileReader fichero = new FileReader("menus.json");
+			FileReader fichero = new FileReader("menusSemana/menu" + dia + ".json");
 
 			Scanner sc = new Scanner(fichero);
 
@@ -118,28 +122,12 @@ public class Pedido {
 			ex.getMessage();
 		}
 		
-		JSONArray MenusArr = new JSONArray(txt);
-		Menu[] menus = new Menu[MenusArr.length()];
-		String precio;
-		for(int i=0;i<MenusArr.length();i++) {
-			JSONObject m = MenusArr.getJSONObject(i);
-			 precio = m.getString("precio");
-			JSONArray Platos = m.getJSONArray("platos");
-			String[] listaPlatos = new String[Platos.length()];
-
-			for (int j = 0; j < listaPlatos.length; j++) {
-				String p = Platos.getString(j);
-				listaPlatos[j] = p;
-			}
-			Menu menu = new Menu(precio, listaPlatos);
-			menus[i] = menu;
-			
-			
-		}
-		return menus;
+		JSONObject menuJSON = new JSONObject(txt);
+		Gson gson = new Gson();
+		Menu menu = gson.fromJson(menuJSON.toString(), Menu.class);
+		return menu;
 		
 	}
-
 	public ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
 		// Leer listaPlatos
@@ -232,29 +220,47 @@ public class Pedido {
 		
 	}
 	public Menu AñadirMenuAlPedido() {
-		Menu[] MenusDisponibles = SacarInstanciasMenu();
-		int i=0;
-		Menu MenuSeleccionado = null;
-		for (Menu m : MenusDisponibles) {
-			System.out.println("["+ i + "]" + " Precio: " + m.precio + "Platos : ");
-			for(int j=0;j<m.platos.length;j++) {
-				System.out.println(m.platos[j] + ", ");
-				
-			}
-			i++;
-		}
 		
-		System.out.println("\n" + "Selecciona el menu: ");
+		System.out.println("El menu del dia es:");
+		
 		Scanner sc = new Scanner(System.in);
-		int num= sc.nextInt();
-		if(num>MenusDisponibles.length || num<0) {
-			System.out.println("Numero invalido");
+		Date date = new Date();
+		int dia= date.getDay();
+		Menu m = new Menu();
+		switch (dia) {
+			case 0:
+				//Sacar instacia Lunes
+				m =SacarInstanciasMenu("Lunes");
+			case 1:
+				m =SacarInstanciasMenu("Martes");
+			case 2:
+				m =SacarInstanciasMenu("Miercoles");
+			case 3:
+				m =SacarInstanciasMenu("Jueves");
+			case 4:
+				m =SacarInstanciasMenu("Viernes");
+			case 5:
+				m =SacarInstanciasMenu("Sabado");
+			case 6:
+				m =SacarInstanciasMenu("Domingo");
+		}
+		System.out.println(m);
+		
+		System.out.println("¿Quieres añadirlo al pedido? (y/n)");
+		char resp=sc.next().charAt(0);
+		if(resp=='y'||resp=='n' ) {
+			if(resp=='n') {
+				System.out.println("Operacion cancelada");
+				m = null;
+			}
+			if(resp=='y') {
+				System.out.println("Pedido añadido!!");
+			}
 		} else {
-			MenuSeleccionado= MenusDisponibles[num];
+			System.out.println("Respuesta invalida");
 		}
 		
-		
-		return MenuSeleccionado;
+		return m;
 	}
 	public static int sacarIDPedido() {
 		String txt = "";
@@ -291,46 +297,29 @@ public class Pedido {
 		String texto = "";
 		
 		try {
-			
 			FileReader fichero = new FileReader("listaPedidos.json");
-
 			Scanner sc = new Scanner(fichero);
-
 			while (sc.hasNextLine()) {
 				texto += sc.nextLine();
 				sc.close();
 			}
-
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-
 		JSONObject jsonPedido = new JSONObject();
 		jsonPedido.put("NIdentificacion", p.NIdentificacion);
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
-
-		JSONArray jsonArrayNew = new JSONArray(texto);  
-
-		jsonArrayNew.put(jsonPedido);
-
-		
-
 		try {
-
 			FileWriter writer = new FileWriter("listaPedidos.json");
-
 			// Escribir el objeto JSON en el archivo
-
-			writer.write(jsonArrayNew.toString());
+			writer.write(jsonPedido.toString());
 			writer.flush();
-
 			// Cerrar el objeto FileWriter
 			writer.close();
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-
 	}
 
 	public Plato AgregarPlato(String nombrePlato) {

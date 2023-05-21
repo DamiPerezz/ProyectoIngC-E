@@ -311,7 +311,7 @@ public class Menu {
     	JSONObject plato = new JSONObject();
     	//Guarda atributos de la instancia de plato en JSON
     	plato.put("precio", p.getPrecio());
-    	plato.put("nombrePlato", p.getNOPlato());
+    	plato.put("nombrePlato", p.getNombrePlato());
     	plato.put("NOPlato", p.getNOPlato());
     	JSONArray Ingredientes = new JSONArray();
     	for(Ingrediente i: p.getListaIngredientes()) {
@@ -421,5 +421,9 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public String toString() {
+    	
+    	return this.listaPlatos + "\n" + this.precio + "$";
     }
 }
