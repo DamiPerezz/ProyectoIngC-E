@@ -26,6 +26,30 @@ public class Menu {
 		this.listaPlatos=listaPlatos;
 	}
 	
+	public String getDiaSemana() {
+		return DiaSemana;
+	}
+
+	public void setDiaSemana(String diaSemana) {
+		DiaSemana = diaSemana;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+
+	public ArrayList<Plato> getListaPlatos() {
+		return listaPlatos;
+	}
+
+	public void setListaPlatos(ArrayList<Plato> listaPlatos) {
+		this.listaPlatos = listaPlatos;
+	}
+
 	public Menu() {
 		super();
 		// TODO Auto-generated constructor stub

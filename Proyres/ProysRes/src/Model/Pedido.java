@@ -153,8 +153,10 @@ public class Pedido {
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
 		}
-		
-		Menu menu = new Menu(DiaSemana,price, listaPlatos);
+		Menu menu = new Menu();
+		menu.setDiaSemana(DiaSemana);
+		menu.setPrecio(price);
+		menu.setListaPlatos(listaPlatos);
 		return menu;
 		
 	}
@@ -252,23 +254,24 @@ public class Pedido {
 		Date date = new Date();
 		int dia=0; //date.getDay();
 		Menu m = new Menu();
-		switch (dia) {
-			case 0:
-				//Sacar instacia Lunes
-				m =SacarInstanciasMenu("Lunes");
-			case 1:
-				m =SacarInstanciasMenu("Martes");
-			case 2:
-				m =SacarInstanciasMenu("Miercoles");
-			case 3:
-				m =SacarInstanciasMenu("Jueves");
-			case 4:
-				m =SacarInstanciasMenu("Viernes");
-			case 5:
-				m =SacarInstanciasMenu("Sabado");
-			case 6:
-				m =SacarInstanciasMenu("Domingo");
-		}
+		m = SacarInstanciasMenu("Lunes");
+//		switch (dia) {
+//			case 0:
+//				//Sacar instacia Lunes
+//				m =SacarInstanciasMenu("Lunes");
+//			case 1:
+//				m =SacarInstanciasMenu("Martes");
+//			case 2:
+//				m =SacarInstanciasMenu("Miercoles");
+//			case 3:
+//				m =SacarInstanciasMenu("Jueves");
+//			case 4:
+//				m =SacarInstanciasMenu("Viernes");
+//			case 5:
+//				m =SacarInstanciasMenu("Sabado");
+//			case 6:
+//				m =SacarInstanciasMenu("Domingo");
+//		}
 		System.out.println(m);
 		
 		System.out.println("¿Quieres añadirlo al pedido? (y/n)");
@@ -345,7 +348,7 @@ public class Pedido {
 		try {
 			FileWriter writer = new FileWriter("listaPedidos.json");
 			// Escribir el objeto JSON en el archivo
-			writer.write(jsonPedido.toString());
+			writer.write(JSONPedidos.toString());
 			writer.flush();
 			// Cerrar el objeto FileWriter
 			writer.close();
@@ -363,9 +366,7 @@ public class Pedido {
 			if (plato.getNombrePlato().equals(nombrePlato)) {
 				p = plato;
 				break;
-			} else {
-				System.out.println("Lo sentimos, ese plato no lo tenemos");
-			}
+			} 
 		}
 
 		return p;
