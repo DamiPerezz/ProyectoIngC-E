@@ -11,8 +11,6 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
 public class Pedido {
 
 	private int NIdentificacion;
