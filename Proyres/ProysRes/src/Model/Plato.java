@@ -127,7 +127,7 @@ public class Plato {
 		
 		Ingrediente[] ingredientesPlato = new Ingrediente[numIng]; //listaIngredientes
 		
-		
+		//Hola
 		
 		for(int i=0;i<numIng;i++) {
 			System.out.println("Añade un ingrediente");
