@@ -11,8 +11,12 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Pedido {
+import View.Main;
+import View.VentanaCarrito;
 
+public class Pedido {
+	private String textoCarrito = "";
+	
 	private int NIdentificacion;
 	private ArrayList<Menu> listaMenus;
 	private ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
@@ -21,6 +25,7 @@ public class Pedido {
 	public static void main(String[] args) {
 
 		Pedido r = new Pedido();
+		
 		r.CrearPedido();
 	}
 
@@ -103,7 +108,7 @@ public class Pedido {
 	}
 	public Menu SacarInstanciasMenu(String dia) {
 		String text="";
-		 
+		textoCarrito = "";
 		// Leer listaPlatos
 		try {
 			FileReader fichero = new FileReader("menusSemana/menu" + dia + ".json");
@@ -131,6 +136,8 @@ public class Pedido {
 			JSONObject platoJSON = listaPla.getJSONObject(i);
 			int precio = platoJSON.getInt("precio");
 			String nombrePlato = platoJSON.getString("nombrePlato");
+			textoCarrito += "- " + nombrePlato + "<br>";
+			
 			int NOPlato = platoJSON.getInt("NOPlato");
 			// Creamos el JSONArray para sacar los valores de INgrediente
 			
@@ -154,6 +161,8 @@ public class Pedido {
 		menu.setDiaSemana(DiaSemana);
 		menu.setPrecio(price);
 		menu.setListaPlatos(listaPlatos);
+		
+		
 		return menu;
 		
 	}
@@ -237,7 +246,7 @@ public class Pedido {
 		}
 		Scanner sc = new Scanner(System.in);
 		// Falta metodo filtrar añadir
-		String nombrePlato = sc.next();
+		String nombrePlato = sc.nextLine();
 
 		return AgregarPlato(nombrePlato);
 		
@@ -279,6 +288,11 @@ public class Pedido {
 				m = null;
 			}
 			if(resp=='y') {
+				
+			 String texto = "Menú del día: "+ m.getPrecio() + "€<br>" + textoCarrito;
+				
+			VentanaCarrito.actualizarPedido(texto, m.getPrecio());
+			 
 				System.out.println("Menu añadido!!");
 			}
 		} else {
@@ -356,7 +370,12 @@ public class Pedido {
 
 	public Plato AgregarPlato(String nombrePlato) {
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
-
+		
+		
+		
+		
+		
+		
 		Plato p = null;
 
 		for (Plato plato : PlatosDisponibles) {
@@ -365,7 +384,8 @@ public class Pedido {
 				break;
 			} 
 		}
-
+		VentanaCarrito.actualizarPedido(nombrePlato + ": "+ p.getPrecio() + "€" + "<br>", p.getPrecio());
+		
 		return p;
 
 	}

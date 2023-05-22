@@ -2,17 +2,23 @@ package View;
 
 
 	import javax.swing.*;
-	import java.awt.*;
+
+
+
+import java.awt.*;
 	import java.awt.event.*;
 
 	public class Main {
 
+	
+		
+		
 	    private JFrame frame;
 	    private JPanel UserPanel, adminPanel, HomePanel;
 	    private JPanel pedidoPanel;
 	    private static final String ADMIN_PASSWORD = "Thebest";  // La contraseña del administrador.
 
-	    public static void main(String[] args) {
+	    public static void main(String[]args) {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	                try {
@@ -113,6 +119,26 @@ package View;
 	        btnNewButton_1_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 	        btnNewButton_1_3.setBounds(42, 167, 165, 35);
 	        UserPanel.add(btnNewButton_1_3);
+	        
+	        
+	        
+	        JButton btnNewButton_1_4 = new JButton("Carrito");
+	        btnNewButton_1_4.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        	
+	        		VentanaCarrito mainFrame = new VentanaCarrito(); //Se crea la ventanaPrincipal
+	        		ControladorCarrito mc = new ControladorCarrito(mainFrame); //Se crea el controladorPrincipal y se le asocia la ventanaPrincipal
+	        		//Le asociamos el controlador a la ventana
+	        		mainFrame.controlador = mc; //A la ventanaPrincipal se le asocia su controladorPrincipal
+	        		mainFrame.initialize();
+	        	
+	        	
+	        	
+	        	}
+	        });
+	        
+	        btnNewButton_1_4.setBounds(325, 225, 165, 35);
+	        UserPanel.add(btnNewButton_1_4);
 	        
 	        JLabel lblNewLabel = new JLabel("");
 	        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\aguir\\OneDrive\\Imágenes\\Screenshots\\Captura de pantalla 2023-05-21 154342.png"));
