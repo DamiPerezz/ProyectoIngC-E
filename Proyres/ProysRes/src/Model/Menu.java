@@ -215,7 +215,7 @@ public class Menu {
 			this.DiaSemana=dia;
 		}else {
 			//Crear Excepcion
-			System.out.println("Dia no valido");
+			
 		}
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
 		boolean SeguirPedido = true;
@@ -246,13 +246,14 @@ public class Menu {
 	public Plato AñadirPlatoAlMenu() {
 		
 		System.out.println("¿Que platos quieres añadir al menu?");
+		System.out.println("Disclaimer: INTRODUCIR NOMBRE EXACTAMENTE IGUAL QUE EN LAS OPCIONES");
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
 		for (Plato p : PlatosDisponibles) {
 			System.out.println("- " + p.getNombrePlato());
 		}
 		Scanner sc = new Scanner(System.in);
 		// Falta metodo filtrar añadir
-		String nombrePlato = sc.next();
+		String nombrePlato = sc.nextLine();
 		return AgregarPlato(nombrePlato);	
 	}
 	
@@ -267,7 +268,7 @@ public class Menu {
 			p = plato;
 			break;
 		} else {
-			System.out.println("Lo sentimos, ese plato no lo tenemos");
+			
 		}
 	}
 

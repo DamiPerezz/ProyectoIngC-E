@@ -106,18 +106,15 @@ public class Plato {
 		Plato aux = new Plato();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca nombre del nuevo plato:");
-		String plato= sc.next();									//Nombre del Plato
-		System.out.println("Introduzca el precio del nuevo plato:");
+		String plato= sc.nextLine();									//Nombre del Plato
+		System.out.println("Introduzca el precio del nuevo plato:" + "\n" + "SOLO EL NUMERO ENTERO");
 		int precio= sc.nextInt();									//Precio
 		
 		Ingrediente ingrediente = new Ingrediente(); 
 		
 		Ingrediente[] listaIngredientes = ingrediente.MostrarIngredientes();
 		
-		System.out.println("Ingredientes disponibles:");
-		for(int i=0;i<listaIngredientes.length;i++) {
-			System.out.println(listaIngredientes[i]);
-		}
+		
 		ArrayList<Plato> TotalPlatos = aux.SacarInstanciasPlato();
 		int index = TotalPlatos.size() -1;
 		Plato ultPlato= TotalPlatos.get(index);
