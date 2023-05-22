@@ -58,11 +58,10 @@ public class Ingrediente {
 			 Scanner scanner = new Scanner(fichero);
 	            while (scanner.hasNextLine()) {
 	                texto = scanner.nextLine();
-	                //System.out.println(texto);
-	            }
+
 	            scanner.close();
 				
-		}catch(Exception ex) {
+		}} catch(Exception ex) {
 			ex.getMessage();
 		}
 		String[] ingredientes = texto.split(":");
@@ -73,6 +72,7 @@ public class Ingrediente {
 			listaIngredientes[i] = ing;
 		}
 		return listaIngredientes;
+	
 	}
 	
 	public void AñadirIngrediente() {

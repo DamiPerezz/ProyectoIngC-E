@@ -75,36 +75,81 @@ public class Alergia {
 
 	}
 
-	public void filtrarPlatos(String[] args) {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();
 		int opcionUsuario;
 		int h = 0; // usado para ir guardando con un nº asociado cada plato
-		JSONObject listaPlatos = new JSONObject();
+
+		String alergiaElegida = "";
+		String alergiasTotales = "";
 		String texto = "";
-		String platosFiltrados = "";
 		String alergiasFiltradas = "";
 		do {
-			System.out.println("Seleccione una alergia:");
+			System.out.println("Seleccione una alergia: \n" + "1. Gluten \n" + "2. Marisco \n" + "3. Frutos Secos \n"
+					+ "4. Lactosa \n" + "5. Huevos \n" + "6. Pescado \n" + "7. Soja \n" + "8. Vegetariano \n");
 
-			arrayListAlergias.add("gluten");
-			arrayListAlergias.add("marisco");
-			arrayListAlergias.add("frutosSecos");
-			arrayListAlergias.add("lactosa");
-			arrayListAlergias.add("huevos");
-			arrayListAlergias.add("pescado");
-			arrayListAlergias.add("soja");
-			arrayListAlergias.add("vegetariano");
 			// nota: crear un json con las alergias que existen en el restaurante. Éste
 			// array es temporal, al igual que en mostrarListaAlergias
 
-			mostrarListaAlergias();
+			do {
+				try {
+					opcionUsuario = in.nextInt();
+				} catch (Exception e) {
+					opcionUsuario = 0;
+				}
+				if (opcionUsuario < 1 || opcionUsuario > 8) {
+					System.out.println("Eliga un nº entre 1 y 8.");
+				}
 
-			opcionUsuario = in.nextInt();
+			} while (opcionUsuario < 1 || opcionUsuario > 8);
+
+			
+
+			Pattern patronA = Pattern.compile(alergiaElegida);
+
+			Matcher matchAlergia = patronA.matcher(alergiasTotales);
+			
+			switch (opcionUsuario) {
+
+			case 1:
+				alergiaElegida = "gluten";
+				if(!matchAlergia.find()) alergiasTotales += ", gluten";
+				break;
+			case 2:
+				alergiaElegida = "marisco";
+				if(!matchAlergia.find()) alergiasTotales += ", marisco";
+				break;
+			case 3:
+				alergiaElegida = "frutos secos";
+				if(!matchAlergia.find()) alergiasTotales += ", frutos secos";
+				break;
+			case 4:
+				alergiaElegida = "lactosa";
+				if(!matchAlergia.find()) alergiasTotales += ", lactosa";
+				break;
+			case 5:
+				alergiaElegida = "huevos";
+				if(!matchAlergia.find()) alergiasTotales += ", huevos";
+				break;
+			case 6:
+				alergiaElegida = "pescado";
+				if(!matchAlergia.find()) alergiasTotales += ", pescado";
+				break;
+			case 7:
+				alergiaElegida = "soja";
+				if(!matchAlergia.find()) alergiasTotales += ", soja";
+				break;
+			case 8:
+				alergiaElegida = "vegetariano";
+				if(!matchAlergia.find()) alergiasTotales += ", (apto para) vegetarianos";
+				break;
+
+			}
 
 			try {
 
-				File Platos = new File("listaAlergias.json");
+				File Platos = new File("listaPlatos.json");
 				Scanner sc = new Scanner(Platos);
 
 				while (sc.hasNextLine()) {
@@ -115,46 +160,35 @@ public class Alergia {
 				e.printStackTrace();
 			}
 
-			listaPlatos = new JSONObject();
+			JSONArray listaPlatos = new JSONArray(texto);
 
-			JSONArray listaAlergias = new JSONArray(texto);
-
-			JSONObject alergiaJson = listaAlergias.getJSONObject(opcionUsuario);
-
-			listaPlatos = alergiaJson.getJSONObject(arrayListAlergias.get(opcionUsuario));
-
-			System.out.println("Presione Y para añadir una nueva alergia");
-
-			Pattern alergiaExpresion = Pattern.compile((arrayListAlergias.get(opcionUsuario)));
-			Matcher alergiaMatcher = alergiaExpresion.matcher(alergiasFiltradas);
-
-			if (alergiaMatcher.find()) {
-
-			} else {
-
-				alergiasFiltradas += ", " + listaPlatos.getString("nombre");
-
-			}
-
-			for (int i = 0; i < listaPlatos.length() - 1; i++) {
-
-				Pattern expresion = Pattern.compile(listaPlatos.getString("p" + (i + 1)) + '\n');
-				Matcher matcher = expresion.matcher(platosFiltrados);
-				if (matcher.find()) {
+			
+			for (int i = 0; i < listaPlatos.length(); i++) {
+				JSONObject plato = listaPlatos.getJSONObject(i);
+				if (plato.get("alergia").equals(alergiaElegida)) {
 
 				} else {
-					platosFiltrados += h + 1 + ". " + listaPlatos.getString("p" + (i + 1)) + '\n';
-					h++;
+
+					Pattern patron = Pattern.compile(plato.getString("nombrePlato"));
+
+					
+					Matcher matchPlato = patron.matcher(alergiasFiltradas);
+
+					if (matchPlato.find()) {
+						
+					}else {
+						alergiasFiltradas += "- " + plato.get("nombrePlato") + '\n';
+						
+					}
+
 				}
+
 			}
+			System.out.println("Presione Y para añadir una nueva alergia");
+
 		} while (in.next().toUpperCase().charAt(0) == 'Y');
 
-		System.out.print("Menú apto para las siguientes alergias: ");
-
-		System.out.println(alergiasFiltradas);// Esto en un futuro será un for de todas las alergias
-												// elegidas
-
-		System.out.println(platosFiltrados);
+		System.out.print("Menú apto para las siguientes alergias: \n" + alergiasFiltradas);
 
 	}
 
