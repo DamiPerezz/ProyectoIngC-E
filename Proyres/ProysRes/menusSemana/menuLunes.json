@@ -1,1 +1,1 @@
-{"precio":4,"listaPlatos":[{"NOPlato":0,"precio":7,"Alergia":"Gluten","listaIngredientes":["Pan","Aceite","Jamon","Tomate"],"nombrePlato":"TostadasConJamon"}],"DiaSemana":"Lunes"}
+{"precio":22,"listaPlatos":[{"NOPlato":0,"precio":7,"Alergia":"Gluten","listaIngredientes":["Pan","Aceite","Jamon","Tomate"],"nombrePlato":"Tostadas Con Jamon"},{"NOPlato":4,"precio":15,"Alergia":"Lactosa","listaIngredientes":["Caldo","Cebolla"],"nombrePlato":"Sopa"},{"NOPlato":4,"precio":15,"Alergia":"Lactosa","listaIngredientes":["Caldo","Cebolla"],"nombrePlato":"Sopa"}],"DiaSemana":"Lunes"}

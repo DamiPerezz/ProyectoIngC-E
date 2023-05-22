@@ -1,1 +1,1 @@
-{"precio":13,"listaPlatos":[{"NOPlato":0,"precio":15,"listaIngredientes":["Patata","Mayonesa","Atun","Aceituna"],"nombrePlato":"EnsaladillaRusa"}],"DiaSemana":"Miercoles"}
+{"precio":23,"listaPlatos":[{"NOPlato":3,"precio":15,"Alergia":"Gluten","listaIngredientes":["Masa","Tomate","Queso","Jamon"],"nombrePlato":"Pizza Jamon"}],"DiaSemana":"Miercoles"}

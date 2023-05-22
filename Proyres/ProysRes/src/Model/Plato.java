@@ -97,6 +97,7 @@ public class Plato {
 		Plato aux = new Plato();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca nombre del nuevo plato:");
+
 		String plato = sc.nextLine(); // Nombre del Plato
 		System.out.println("Introduzca el precio del nuevo plato:");
 		float precio = sc.nextFloat(); // Precio
@@ -109,6 +110,16 @@ public class Plato {
 //		for (int i = 0; i < listaIngredientes.length; i++) {
 //			System.out.println(listaIngredientes[i]);
 //		}
+
+		//String plato= sc.nextLine();									//Nombre del Plato
+		System.out.println("Introduzca el precio del nuevo plato:" + "\n" + "SOLO EL NUMERO ENTERO");
+		int precio2= sc.nextInt();									//Precio
+		
+		Ingrediente ingrediente = new Ingrediente(); 
+		
+		Ingrediente[] listaIngredientes = ingrediente.MostrarIngredientes();
+		
+		
 		ArrayList<Plato> TotalPlatos = aux.SacarInstanciasPlato();
 		int index = TotalPlatos.size() - 1;
 		Plato ultPlato = TotalPlatos.get(index);
@@ -117,15 +128,24 @@ public class Plato {
 
 		// Añadir ingredientes
 		System.out.println("¿Cuantos ingredientes tiene tu plato?");
+
 		int numIng = sc.nextInt();
 
 		Ingrediente[] ingredientesPlato = new Ingrediente[numIng]; // listaIngredientes
 
 		for (int i = 0; i < numIng; i++) {
+
+		 numIng= sc.nextInt();
+		 ingredientesPlato = new Ingrediente[numIng]; //listaIngredientes
+		
+		//Hola
+		
+		for(int j=0;j<numIng;j++) {
+
 			System.out.println("Añade un ingrediente");
 			String nombreIng = sc.next();
 			Ingrediente ing = new Ingrediente(nombreIng);
-			ingredientesPlato[i] = ing;
+			ingredientesPlato[j] = ing;
 
 		}
 
@@ -212,6 +232,7 @@ public class Plato {
 
 		System.out.println("Plato creado con éxito.");
 		
+	}
 	}
 
 	public ArrayList<Plato> SacarInstanciasPlato() {
