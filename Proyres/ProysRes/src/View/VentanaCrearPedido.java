@@ -15,6 +15,13 @@ import javax.swing.JMenuBar;
 
 public class VentanaCrearPedido extends JFrame {
 
+	public static void main(String[] args) {
+		VentanaCrearPedido ventana = new VentanaCrearPedido();
+		ventana.Iniciar();
+		ventana.setSize(300, 400);
+		ventana.setVisible(true);
+	}
+
 	
 	
 	// esto es para
@@ -45,7 +52,6 @@ public class VentanaCrearPedido extends JFrame {
 		menu.setMnemonic(KeyEvent.VK_A);
 		menuBar.add(menu); // añadimos boton de "Atras" al menubar
 		setJMenuBar(menuBar);
-		
 		
 		//LOS 3 BOTONES
 		añadirPlato = new JButton ("Añadir Plato");

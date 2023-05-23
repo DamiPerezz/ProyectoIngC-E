@@ -31,6 +31,12 @@ public class ControladorCrearPedido implements ActionListener {
         } else if (accion == ventana.menuDelDia) {
         	
         	
+//        	  VentanaMenu ventanaMenu = new VentanaMenu();
+//              ControladorAñadirPlato controlador = new ControladorAñadirPlato(ventanaMenu);
+//              ventanaMenu.controlador = controlador;
+//              ventanaMenu.setVisible(true);
+//        	
+        	
         } else if (accion == ventana.carrito) {
 
     		VentanaCarrito mainFrame = new VentanaCarrito(); //Se crea la ventanaPrincipal
