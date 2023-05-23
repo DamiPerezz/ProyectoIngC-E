@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+//QUE EST ESOBIHGFJDSKLFJ
+
 public class VentanaCarrito extends JFrame {
 	public ControladorCarrito controlador;
 
