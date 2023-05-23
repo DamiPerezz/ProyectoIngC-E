@@ -1,0 +1,68 @@
+package Model;
+
+import java.util.Scanner;
+
+public class Tupper {
+	
+    private static long tupperStock = 999999999; // Cantidad inicial de tuppers disponibles
+
+  public Tupper() {
+	  super();
+  }
+  
+  public Tupper(long tupperStock) {
+	  super();
+	  Tupper.tupperStock = tupperStock;
+  }
+    
+  
+    public static long getTupperStock() {
+	return tupperStock;
+}
+
+    public static void setTupperStock(long tupperStock) {
+    	
+	Tupper.tupperStock = tupperStock;
+}
+
+	public static void PedirTupper() {
+        
+    	Scanner scanner = new Scanner(System.in);
+    	int respuestaTupper;
+    
+
+    	do {
+            System.out.println("Pedido realizado con éxito. ¿Desea un tupper para guardar la comida sobrante? [Sí-1]/[No-0]");
+            respuestaTupper = scanner.nextInt();
+
+             if (respuestaTupper==1) {
+             	
+                 tupperStock--;
+                 
+                 if (tupperStock==0) {
+                	 System.out.println("Tupper añadido a su pedido. Quedan " + tupperStock + " tuppers disponibles.");
+                	 
+                	
+                 }else {
+                	 System.out.println("Disculpe las molestias pero no nos quedan tuppers en el almacén. Comuníqueselo a un trabajador para que te ofrezca uno");
+          break;
+                 }
+                 
+                 if (respuestaTupper==0) {
+                	 System.out.println("Pedido realizado sin incluir tupper");
+                 }
+                 
+             } 
+             
+	
+	}while(respuestaTupper==1);
+	}	
+
+	
+	public static void main (String []args) {
+		
+		
+		PedirTupper();
+}
+}
+	
