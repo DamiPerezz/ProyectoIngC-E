@@ -5,19 +5,26 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import Model.*;
 
 public class AñadirPlatoVentana extends JFrame{
 
+	public ControladorAñadirPlato controlador;
 	private JFrame marco;
 	private JPanel panel;
-	private ControladorCarrito controlador;
+	private JMenuBar menuBar;
+	private JMenu menu;
+	public JButton atras;
+
 	
 	public static void main(String[] args) {
 		
@@ -32,13 +39,23 @@ public class AñadirPlatoVentana extends JFrame{
 	
 	
 	public void IniciarVentana( ) {
+		controlador = new ControladorAñadirPlato(this);
+		
 		marco = new JFrame();
 		marco.setBounds(100, 100, 499, 322);
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         marco.getContentPane().setLayout(new FlowLayout());
         marco.setVisible(true);
         
-        
+        atras = new JButton("atras");
+        atras.setMnemonic(KeyEvent.VK_M); //activar el boton para poder pulsarle
+		atras.setBounds(45, 140, 194, 46);
+		setLayout(new FlowLayout()); // Se utiliza FlowLayout como administrador de diseño
+        add(atras);
+		marco.add(atras);
+		marco.setVisible(true);
+        atras.addActionListener(controlador);
+		
         
 		//Bucle que baya creando botones y añadiendolos al carrito
 		ArrayList<Plato> TotalPlatos = Pedido.SacarInstanciasPlato();
@@ -55,10 +72,10 @@ public class AñadirPlatoVentana extends JFrame{
 			marco.add(platos);
 			platos.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	               ArrayList<Plato> lista = controlador.getListaPlatos();
+	               ArrayList<Plato> lista = ControladorCarrito.getListaPlatos();
 	               lista.add(p);
-	               controlador.setListaPlatos(lista);
-	               
+	               ControladorCarrito.setListaPlatos(lista);
+	               System.out.println("xd");
 	            }
 	        });
 	}

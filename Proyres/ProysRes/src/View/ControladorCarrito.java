@@ -71,7 +71,8 @@ public class ControladorCarrito implements ActionListener{
 		
 		AñadirPedidoAJSON(p);
 
-		
+		listaPlatos.clear();
+		listaMenus.clear();
 		
 		
 		v.asegurarVentana();

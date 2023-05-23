@@ -96,6 +96,15 @@ import java.awt.*;
 	        JButton btnNewButton_1 = new JButton("Crear Pedido");
 	        btnNewButton_1.setBounds(265, 66, 136, 36);
 	        UserPanel.add(btnNewButton_1);
+	        btnNewButton_1.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                VentanaCrearPedido ventanaPedido= new VentanaCrearPedido();
+	                ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
+	               ventanaPedido.controlador = controladorPedido; 
+	            	ventanaPedido.Iniciar();
+	            	
+	            }
+	        });
 	        
 	        JButton btnNewButton_1_1 = new JButton("Añadir Pedido");
 	        btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -131,8 +140,6 @@ import java.awt.*;
 	        		//Le asociamos el controlador a la ventana
 	        		mainFrame.controlador = mc; //A la ventanaPrincipal se le asocia su controladorPrincipal
 	        		mainFrame.initialize();
-	        	
-	        	
 	        	
 	        	}
 	        });
@@ -180,6 +187,15 @@ import java.awt.*;
 	        JButton btnHomeFromAdmin_1_1 = new JButton("Crear Pedido");
 	        btnHomeFromAdmin_1_1.setBounds(262, 56, 194, 46);
 	        adminPanel.add(btnHomeFromAdmin_1_1);
+	        btnHomeFromAdmin_1_1.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                VentanaCrearPedido ventanaPedido= new VentanaCrearPedido();
+	                ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
+	               ventanaPedido.controlador = controladorPedido; 
+	            	ventanaPedido.Iniciar();
+	            	
+	            }
+	        });
 	        
 	      //BOTON INGREDIENTE DESDE ADMIN
 	        
