@@ -112,9 +112,9 @@ public class Plato {
 //		}
 
 		//String plato= sc.nextLine();									//Nombre del Plato
-		System.out.println("Introduzca el precio del nuevo plato:" + "\n" + "SOLO EL NUMERO ENTERO");
-		int precio2= sc.nextInt();									//Precio
-		
+//		System.out.println("Introduzca el precio del nuevo plato:" + "\n" + "SOLO EL NUMERO ENTERO");
+//		int precio2= sc.nextInt();									//Precio
+//		
 		Ingrediente ingrediente = new Ingrediente(); 
 		
 		Ingrediente[] listaIngredientes = ingrediente.MostrarIngredientes();
@@ -135,7 +135,7 @@ public class Plato {
 
 		for (int i = 0; i < numIng; i++) {
 
-		 numIng= sc.nextInt();
+		
 		 ingredientesPlato = new Ingrediente[numIng]; //listaIngredientes
 		
 		//Hola
