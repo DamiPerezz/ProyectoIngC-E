@@ -11,12 +11,12 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import View.ControladorCarrito;
 import View.Main;
 import View.VentanaCarrito;
 
 public class Pedido {
 	private String textoCarrito = "";
-	
 	private int NIdentificacion;
 	private ArrayList<Menu> listaMenus;
 	private ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
@@ -103,7 +103,7 @@ public class Pedido {
 				
 				AñadirPedidoAJSON(p);
 
-				System.out.println("Pedido realizado con exito!!");
+				System.out.println("Pedido realizado con exito!!!!");
 
 	}
 	public Menu SacarInstanciasMenu(String dia) {
@@ -292,11 +292,14 @@ public class Pedido {
 			 String texto = "Menú del día: "+ m.getPrecio() + "€<br>" + textoCarrito;
 				
 			VentanaCarrito.actualizarPedido(texto, m.getPrecio());
-			 
+			ControladorCarrito.actualizarPedido(m); 
+			
+			
 				System.out.println("Menu añadido!!");
 			}
 		} else {
 			System.out.println("Respuesta invalida");
+			m = null;
 		}
 		
 		return m;
@@ -385,6 +388,7 @@ public class Pedido {
 			} 
 		}
 		VentanaCarrito.actualizarPedido(nombrePlato + ": "+ p.getPrecio() + "€" + "<br>", p.getPrecio());
+		ControladorCarrito.actualizarPedido(p);
 		
 		return p;
 
@@ -396,4 +400,20 @@ public class Pedido {
 				+ this.listaMenus + "\n" + "----------------------";
 	}
 
+	
+	public int getNIdentificacion() {
+		
+		return NIdentificacion;
+	}
+	
+	public ArrayList<Plato> getListaPlatos() {
+		
+		return listaPlatos;
+	}
+	
+	public ArrayList<Menu> getListaMenus() {
+		
+		return listaMenus;
+	}
+	
 }
