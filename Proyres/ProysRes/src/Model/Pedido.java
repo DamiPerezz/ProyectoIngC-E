@@ -166,7 +166,7 @@ public class Pedido {
 		return menu;
 		
 	}
- 	public  ArrayList<Plato> SacarInstanciasPlato() {
+ 	public static  ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
 		// Leer listaPlatos
 		try {

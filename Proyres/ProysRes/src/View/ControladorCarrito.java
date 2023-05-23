@@ -28,6 +28,18 @@ public class ControladorCarrito implements ActionListener{
 	private static ArrayList<Plato> listaPlatos = new ArrayList<>();
 	private static ArrayList<Menu> listaMenus = new ArrayList<>();
 	
+	
+	
+	public static ArrayList<Plato> getListaPlatos() {
+		return listaPlatos;
+	}
+
+
+	public static void setListaPlatos(ArrayList<Plato> listaPlatos) {
+		ControladorCarrito.listaPlatos = listaPlatos;
+	}
+
+
 	public ControladorCarrito(VentanaCarrito v) {
 		
 		this.v = v;
