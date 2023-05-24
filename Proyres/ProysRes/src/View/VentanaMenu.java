@@ -13,6 +13,8 @@ import javax.swing.JTextArea;
 
 public class VentanaMenu extends JFrame {
 	
+	public ControladorMenu controladormenu;
+	
 	public static void main(String[] args) {
 		VentanaMenu ventana = new VentanaMenu();
 		ventana.Iniciar();

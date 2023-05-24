@@ -77,6 +77,7 @@ public class VentanaCrearPedido extends JFrame {
         menuDelDia.setVisible(true);
         menuDelDia.addActionListener(controlador);
         
+        
         //boton Carrito
         carrito.setMnemonic(KeyEvent.VK_M); //activar el boton para poder pulsarle
         carrito.setBounds(45, 140, 194, 46);

@@ -30,12 +30,16 @@ public class ControladorCrearPedido implements ActionListener {
         	
         } else if (accion == ventana.menuDelDia) {
         	
-        	
-//        	  VentanaMenu ventanaMenu = new VentanaMenu();
-//              ControladorAñadirPlato controlador = new ControladorAñadirPlato(ventanaMenu);
-//              ventanaMenu.controlador = controlador;
-//              ventanaMenu.setVisible(true);
-//        	
+        	VentanaMenu ventanaMenu = new VentanaMenu(); //Se crea la ventana de Menu
+           
+        	ventanaMenu.Iniciar();    //Se llama al metodo de la clase VentanaMenu para crear la ventana y mostrarla     
+          
+
+            ControladorMenu controladorMenu = new ControladorMenu(ventanaMenu);//Se crea instancia del controladorMenu y se le asocia su ventana, en este casoVentanaMenu
+            ventanaMenu.añadir.addActionListener(controladorMenu);//Se asocia el actionListener a los botones que queremos que ejecuten una accion al ser pulsados
+            ventanaMenu.atras.addActionListener(controladorMenu);
+         
+            ventanaMenu.setVisible(true);
         	
         } else if (accion == ventana.carrito) {
 
@@ -46,9 +50,7 @@ public class ControladorCrearPedido implements ActionListener {
     		mainFrame.initialize();
     		mainFrame.setVisible(true);
         	
-        } else {
-            
-        }   
+        } 
 	}	
 }
 
