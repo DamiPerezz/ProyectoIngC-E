@@ -32,7 +32,7 @@ public class ControladorMenu implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-      
+    
     	if (e.getSource() == ventana.añadir) {
     		
     		
@@ -40,13 +40,13 @@ public class ControladorMenu implements ActionListener {
             String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
             String menu = leerMenu(nombreFichero);
           //  ventana.texto.setText(menu);
-            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!" + nombreFichero);
+            JOptionPane.showMessageDialog(ventana, " ¡Menú añadido correctamente! ");
             
             ventana.setVisible(true);
             //ventana.dispose();
             
         }  else if (e.getSource() == ventana.atras) {
-        	System.out.print("xd");
+        	ventana.setVisible(false);
         	
           //  ventanaCrearPedido.setVisible(true);
         }
@@ -111,6 +111,7 @@ public class ControladorMenu implements ActionListener {
 			// Creamos el JSONArray para sacar los valores de INgrediente
 			listaNombres.add(nombrePlato);
 			}
+		
 			System.out.print(listaNombres);		
         
         
@@ -122,11 +123,7 @@ public class ControladorMenu implements ActionListener {
         
         
         
-//        for (int i = 0; i < platos.length(); i++) {
-//            String plato = platos.getString(i);
-//            menu.append("- ").append(plato).append("\n");
-//        }
-System.out.println(platos);
+
         return menu.toString();
     }
 }
