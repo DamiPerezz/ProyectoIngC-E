@@ -26,6 +26,14 @@ public class Menu {
 		this.listaPlatos=listaPlatos;
 	}
 	
+
+	public Menu(ArrayList<Plato> listaPlatos  ) {
+		super();
+		
+		this.listaPlatos=listaPlatos;
+	}
+	
+	
 	public String getDiaSemana() {
 		return DiaSemana;
 	}
@@ -52,7 +60,7 @@ public class Menu {
 
 	public Menu() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
@@ -448,6 +456,7 @@ public class Menu {
             e.printStackTrace();
         }
     }
+  
     public String toString() {
     	
     	return this.listaPlatos + "\n" + this.precio + "$";

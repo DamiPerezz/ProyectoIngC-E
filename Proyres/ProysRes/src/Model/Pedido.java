@@ -154,6 +154,7 @@ public class Pedido {
 			}
 			
 			String Alergia = platoJSON.getString("Alergia");
+			
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
 		}

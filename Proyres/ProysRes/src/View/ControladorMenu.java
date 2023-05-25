@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import Model.Ingrediente;
 import Model.Menu;
+import Model.Pedido;
 import Model.Plato;
 
 import java.util.ArrayList;
@@ -20,13 +21,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import Model.Plato;
 
 public class ControladorMenu implements ActionListener {
     private VentanaMenu ventana;
     private VentanaCrearPedido ventanaCrearPedido;
+    private String diaSemana;
+    private ArrayList <String> listaNombres = new ArrayList<>();
     
     
-    
+	public void setPlatosDelDia(ArrayList<String> listaNombres) {
+		
+		this.listaNombres = listaNombres;
+		
+	}
+	
     public ControladorMenu(VentanaMenu ventana, VentanaCrearPedido ventanaCrearPedido) {
         this.ventana = ventana;
         this.ventanaCrearPedido = ventanaCrearPedido;
@@ -47,20 +56,44 @@ public class ControladorMenu implements ActionListener {
 //            String diaSemana = obtenerDiaSemanaActual();
 //            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
 //            String menu = leerMenu(nombreFichero);
-          //  ventana.texto.setText(menu);
-            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!");
-            Menu m = new Menu();
-            ControladorCarrito.actualizarPedido(m);
-            ventana.setVisible(true);
-            //ventana.dispose();
+         //  ventana.texto.setText(menu);
+            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!");         
+           
+          //  String[] platosArray = {"Plato 1", "Plato 2", "Plato 3"};
+           
             
-        }  else if (e.getSource() == ventana.atras) {
-        	ventana.dispose();
-        	
-          //  ventanaCrearPedido.setVisible(true);
-        }
-    }
+            //------------------------------------------
+            
+            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
+            String menu = leerMenu(nombreFichero);
+            System.out.println(menu);
+            String[] arrayStrings = menu.split(",");
+            ArrayList<Plato> platos = new ArrayList<>();
+           
+            for (String nombrePlato : arrayStrings) {
+                Plato plato = new Plato(nombrePlato);
+                platos.add(plato);
+            }
 
+            Menu m = new Menu(platos);
+            ControladorCarrito.actualizarPedido(m);
+            
+         
+            ventana.setVisible(true);
+           
+         
+          
+      
+
+          //  ventanaCrearPedido.setVisible(true);
+        } else if (e.getSource() == ventana.atras) {
+        	 ventana.setVisible(false);
+        	
+        }
+    
+    	
+    }
+   
     private String obtenerDiaSemanaActual() {
     	Calendar calendar = Calendar.getInstance();
         int diaSemana = calendar.get(Calendar.DAY_OF_WEEK);
@@ -96,7 +129,8 @@ public class ControladorMenu implements ActionListener {
         return dia;
     
     }
-
+//______________________________________________________________
+    
     private String leerMenu(String nombreFichero) {
         StringBuilder contenido = new StringBuilder();
 
@@ -133,11 +167,13 @@ public class ControladorMenu implements ActionListener {
         
         
         
-//        for (int i = 0; i < platos.length(); i++) {
-//            String plato = platos.getString(i);
-//            menu.append("- ").append(plato).append("\n");
-//        }
-//System.out.println(platos);
-        return menu.toString();
+////        for (int i = 0; i < platos.length(); i++) {
+////            String plato = platos.getString(i);
+////            menu.append("- ").append(plato).append("\n");
+////        }
+////System.out.println(platos);
+       return menu.toString();
     }
+    
+    
 }

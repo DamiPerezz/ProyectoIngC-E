@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import View.ControladorMenu;
 
 public class Plato {
 
@@ -17,6 +18,7 @@ public class Plato {
 	private String nombrePlato;
 	private int NOPlato;
 	private String Alergia;
+	 
 
 	public static void main(String[] args) {
 
@@ -45,6 +47,12 @@ public class Plato {
 
 	public Plato() {
 		super();
+	}
+	
+
+	public Plato (String nombre) {
+		super();
+		this.nombrePlato = nombre;
 	}
 
 	public int getNOPlato() {
@@ -275,6 +283,7 @@ public class Plato {
 		}
 		return listaPlatos;
 	}
+	
 
 	public String toString() {
 		return "Nombre:" + this.getNombrePlato() + "Ingrediente: " + this.getIngrediente() + "Precio: "
