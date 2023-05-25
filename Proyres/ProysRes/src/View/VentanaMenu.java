@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
@@ -23,30 +24,27 @@ public class VentanaMenu extends JFrame {
 	}
 
 	public JButton añadir;	
-	public JTextArea texto;
-	public JMenuBar menuBar;
-	public JMenu atras;
-	public ControladorCrearPedido controlador;
+	public JLabel texto; 
+    public JList lista; 
+	public JButton atras;
+	public ControladorMenu controlador;
 	
 	public void Iniciar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		
-		// MENU BAR
-		menuBar = new JMenuBar();
-		atras = new JMenu("Atrás");
-		atras.setMnemonic(KeyEvent.VK_A);
-		menuBar.add(atras); // añadimos boton de "Atras" al menubar
-		setJMenuBar(menuBar);
+		// JList
+		
+		lista = new JList();
+		
+		
 		
 		//JLabel
 		
 		JLabel etiqueta = new JLabel("Menú del día ");
 		add(etiqueta);
-		
-		// JTextArea
-		texto = new JTextArea(5, 25);
 		add(texto);
+	
 		
 		// JButton
 		añadir = new JButton("Añadir");
@@ -54,10 +52,16 @@ public class VentanaMenu extends JFrame {
 		añadir.setPreferredSize(new Dimension(170, 50));
 		add(añadir);
 		
+		atras = new JButton("Atrás");
+		atras.setMnemonic(KeyEvent.VK_A);
+		atras.setPreferredSize(new Dimension(170, 50));
+		add(atras);
+		
+		
 	    añadir.addActionListener(controlador);
 	    atras.addActionListener(controlador);
 		
-		pack(); // Ajusta automáticamente el tamaño de la ventana
+		//pack(); // Ajusta automáticamente el tamaño de la ventana
 	}
 }
 

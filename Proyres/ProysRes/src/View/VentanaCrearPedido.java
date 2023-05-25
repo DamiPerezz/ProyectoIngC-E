@@ -17,7 +17,7 @@ public class VentanaCrearPedido extends JFrame {
 
 	public static void main(String[] args) {
 		VentanaCrearPedido ventana = new VentanaCrearPedido();
-		ventana.Iniciar();
+		
 		ventana.setSize(300, 400);
 		ventana.setVisible(true);
 	}

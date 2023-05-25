@@ -8,6 +8,11 @@ import java.io.IOException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import Model.Ingrediente;
+import Model.Plato;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
@@ -30,15 +35,20 @@ public class ControladorMenu implements ActionListener {
       
     	if (e.getSource() == ventana.añadir) {
     		
+    		
             String diaSemana = obtenerDiaSemanaActual();
-            String nombreFichero = "menu" + diaSemana + ".json";
+            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
             String menu = leerMenu(nombreFichero);
-            ventana.texto.setText(menu);
-            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!");
+          //  ventana.texto.setText(menu);
+            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!" + nombreFichero);
+            
+            ventana.setVisible(true);
+            //ventana.dispose();
             
         }  else if (e.getSource() == ventana.atras) {
-            ventana.setVisible(false);
-            ventanaCrearPedido.setVisible(true);
+        	System.out.print("xd");
+        	
+          //  ventanaCrearPedido.setVisible(true);
         }
     }
 
@@ -91,18 +101,32 @@ public class ControladorMenu implements ActionListener {
         }
 
         JSONObject menuJSON = new JSONObject(contenido.toString());
-        JSONArray platos = menuJSON.getJSONArray("platos");
+        JSONArray platos = menuJSON.getJSONArray("listaPlatos");
         double precioMenu = menuJSON.getDouble("precio");
-
+        
+        ArrayList<String> listaNombres = new ArrayList<String>();
+		for (int i = 0; i < platos.length(); i++) {
+			JSONObject platoJSON = platos.getJSONObject(i);
+			String nombrePlato = platoJSON.getString("nombrePlato");
+			// Creamos el JSONArray para sacar los valores de INgrediente
+			listaNombres.add(nombrePlato);
+			}
+			System.out.print(listaNombres);		
+        
+        
         StringBuilder menu = new StringBuilder();
         menu.append("Menú del día:\n");
         menu.append("Precio: ").append(precioMenu).append("€\n");
-        menu.append("Platos:\n");
-        for (int i = 0; i < platos.length(); i++) {
-            String plato = platos.getString(i);
-            menu.append("- ").append(plato).append("\n");
-        }
-
+       
+        menu.append("Platos:\n").append(platos);
+        
+        
+        
+//        for (int i = 0; i < platos.length(); i++) {
+//            String plato = platos.getString(i);
+//            menu.append("- ").append(plato).append("\n");
+//        }
+System.out.println(platos);
         return menu.toString();
     }
 }
