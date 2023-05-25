@@ -10,17 +10,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import Model.Ingrediente;
+import Model.Menu;
 import Model.Plato;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 public class ControladorMenu implements ActionListener {
     private VentanaMenu ventana;
     private VentanaCrearPedido ventanaCrearPedido;
-
+    
+    
+    
     public ControladorMenu(VentanaMenu ventana, VentanaCrearPedido ventanaCrearPedido) {
         this.ventana = ventana;
         this.ventanaCrearPedido = ventanaCrearPedido;
@@ -28,25 +34,28 @@ public class ControladorMenu implements ActionListener {
     
     public ControladorMenu(VentanaMenu ventana) {
         this.ventana = ventana;
-     
+        String diaSemana = obtenerDiaSemanaActual();
+        String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
+        String menu = leerMenu(nombreFichero);
     }
 
     public void actionPerformed(ActionEvent e) {
-    
+      
     	if (e.getSource() == ventana.añadir) {
     		
-    		
-            String diaSemana = obtenerDiaSemanaActual();
-            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
-            String menu = leerMenu(nombreFichero);
+//    		
+//            String diaSemana = obtenerDiaSemanaActual();
+//            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
+//            String menu = leerMenu(nombreFichero);
           //  ventana.texto.setText(menu);
-            JOptionPane.showMessageDialog(ventana, " ¡Menú añadido correctamente! ");
-            
+            JOptionPane.showMessageDialog(ventana, "¡Menú añadido correctamente!");
+            Menu m = new Menu();
+            ControladorCarrito.actualizarPedido(m);
             ventana.setVisible(true);
             //ventana.dispose();
             
         }  else if (e.getSource() == ventana.atras) {
-        	ventana.setVisible(false);
+        	ventana.dispose();
         	
           //  ventanaCrearPedido.setVisible(true);
         }
@@ -105,15 +114,16 @@ public class ControladorMenu implements ActionListener {
         double precioMenu = menuJSON.getDouble("precio");
         
         ArrayList<String> listaNombres = new ArrayList<String>();
+        
 		for (int i = 0; i < platos.length(); i++) {
 			JSONObject platoJSON = platos.getJSONObject(i);
 			String nombrePlato = platoJSON.getString("nombrePlato");
 			// Creamos el JSONArray para sacar los valores de INgrediente
 			listaNombres.add(nombrePlato);
 			}
-		
-			System.out.print(listaNombres);		
-        
+		ventana.setPlatosDelDia(listaNombres);	
+		//System.out.print(listaNombres);	
+			
         
         StringBuilder menu = new StringBuilder();
         menu.append("Menú del día:\n");
@@ -123,7 +133,11 @@ public class ControladorMenu implements ActionListener {
         
         
         
-
+//        for (int i = 0; i < platos.length(); i++) {
+//            String plato = platos.getString(i);
+//            menu.append("- ").append(plato).append("\n");
+//        }
+//System.out.println(platos);
         return menu.toString();
     }
 }
