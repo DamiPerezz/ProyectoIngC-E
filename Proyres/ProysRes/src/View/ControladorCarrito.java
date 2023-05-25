@@ -22,7 +22,7 @@ import Model.Plato;
 public class ControladorCarrito implements ActionListener{
 
 	
-	VentanaCarrito v; 
+	public VentanaCarrito v; 
 	
 	public String nombreUsuario;
 	private static ArrayList<Plato> listaPlatos = new ArrayList<>();
@@ -52,9 +52,11 @@ public class ControladorCarrito implements ActionListener{
 	
 	public static void actualizarPedido(Plato p) {
 		listaPlatos.add(p);
+		VentanaCarrito.actualizarPedido(p);
 	}
 	public static void actualizarPedido(Menu m) {
 		listaMenus.add(m);
+		VentanaCarrito.actualizarPedido(m);
 	}
 	
 	

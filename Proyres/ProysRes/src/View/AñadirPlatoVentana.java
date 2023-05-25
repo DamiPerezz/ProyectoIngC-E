@@ -74,7 +74,7 @@ public class AñadirPlatoVentana extends JFrame{
 	            public void actionPerformed(ActionEvent e) {
 	               ArrayList<Plato> lista = ControladorCarrito.getListaPlatos();
 	               lista.add(p);
-	               ControladorCarrito.setListaPlatos(lista);
+	               ControladorCarrito.actualizarPedido(p);
 	               System.out.println("xd");
 	            }
 	        });

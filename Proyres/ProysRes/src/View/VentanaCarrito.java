@@ -8,7 +8,13 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Model.Menu;
+import Model.Plato;
+
 import javax.swing.JLabel;
+
+import java.util.ArrayList;
 
 //QUE EST ESOBIHGFJDSKLFJ
 
@@ -22,7 +28,23 @@ public class VentanaCarrito extends JFrame {
 	private static String pedidoActual = "";
 	private static float precioTotal = 0;
 	
-	
+	public static void actualizarPedido(Plato p) {
+		
+		pedidoActual += p.getNombrePlato() + "," + p.getPrecio() + '\n';
+		precioTotal += p.getPrecio();
+	}
+
+	public static void actualizarPedido(Menu m) {
+		ArrayList<Plato> listado = new ArrayList<>();
+		listado = m.getListaPlatos();
+		pedidoActual += "Menú del día: " + m.getPrecio();
+		for(Plato p : listado) {
+			
+			pedidoActual += "- " + p.getNombrePlato() + '\n';
+			
+		}
+		precioTotal += m.getPrecio();
+	}
 	
 	public static void actualizarPedido(String texto, float precio) {
 
