@@ -35,7 +35,7 @@ public class VentanaCrearPedido extends JFrame {
 	public ControladorCrearPedido controlador;
 	
 	public VentanaCrearPedido() {
-		Iniciar();
+		
 	}
 	
 	public void Iniciar() {

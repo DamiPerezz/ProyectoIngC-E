@@ -59,6 +59,19 @@ public class ControladorCarrito implements ActionListener{
 		VentanaCarrito.actualizarPedido(m);
 	}
 	
+	public void borrarPlato(int s) {
+		
+		v.actualizarPrecio(listaPlatos.get(s).getPrecio());
+		listaPlatos.remove(s);
+		
+	}
+	
+	public void borrarMenu(int m) {
+		v.actualizarPrecio(listaMenus.get(m).getPrecio());
+		listaMenus.remove(m);
+		
+	}
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		
