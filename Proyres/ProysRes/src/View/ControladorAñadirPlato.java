@@ -19,11 +19,7 @@ public class ControladorAñadirPlato implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Object causa = e.getSource();
-		if (causa == ventana.atras) {
-           ventana.dispose();
-			// Aquí hacemos la acción correspondiente al botón añadirPlato
-        }
+	
 		
 		       }
 }
