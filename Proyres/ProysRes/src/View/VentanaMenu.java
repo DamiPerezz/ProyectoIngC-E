@@ -2,6 +2,8 @@ package View;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -72,14 +75,35 @@ public class VentanaMenu extends JFrame {
 		añadir.setPreferredSize(new Dimension(170, 50));
 		add(añadir);
 		
-		atras = new JButton("Atrás");
-		atras.setMnemonic(KeyEvent.VK_A);
-		atras.setPreferredSize(new Dimension(170, 50));
-		add(atras);
 		
+		  JMenuBar menuBar = new JMenuBar();
+	        setJMenuBar(menuBar);
+	        
+	        //Añade OPCION a la barra
+	        JMenu mnNewMenu = new JMenu("Opcion");
+	        menuBar.add(mnNewMenu);
+	        
+	        //Añade el salir a la barra con el action listener incorporado para que salga del sistema 
+	        
+	        JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+	        mntmNewMenuItem.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		setVisible(false);
+	        	}
+	        });
+	        
+	        
+	        
+	        mnNewMenu.add(mntmNewMenuItem);
+	        
+	        	
 		
 	    añadir.addActionListener(controlador);
-	    atras.addActionListener(controlador);
+	  
+	    
+	  
+        
+	    
 	
 		pack(); // Ajusta automáticamente el tamaño de la ventana
 	}

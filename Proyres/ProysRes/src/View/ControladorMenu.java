@@ -81,16 +81,8 @@ public class ControladorMenu implements ActionListener {
          
             ventana.setVisible(true);
            
-         
+    	}
           
-      
-
-          //  ventanaCrearPedido.setVisible(true);
-        } else if (e.getSource() == ventana.atras) {
-        	 ventana.setVisible(false);
-        	
-        }
-    
     	
     }
    
