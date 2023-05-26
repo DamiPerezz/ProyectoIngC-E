@@ -292,7 +292,7 @@ public class Pedido {
 				
 			 String texto = "Menú del día: "+ m.getPrecio() + "€<br>" + textoCarrito;
 				
-			VentanaCarrito.actualizarPedido(texto, m.getPrecio());
+			VentanaCarrito.actualizarPedido(m);
 			ControladorCarrito.actualizarPedido(m); 
 			
 			
@@ -388,7 +388,7 @@ public class Pedido {
 				break;
 			} 
 		}
-		VentanaCarrito.actualizarPedido(nombrePlato + ": "+ p.getPrecio() + "€" + "<br>", p.getPrecio());
+		VentanaCarrito.actualizarPedido(p);
 		ControladorCarrito.actualizarPedido(p);
 		
 		return p;

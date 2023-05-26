@@ -30,6 +30,7 @@ public class VentanaCarrito extends JFrame {
 	private static ArrayList<String> pedidoActualPlatos = new ArrayList<>();
 	private static ArrayList<String> pedidoActualMenus = new ArrayList<>();
 	private static float precioTotal = 0;
+	
 
 	public static void actualizarPedido(Plato p) {
 
@@ -157,6 +158,8 @@ public class VentanaCarrito extends JFrame {
 			bep.addActionListener(controlador);
 			this.setVisible(true);
 		}
+		
+		
 	}
 	public void actualizarPrecio(float d) {
 		

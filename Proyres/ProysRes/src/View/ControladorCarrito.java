@@ -27,7 +27,7 @@ public class ControladorCarrito implements ActionListener{
 	public String nombreUsuario;
 	private static ArrayList<Plato> listaPlatos = new ArrayList<>();
 	private static ArrayList<Menu> listaMenus = new ArrayList<>();
-	
+	private VentanaTapper ventanaTapper;
 	
 	
 	public static ArrayList<Plato> getListaPlatos() {
@@ -74,26 +74,82 @@ public class ControladorCarrito implements ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		
-		int NIdentificacion = sacarIDPedido() + 1;
-		
-		
-		// Crear instancia del pedido y guardarla en JSON
+		int ide=0;
+		if(e.getSource()==v.bep) {
+			ventanaTapper= new VentanaTapper();
+			ventanaTapper.setControlador(this);
+			this.ventanaTapper = ventanaTapper;
+			ventanaTapper.IniciarVentanaTupper();
+			
+		}
+		if(e.getSource()==ventanaTapper.BotonSiTapper) {
+			ide =1;
+			int NIdentificacion = sacarIDPedido() + 1;
+			
+			try {
+			FileWriter fichero = new FileWriter("registrosCocina.txt",true);	
+			fichero.write(NIdentificacion + ";" + ide + ";");
+			fichero.close();
+			
+			}catch(Exception ex) {
+				ex.getMessage();
+			}
+			
+			// Crear instancia del pedido y guardarla en JSON
+			
+			Pedido p = new Pedido(NIdentificacion, listaPlatos,listaMenus);
 
-		Pedido p = new Pedido(NIdentificacion, listaPlatos,listaMenus);
+			//Opciones extra
+			
+			AñadirPedidoAJSON(p);
 
-		//Opciones extra
-		
-		AñadirPedidoAJSON(p);
+			listaPlatos.clear();
+			listaMenus.clear();
+			
+			
+			v.asegurarVentana();
+			v.dispose();
+			ventanaTapper.dispose();
+		}
+		if(e.getSource()==ventanaTapper.BotonNoTapper) {
+			ide=-1;
+			int NIdentificacion = sacarIDPedido() + 1;
+			
+			try {
+			FileWriter fichero = new FileWriter("registrosCocina.txt",true);	
+			fichero.write(NIdentificacion + ";" + ide + ";");
+			fichero.close();
+			
+			}catch(Exception ex) {
+				ex.getMessage();
+			}
+			
+			// Crear instancia del pedido y guardarla en JSON
+			
+			Pedido p = new Pedido(NIdentificacion, listaPlatos,listaMenus);
 
-		listaPlatos.clear();
-		listaMenus.clear();
-		
-		
-		v.asegurarVentana();
-		v.dispose();
+			//Opciones extra
+			
+			AñadirPedidoAJSON(p);
 
-	}
+			listaPlatos.clear();
+			listaMenus.clear();
+			
+			
+			v.asegurarVentana();
+			v.dispose();
+			ventanaTapper.dispose();
+		}
+		
+		
+		
+		
+			
+		}
+		
+		
+
+	
 
 	public static int sacarIDPedido() {
 		String txt = "";
