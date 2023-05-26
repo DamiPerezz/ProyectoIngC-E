@@ -226,26 +226,25 @@ import java.awt.*;
 	        		System.exit(0);
 	        	}
 	        });
-	        
-	        
-	        
+	       
 	        mnNewMenu.add(mntmNewMenuItem);
 	        
-	        	        JButton btnAdmin = new JButton("Admin");
-	        	        mnNewMenu.add(btnAdmin);
-	        	        
-	        	        //ME ESTA PONIENDO MALO VER ESTE PROMP PARA EL ADMINISTRADOR CON LAS CREDENCIALES EN EL SISTEMA
-	        	        
-	        	        btnAdmin.addActionListener(new ActionListener() {
-	        	            public void actionPerformed(ActionEvent e) {
-	        	                String password = JOptionPane.showInputDialog(frame, "Enter admin password:");
-	        	                if (ADMIN_PASSWORD.equals(password)) {
-	        	                    ((CardLayout) frame.getContentPane().getLayout()).show(frame.getContentPane(), "Admin");
-	        	                } else {
-	        	                    JOptionPane.showMessageDialog(frame, "Incorrect password!", "Error", JOptionPane.ERROR_MESSAGE);
+	        JMenuItem mntmAdmin = new JMenuItem("Admin");
+            mntmAdmin.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) { 
+                	 {
+                }
+	        	           
+	       String password = JOptionPane.showInputDialog(frame, "Enter admin password:");
+	      if (ADMIN_PASSWORD.equals(password)) {
+	      ((CardLayout) frame.getContentPane().getLayout()).show(frame.getContentPane(), "Admin");
+	           } else {
+	         JOptionPane.showMessageDialog(frame, "Incorrect password!", "Error", JOptionPane.ERROR_MESSAGE);
 	        	                }
 	        	            }
 	        	        });
+            mnNewMenu.add(mntmAdmin);	 
+            
 	    }
 	}
 
