@@ -12,78 +12,111 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Model.*;
 
-public class AñadirPlatoVentana extends JFrame{
+public class AñadirPlatoVentana extends JFrame {
 
 	public ControladorAñadirPlato controlador;
 	private JFrame marco;
 	private JPanel panel;
-	private JMenuBar menuBar;
-	private JMenu menu;
-	public JButton atras;
 
-	
+	private JMenu menu;
+
 	public static void main(String[] args) {
-		
+
 		AñadirPlatoVentana v = new AñadirPlatoVentana();
-		
+
 	}
-	
+
 	public AñadirPlatoVentana() {
-		
+
 		IniciarVentana();
 	}
-	
-	
-	public void IniciarVentana( ) {
+
+	public void IniciarVentana() {
 		controlador = new ControladorAñadirPlato(this);
-		
+		ArrayList<Plato> TotalPlatos = new ArrayList<>();
 		marco = new JFrame();
-		marco.setBounds(100, 100, 499, 322);
-        marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        marco.getContentPane().setLayout(new FlowLayout());
-        marco.setVisible(true);
-        
-        atras = new JButton("atras");
-        atras.setMnemonic(KeyEvent.VK_M); //activar el boton para poder pulsarle
-		atras.setBounds(45, 140, 194, 46);
-		setLayout(new FlowLayout()); // Se utiliza FlowLayout como administrador de diseño
-        add(atras);
-		marco.add(atras);
+		marco.setBounds(100, 100, 600, 500);
+		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		marco.getContentPane().setLayout(new FlowLayout());
+		marco.setResizable(false);
 		marco.setVisible(true);
-        atras.addActionListener(controlador);
-		
-        
-		//Bucle que baya creando botones y añadiendolos al carrito
-		ArrayList<Plato> TotalPlatos = Pedido.SacarInstanciasPlato();
-		
-		//Aqui genera botones en funcion del Plato que saca del arrayList de platos
-		//Cada plato tiene su actionPerformed interno al crearse, es decir
-		//al crearse ya incorpora el metodo que coje del controlador del carrito
-		//Los platos que tiene y añade a este carrito el nuevo plato
-		
+
+		setLayout(new FlowLayout()); // Se utiliza FlowLayout como administrador de diseño
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		// Añade OPCION a la barra
+		JMenu mnNewMenu = new JMenu("Opcion");
+		menuBar.add(mnNewMenu);
+
+		// Añade el salir a la barra con el action listener incorporado para que salga
+		// del sistema
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				marco.setVisible(false);
+			}
+		});
+
+		mnNewMenu.add(mntmNewMenuItem);
+
+		marco.add(menuBar);
+
+		int respuesta = JOptionPane.showConfirmDialog(null, "¿Tienes alguna alergia?", "Atención, lea atentamente",
+				JOptionPane.YES_NO_OPTION);
+
+		if (respuesta == JOptionPane.YES_OPTION) {
+
+			String[] alergias = JOptionPane
+					.showInputDialog(
+							"Escriba las alergias separado por comas: \n 1. Gluten \n 2. Marisco \n 3. Frutos Secos \n"
+									+ "4. Lactosa \n 5. Huevos \n 6. Pescado \n 7. Soja \n 8. Vegetariano \n")
+					.toLowerCase().replaceAll("\\s", "").split(",");
+
+			if (!alergias[0].equals("")) {
+				TotalPlatos = Alergia.filtrarPlatos(alergias);
+			} else {
+
+				String aux[] = new String[1];
+				aux[0] = "ninguna";
+				TotalPlatos = Alergia.filtrarPlatos(aux);
+			}
+		}
+
+		// Bucle que baya creando botones y añadiendolos al carrito
+		else {
+			TotalPlatos = Pedido.SacarInstanciasPlato();
+		}
+
+		// Aqui genera botones en funcion del Plato que saca del arrayList de platos
+		// Cada plato tiene su actionPerformed interno al crearse, es decir
+		// al crearse ya incorpora el metodo que coje del controlador del carrito
+		// Los platos que tiene y añade a este carrito el nuevo plato
+
 		for (Plato p : TotalPlatos) {
-			JButton platos  = new JButton (p.getNombrePlato()+ " : " + p.getPrecio() + "$");
-			platos.setBounds(45, 140, 194, 46);
+			JButton platos = new JButton(p.getNombrePlato() + " : " + p.getPrecio() + "€");
+			platos.setBounds(45, 140, 250, 46);
 			platos.setVisible(true);
 			marco.add(platos);
 			platos.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	               ArrayList<Plato> lista = ControladorCarrito.getListaPlatos();
-	               lista.add(p);
-	               ControladorCarrito.actualizarPedido(p);
-	               System.out.println("xd");
-	            }
-	        });
-	}
-		
-	        
-		
-		
-		
-		
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<Plato> lista = ControladorCarrito.getListaPlatos();
+					lista.add(p);
+					ControladorCarrito.actualizarPedido(p);
+					System.out.println("xd");
+				}
+			});
+
+		}
+		pack();
+
+		marco.setVisible(true);
 	}
 }
