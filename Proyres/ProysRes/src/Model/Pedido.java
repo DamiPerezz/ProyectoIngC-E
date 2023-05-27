@@ -28,11 +28,11 @@ public class Pedido {
 	public static void main(String[] args) {
 
 		Pedido r = new Pedido();
-		
+
 		r.CrearPedido();
 	}
 
-	public  void imprimirRecibo() {
+	public void imprimirRecibo() {
 
 		int factura = 0;
 
@@ -66,52 +66,59 @@ public class Pedido {
 	public Pedido(int NIdentificacion) {
 		super();
 	}
+
 	public Pedido() {
 		super();
 	}
-		public  void CrearPedido() {
-		
-		//Preguntar opcion 1,2 o 3
-	int opcion;
-	boolean SeguirPedido = true;
-	ArrayList<Plato> PlatosPedido = new ArrayList<Plato>();
-	ArrayList<Menu> MenusPedido = new ArrayList<Menu>();
-		//Bucle de pedir plato/Menu
-	
-		while(SeguirPedido==true) {
-			opcion=OpcionesDePedido();
-			switch(opcion) {
+
+	public void CrearPedido() {
+
+		// Preguntar opcion 1,2 o 3
+		int opcion;
+		boolean SeguirPedido = true;
+		ArrayList<Plato> PlatosPedido = new ArrayList<Plato>();
+		ArrayList<Menu> MenusPedido = new ArrayList<Menu>();
+		// Bucle de pedir plato/Menu
+
+		while (SeguirPedido == true) {
+			opcion = OpcionesDePedido();
+			switch (opcion) {
 			case 1:
-	//Añadir Plato
+				// Añadir Plato
 				PlatosPedido.add(AñadirPlatoAlPedido());
 				break;
 			case 2:
 				MenusPedido.add(AñadirMenuAlPedido());
 				break;
-			case 3:	
-				SeguirPedido=false;
-			}//Preguntar si ha termiando de pedir
-			//SeguirPedido=FinDelPedido();
-			
+			case 3:
+				SeguirPedido = false;
+			}// Preguntar si ha termiando de pedir
+				// SeguirPedido=FinDelPedido();
+
 		}
-		
-		//Terminar pedido, guardalo e imprimir recibo
-		
-				int NIdentificacion = sacarIDPedido() + 1;
-				// Crear instancia del pedido y guardarla en JSON
 
-				Pedido p = new Pedido(NIdentificacion, PlatosPedido,MenusPedido);
-		
-				//Opciones extra
-				
-				AñadirPedidoAJSON(p);
+		// Terminar pedido, guardalo e imprimir recibo
 
+<<<<<<< HEAD
 				JOptionPane.showMessageDialog(VentanaCarrito, "Pedido realizado con exito!!!!");
 				System.out.println();
+=======
+		int NIdentificacion = sacarIDPedido() + 1;
+		// Crear instancia del pedido y guardarla en JSON
+
+		Pedido p = new Pedido(NIdentificacion, PlatosPedido, MenusPedido);
+
+		// Opciones extra
+
+		AñadirPedidoAJSON(p);
+
+		System.out.println("Pedido realizado con exito!!!!");
+>>>>>>> 1452ba489479a4eb64f05361fed208224f82563d
 
 	}
+
 	public Menu SacarInstanciasMenu(String dia) {
-		String text="";
+		String text = "";
 		textoCarrito = "";
 		// Leer listaPlatos
 		try {
@@ -127,38 +134,35 @@ public class Pedido {
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-		String txt= text;
+		String txt = text;
 		JSONObject menuJSON = new JSONObject(txt);
 		int price = menuJSON.getInt("precio");
 		String DiaSemana = menuJSON.getString("DiaSemana");
-		JSONArray listaPla= menuJSON.getJSONArray("listaPlatos");
-		
-		ArrayList<Plato> listaPlatos= new ArrayList<Plato>();
-		
-		//Bucle de instanciar JSONPlato a ArrayList Plato
-		for(int i=0;i<listaPla.length();i++) {
+		JSONArray listaPla = menuJSON.getJSONArray("listaPlatos");
+
+		ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
+
+		// Bucle de instanciar JSONPlato a ArrayList Plato
+		for (int i = 0; i < listaPla.length(); i++) {
 			JSONObject platoJSON = listaPla.getJSONObject(i);
 			int precio = platoJSON.getInt("precio");
 			String nombrePlato = platoJSON.getString("nombrePlato");
 			textoCarrito += "- " + nombrePlato + "<br>";
-			
+
 			int NOPlato = platoJSON.getInt("NOPlato");
 			// Creamos el JSONArray para sacar los valores de INgrediente
-			
-			
+
 			JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
 			Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
-			
-			
-			
+
 			for (int j = 0; j < listaIngredientes.length; j++) {
-				String nombre =  lisIng.getString(j);
+				String nombre = lisIng.getString(j);
 				Ingrediente ingrediente = new Ingrediente(nombre);
 				listaIngredientes[j] = ingrediente;
 			}
-			
+
 			String Alergia = platoJSON.getString("Alergia");
-			
+
 			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
 			listaPlatos.add(p);
 		}
@@ -166,12 +170,12 @@ public class Pedido {
 		menu.setDiaSemana(DiaSemana);
 		menu.setPrecio(price);
 		menu.setListaPlatos(listaPlatos);
-		
-		
+
 		return menu;
-		
+
 	}
- 	public static  ArrayList<Plato> SacarInstanciasPlato() {
+
+	public static ArrayList<Plato> SacarInstanciasPlato() {
 		String txt = "";
 		// Leer listaPlatos
 		try {
@@ -210,39 +214,41 @@ public class Pedido {
 		}
 		return listaPlatos;
 	}
+
 	public boolean FinDelPedido() {
 		System.out.println("¿Quieres continuar con el pedido?" + "\n" + "[Y]/[N]");
 		Scanner teclado = new Scanner(System.in);
-		String resp= teclado.next();
-		char respuesta= resp.charAt(0);
-		boolean respBool=false;
-		if (respuesta== 'Y' || respuesta== 'N') {
-			if(respuesta== 'Y')
-				respBool=true;
-			if(respuesta=='N')
+		String resp = teclado.next();
+		char respuesta = resp.charAt(0);
+		boolean respBool = false;
+		if (respuesta == 'Y' || respuesta == 'N') {
+			if (respuesta == 'Y')
+				respBool = true;
+			if (respuesta == 'N')
 				System.out.println("Gracias por tu visita ;)");
-				respBool=false;
-		}else {	
+			respBool = false;
+		} else {
 			System.out.println("Respuesta invalida");
 		}
-		
+
 		return respBool;
 	}
+
 	public int OpcionesDePedido() {
-		
+
 		System.out.println("Opciones");
 		System.out.println("[1] Añadir Plato");
 		System.out.println("[2] Añadir Menu");
 		System.out.println("[3] Finalizar pedido");
 		Scanner teclado = new Scanner(System.in);
-		int respuesta= teclado.nextInt();
-		
-		
+		int respuesta = teclado.nextInt();
+
 		return respuesta;
-				
+
 	}
+
 	public Plato AñadirPlatoAlPedido() {
-		
+
 		System.out.println("¿Que platos quieres añadir al pedido?");
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
 
@@ -254,16 +260,16 @@ public class Pedido {
 		String nombrePlato = sc.nextLine();
 
 		return AgregarPlato(nombrePlato);
-		
-		
+
 	}
+
 	public Menu AñadirMenuAlPedido() {
-		
+
 		System.out.println("El menu del dia es:");
-		
+
 		Scanner sc = new Scanner(System.in);
 		Date date = new Date();
-		int dia=0; //date.getDay();
+		int dia = 0; // date.getDay();
 		Menu m = new Menu();
 		m = SacarInstanciasMenu("Lunes");
 //		switch (dia) {
@@ -284,31 +290,31 @@ public class Pedido {
 //				m =SacarInstanciasMenu("Domingo");
 //		}
 		System.out.println(m);
-		
+
 		System.out.println("¿Quieres añadirlo al pedido? (y/n)");
-		char resp=sc.next().charAt(0);
-		if(resp=='y'||resp=='n' ) {
-			if(resp=='n') {
+		char resp = sc.next().charAt(0);
+		if (resp == 'y' || resp == 'n') {
+			if (resp == 'n') {
 				System.out.println("Operacion cancelada");
 				m = null;
 			}
-			if(resp=='y') {
-				
-			 String texto = "Menú del día: "+ m.getPrecio() + "€<br>" + textoCarrito;
-				
-			VentanaCarrito.actualizarPedido(m);
-			ControladorCarrito.actualizarPedido(m); 
-			
-			
+			if (resp == 'y') {
+
+				String texto = "Menú del día: " + m.getPrecio() + "€<br>" + textoCarrito;
+
+				VentanaCarrito.actualizarPedido(m);
+				ControladorCarrito.actualizarPedido(m);
+
 				System.out.println("Menu añadido!!");
 			}
 		} else {
 			System.out.println("Respuesta invalida");
 			m = null;
 		}
-		
+
 		return m;
 	}
+
 	public static int sacarIDPedido() {
 		String txt = "";
 		try {
@@ -325,8 +331,8 @@ public class Pedido {
 			er.getMessage();
 		}
 
-		JSONArray PedidosJSONArr = new JSONArray (txt);
-		int index = PedidosJSONArr.length() -1;
+		JSONArray PedidosJSONArr = new JSONArray(txt);
+		int index = PedidosJSONArr.length() - 1;
 		JSONObject ultimoObjeto = PedidosJSONArr.getJSONObject(index);
 		int num = ultimoObjeto.getInt("NIdentificacion");
 
@@ -340,9 +346,10 @@ public class Pedido {
 
 		return num;
 	}
+
 	public static void AñadirPedidoAJSON(Pedido p) {
 		String texto = "";
-		
+
 		try {
 			FileReader fichero = new FileReader("listaPedidos.json");
 			Scanner sc = new Scanner(fichero);
@@ -353,17 +360,17 @@ public class Pedido {
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
-		//Sacamos los pedidos JSON guardados
-		JSONArray JSONPedidos = new JSONArray (texto);
-		
-		//Creamos el objeto JSON de la instancia
+		// Sacamos los pedidos JSON guardados
+		JSONArray JSONPedidos = new JSONArray(texto);
+
+		// Creamos el objeto JSON de la instancia
 		JSONObject jsonPedido = new JSONObject();
 		jsonPedido.put("NIdentificacion", p.NIdentificacion);
 		jsonPedido.put("listaPlatos", p.listaPlatos);
 		jsonPedido.put("listaMenus", p.listaMenus);
-		//añadimos el JSONObject al JSON Array
+		// añadimos el JSONObject al JSON Array
 		JSONPedidos.put(jsonPedido);
-		
+
 		try {
 			FileWriter writer = new FileWriter("listaPedidos.json");
 			// Escribir el objeto JSON en el archivo
@@ -378,23 +385,18 @@ public class Pedido {
 
 	public Plato AgregarPlato(String nombrePlato) {
 		ArrayList<Plato> PlatosDisponibles = SacarInstanciasPlato();
-		
-		
-		
-		
-		
-		
+
 		Plato p = null;
 
 		for (Plato plato : PlatosDisponibles) {
 			if (plato.getNombrePlato().equals(nombrePlato)) {
 				p = plato;
 				break;
-			} 
+			}
 		}
 		VentanaCarrito.actualizarPedido(p);
 		ControladorCarrito.actualizarPedido(p);
-		
+
 		return p;
 
 	}
@@ -405,20 +407,19 @@ public class Pedido {
 				+ this.listaMenus + "\n" + "----------------------";
 	}
 
-	
 	public int getNIdentificacion() {
-		
+
 		return NIdentificacion;
 	}
-	
+
 	public ArrayList<Plato> getListaPlatos() {
-		
+
 		return listaPlatos;
 	}
-	
+
 	public ArrayList<Menu> getListaMenus() {
-		
+
 		return listaMenus;
 	}
-	
+
 }

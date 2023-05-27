@@ -94,7 +94,7 @@ public class VentanaCarrito extends JFrame {
 			panelCarrito.setLayout(new FlowLayout());
 
 			bep = new JButton("Finalizar pedido");
-
+			
 			JLabel texto = new JLabel("Pedido actual:");
 
 			for (String s : pedidoActualPlatos) {
@@ -146,6 +146,10 @@ public class VentanaCarrito extends JFrame {
 			JLabel precioFinal = new JLabel("Importe Total:" + precioTotal);
 
 			bep.setPreferredSize(new Dimension(150, 50));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1452ba489479a4eb64f05361fed208224f82563d
 			panelCarrito.add(texto, BorderLayout.NORTH);
 			panelCarrito.add(bep, BorderLayout.SOUTH);
 

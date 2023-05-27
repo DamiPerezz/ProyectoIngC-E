@@ -75,77 +75,19 @@ public class Alergia {
 
 	}
 
-	public static void main(String[] args) {
+	public static ArrayList<Plato> filtrarPlatos(String[] alergiasElegidas) {
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> arrayListAlergias = new ArrayList<String>();
+		ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
 		int opcionUsuario;
+		String opcionesUsuario;
 		int h = 0; // usado para ir guardando con un nº asociado cada plato
+		boolean contieneAlergia = false;
+		
 
-		String alergiaElegida = "";
-		String alergiasTotales = "";
 		String texto = "";
 		String alergiasFiltradas = "";
-		do {
-			System.out.println("Seleccione una alergia: \n" + "1. Gluten \n" + "2. Marisco \n" + "3. Frutos Secos \n"
-					+ "4. Lactosa \n" + "5. Huevos \n" + "6. Pescado \n" + "7. Soja \n" + "8. Vegetariano \n");
-
-			// nota: crear un json con las alergias que existen en el restaurante. Éste
-			// array es temporal, al igual que en mostrarListaAlergias
-
-			do {
-				try {
-					opcionUsuario = in.nextInt();
-				} catch (Exception e) {
-					opcionUsuario = 0;
-				}
-				if (opcionUsuario < 1 || opcionUsuario > 8) {
-					System.out.println("Eliga un nº entre 1 y 8.");
-				}
-
-			} while (opcionUsuario < 1 || opcionUsuario > 8);
-
-			
-
-			Pattern patronA = Pattern.compile(alergiaElegida);
-
-			Matcher matchAlergia = patronA.matcher(alergiasTotales);
-			
-			switch (opcionUsuario) {
-
-			case 1:
-				alergiaElegida = "gluten";
-				if(!matchAlergia.find()) alergiasTotales += ", gluten";
-				break;
-			case 2:
-				alergiaElegida = "marisco";
-				if(!matchAlergia.find()) alergiasTotales += ", marisco";
-				break;
-			case 3:
-				alergiaElegida = "frutos secos";
-				if(!matchAlergia.find()) alergiasTotales += ", frutos secos";
-				break;
-			case 4:
-				alergiaElegida = "lactosa";
-				if(!matchAlergia.find()) alergiasTotales += ", lactosa";
-				break;
-			case 5:
-				alergiaElegida = "huevos";
-				if(!matchAlergia.find()) alergiasTotales += ", huevos";
-				break;
-			case 6:
-				alergiaElegida = "pescado";
-				if(!matchAlergia.find()) alergiasTotales += ", pescado";
-				break;
-			case 7:
-				alergiaElegida = "soja";
-				if(!matchAlergia.find()) alergiasTotales += ", soja";
-				break;
-			case 8:
-				alergiaElegida = "vegetariano";
-				if(!matchAlergia.find()) alergiasTotales += ", (apto para) vegetarianos";
-				break;
-
-			}
+		
 
 			try {
 
@@ -160,35 +102,58 @@ public class Alergia {
 				e.printStackTrace();
 			}
 
-			JSONArray listaPlatos = new JSONArray(texto);
+			JSONArray platosArr = new JSONArray(texto);
 
-			
-			for (int i = 0; i < listaPlatos.length(); i++) {
-				JSONObject plato = listaPlatos.getJSONObject(i);
-				if (plato.get("alergia").equals(alergiaElegida)) {
+			for (int i = 0; i < platosArr.length(); i++) {
+				contieneAlergia = false;
+				JSONObject plato = platosArr.getJSONObject(i);
+				for (int q = 0; q < alergiasElegidas.length; q++) {
+					System.out.println(plato.get("alergia").toString().toLowerCase());
+					System.out.println(alergiasElegidas[q]);
 
-				} else {
+					if (plato.get("alergia").toString().toLowerCase().equals(alergiasElegidas[q])) {
+						contieneAlergia = true;
+					}
+				}
+					if (contieneAlergia == false) {
 
-					Pattern patron = Pattern.compile(plato.getString("nombrePlato"));
+						Pattern patron = Pattern.compile(plato.getString("nombrePlato"));
 
-					
-					Matcher matchPlato = patron.matcher(alergiasFiltradas);
+						Matcher matchPlato = patron.matcher(alergiasFiltradas);
 
-					if (matchPlato.find()) {
-						
-					}else {
-						alergiasFiltradas += "- " + plato.get("nombrePlato") + '\n';
+						if (matchPlato.find()) {
+
+						} else {
+
+							JSONObject platoJSON = platosArr.getJSONObject(i);
+							int precio = platoJSON.getInt("precio");
+							String nombrePlato = platoJSON.getString("nombrePlato");
+							int NOPlato = platoJSON.getInt("NOPlato");
+							// Creamos el JSONArray para sacar los valores de INgrediente
+							JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
+							Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
+							for (int j = 0; j < listaIngredientes.length; j++) {
+								JSONObject ing = lisIng.getJSONObject(j);
+								String nombre = ing.getString("nombre");
+								Ingrediente ingrediente = new Ingrediente(nombre);
+								listaIngredientes[j] = ingrediente;
+							}
+							String Alergia = platoJSON.getString("alergia");
+							Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
+							listaPlatos.add(p);
+
+							alergiasFiltradas += "- " + plato.get("nombrePlato") + '\n';
+
 						
 					}
-
 				}
 
 			}
-			System.out.println("Presione Y para añadir una nueva alergia");
+			
 
-		} while (in.next().toUpperCase().charAt(0) == 'Y');
-
-		System.out.print("Menú apto para las siguientes alergias: \n" + alergiasFiltradas);
+		
+			return listaPlatos;
+		
 
 	}
 
