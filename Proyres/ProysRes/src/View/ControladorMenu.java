@@ -64,6 +64,11 @@ public class ControladorMenu implements ActionListener {
             
             //------------------------------------------
             
+            
+            
+        	//JSONArray platosArr = new JSONArray(txt);
+            
+            
             String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
             String menu = leerMenu(nombreFichero);
             System.out.println(menu);
@@ -123,7 +128,7 @@ public class ControladorMenu implements ActionListener {
     }
 //______________________________________________________________
     
-    private String leerMenu(String nombreFichero) {
+    public String leerMenu(String nombreFichero) {
         StringBuilder contenido = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreFichero))) {
@@ -147,7 +152,10 @@ public class ControladorMenu implements ActionListener {
 			// Creamos el JSONArray para sacar los valores de INgrediente
 			listaNombres.add(nombrePlato);
 			}
+		
 		ventana.setPlatosDelDia(listaNombres);	
+		
+		ventana.enviarArray(listaNombres);
 		//System.out.print(listaNombres);	
 			
         

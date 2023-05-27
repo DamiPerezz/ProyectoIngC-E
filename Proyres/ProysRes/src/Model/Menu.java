@@ -229,7 +229,7 @@ public class Menu {
 		boolean SeguirPedido = true;
 		ArrayList<Plato> PlatosMenu = new ArrayList<Plato>();
 		do {
-			PlatosMenu.add(AñadirPlatoAlMenu());
+			PlatosMenu.add(añadirPlatoAlMenu());
 			System.out.println("¿Quieres seguir añadiendo platos? (y/n)");
 			char resp=sc.next().charAt(0);
 			if(resp=='y'||resp=='n' ) {
@@ -251,7 +251,7 @@ public class Menu {
 		return m;
 		
 	}
-	public Plato AñadirPlatoAlMenu() {
+	public Plato añadirPlatoAlMenu() {
 		
 		System.out.println("¿Que platos quieres añadir al menu?");
 		System.out.println("Disclaimer: INTRODUCIR NOMBRE EXACTAMENTE IGUAL QUE EN LAS OPCIONES");

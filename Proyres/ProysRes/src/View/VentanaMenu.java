@@ -19,6 +19,9 @@ import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class VentanaMenu extends JFrame {
 	
 	public static ControladorMenu controladormenu;
@@ -37,6 +40,7 @@ public class VentanaMenu extends JFrame {
 	public JLabel texto; 
 	public JButton atras;
 	public ControladorMenu controlador;
+	public ArrayList<String> nombres;
 	
 	public void setPlatosDelDia(ArrayList<String> listaNombres) {
 		
@@ -52,23 +56,32 @@ public class VentanaMenu extends JFrame {
 		
 		//JLabel
 		
-		JLabel etiqueta = new JLabel("Menú del día ");
-		add(etiqueta);
+		JLabel etiqueta = new JLabel("Menú del día \n");
+		
+		String texto = "";
+		
+		texto = controlador.leerMenu("menusSemana/menu" + "Lunes" + ".json");
+		
+		String mensaje = "<html> Menú del día : <br>";
+		
+		for ( int i = 0; i < nombres.size(); i ++) {
+			
+			mensaje += "-" + nombres.get(i) +  "<br>"; 
+			
+			
+		}
+		
+		mensaje +="</html>";
+		
+		
+		etiqueta.setText(mensaje);
+	
 		//add(texto);
 	
 		//JTextPane
-		JTextPane textPane = new JTextPane();
-		StyledDocument doc = textPane.getStyledDocument();
-		for (String nombre : listaNombres) {
-		    try {
-				doc.insertString(doc.getLength(), nombre + "\n", null);
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} 
-		add(textPane);
+
 		
+		add(etiqueta);
 		// JButton
 		añadir = new JButton("Añadir");
 		añadir.setMnemonic(KeyEvent.VK_M); // activar el boton para poder pulsarle
@@ -100,12 +113,14 @@ public class VentanaMenu extends JFrame {
 		
 	    añadir.addActionListener(controlador);
 	  
-	    
-	  
-        
-	    
-	
 		pack(); // Ajusta automáticamente el tamaño de la ventana
 	}
+	
+	
+	public void enviarArray( ArrayList<String> listaNombres) {
+			nombres = listaNombres;
+		
+	}
+	
 }
 
