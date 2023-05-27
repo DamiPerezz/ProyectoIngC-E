@@ -19,6 +19,9 @@ import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class VentanaMenu extends JFrame {
 	
 	public static ControladorMenu controladormenu;
@@ -37,6 +40,7 @@ public class VentanaMenu extends JFrame {
 	public JLabel texto; 
 	public JButton atras;
 	public ControladorMenu controlador;
+	public ArrayList<String> nombres;
 	
 	public void setPlatosDelDia(ArrayList<String> listaNombres) {
 		
@@ -56,14 +60,26 @@ public class VentanaMenu extends JFrame {
 		
 		String texto = "";
 		
-		texto += controlador.leerMenu("menusSemana/menu\" + \"Lunes\" + \".json");
+		texto = controlador.leerMenu("menusSemana/menu" + "Lunes" + ".json");
 		
+		String mensaje = "<html> Menú del día : <br>";
+		
+		for ( int i = 0; i < nombres.size(); i ++) {
+			
+			mensaje += "-" + nombres.get(i) +  "<br>"; 
+			
+			
+		}
+		
+		mensaje +="</html>";
+		
+		
+		etiqueta.setText(mensaje);
+	
 		//add(texto);
 	
 		//JTextPane
-		
-		etiqueta.setText(texto);
-	
+
 		
 		add(etiqueta);
 		// JButton
@@ -97,12 +113,14 @@ public class VentanaMenu extends JFrame {
 		
 	    añadir.addActionListener(controlador);
 	  
-	    
-	  
-        
-	    
-	
 		pack(); // Ajusta automáticamente el tamaño de la ventana
 	}
+	
+	
+	public void enviarArray( ArrayList<String> listaNombres) {
+			nombres = listaNombres;
+		
+	}
+	
 }
 
