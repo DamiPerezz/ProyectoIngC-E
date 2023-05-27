@@ -141,7 +141,7 @@ public class Plato {
 
 		Ingrediente[] ingredientesPlato = new Ingrediente[numIng]; // listaIngredientes
 
-		for (int i = 0; i < numIng; i++) {
+	
 
 		
 		 ingredientesPlato = new Ingrediente[numIng]; //listaIngredientes
@@ -240,7 +240,7 @@ public class Plato {
 
 		System.out.println("Plato creado con éxito.");
 		
-	}
+	
 	}
 
 	public ArrayList<Plato> SacarInstanciasPlato() {

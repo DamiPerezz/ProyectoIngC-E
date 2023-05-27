@@ -123,7 +123,7 @@ public class ControladorMenu implements ActionListener {
     }
 //______________________________________________________________
     
-    private String leerMenu(String nombreFichero) {
+    public String leerMenu(String nombreFichero) {
         StringBuilder contenido = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreFichero))) {

@@ -52,23 +52,20 @@ public class VentanaMenu extends JFrame {
 		
 		//JLabel
 		
-		JLabel etiqueta = new JLabel("Menú del día ");
-		add(etiqueta);
+		JLabel etiqueta = new JLabel("Menú del día \n");
+		
+		String texto = "";
+		
+		texto += controlador.leerMenu("menusSemana/menu\" + \"Lunes\" + \".json");
+		
 		//add(texto);
 	
 		//JTextPane
-		JTextPane textPane = new JTextPane();
-		StyledDocument doc = textPane.getStyledDocument();
-		for (String nombre : listaNombres) {
-		    try {
-				doc.insertString(doc.getLength(), nombre + "\n", null);
-			} catch (BadLocationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} 
-		add(textPane);
 		
+		etiqueta.setText(texto);
+	
+		
+		add(etiqueta);
 		// JButton
 		añadir = new JButton("Añadir");
 		añadir.setMnemonic(KeyEvent.VK_M); // activar el boton para poder pulsarle

@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 
 import Model.Alergia;
+import Model.Menu;
+import Model.Plato;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -141,26 +143,38 @@ public class Main {
 //	        btnHomeFromAdmin_1.setBounds(45, 56, 194, 46);
 //	        adminPanel.add(btnHomeFromAdmin_1);
 
-		// BOTON PEDIDO DESDE USUARIO
+		// BOTON PEDIDO ADMIN
 
-		JButton btnHomeFromAdmin_1_1 = new JButton("Crear Pedido");
+		JButton btnHomeFromAdmin_1_1 = new JButton("Añadir Plato");
 		btnHomeFromAdmin_1_1.setBounds(262, 56, 194, 46);
 		adminPanel.add(btnHomeFromAdmin_1_1);
 		btnHomeFromAdmin_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCrearPedido ventanaPedido = new VentanaCrearPedido();
-				ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
-				ventanaPedido.controlador = controladorPedido;
-				ventanaPedido.Iniciar();
+//				VentanaCrearPedido ventanaPedido = new VentanaCrearPedido();
+//				ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
+//				ventanaPedido.controlador = controladorPedido;
+//				ventanaPedido.Iniciar();
+				Plato.AñadirPlato(); 
 
 			}
 		});
 
 		// BOTON INGREDIENTE DESDE ADMIN
 
-		JButton btnHomeFromAdmin_1_2 = new JButton("Añadir Ingredientes");
+		JButton btnHomeFromAdmin_1_2 = new JButton("Añadir Menú");
 		btnHomeFromAdmin_1_2.setBounds(45, 140, 194, 46);
 		adminPanel.add(btnHomeFromAdmin_1_2);
+		btnHomeFromAdmin_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				VentanaCrearPedido ventanaPedido = new VentanaCrearPedido();
+//				ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
+//				ventanaPedido.controlador = controladorPedido;
+//				ventanaPedido.Iniciar();
+				Menu m = new Menu();
+				m = m.CrearMenu();
+				m.AñadirMenuAFichero(m);
+			}
+		});
 
 		// BOTON AÑADIR TAPER DESDE ADMIN
 
