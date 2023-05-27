@@ -84,7 +84,6 @@ public class AñadirPlatoVentana extends JFrame{
 		
 		
 		
-	
+		
 	}
-	
 }
