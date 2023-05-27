@@ -6,6 +6,9 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -103,7 +106,8 @@ public class Pedido {
 				
 				AñadirPedidoAJSON(p);
 
-				System.out.println("Pedido realizado con exito!!!!");
+				JOptionPane.showMessageDialog(VentanaCarrito, "Pedido realizado con exito!!!!");
+				System.out.println();
 
 	}
 	public Menu SacarInstanciasMenu(String dia) {

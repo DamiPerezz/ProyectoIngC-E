@@ -145,8 +145,7 @@ public class VentanaCarrito extends JFrame {
 
 			JLabel precioFinal = new JLabel("Importe Total:" + precioTotal);
 
-			bep.setPreferredSize(new Dimension(100, 50));
-
+			bep.setPreferredSize(new Dimension(150, 50));
 			panelCarrito.add(texto, BorderLayout.NORTH);
 			panelCarrito.add(bep, BorderLayout.SOUTH);
 
