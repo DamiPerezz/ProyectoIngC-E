@@ -88,7 +88,7 @@ public class ControladorCarrito implements ActionListener{
 			
 			try {
 			FileWriter fichero = new FileWriter("registrosCocina.txt",true);	
-			fichero.write(NIdentificacion + ";" + ide + ";" + '\n');
+			fichero.write(NIdentificacion + ";" + ide + ";");
 			fichero.close();
 			
 			}catch(Exception ex) {
@@ -117,7 +117,7 @@ public class ControladorCarrito implements ActionListener{
 			
 			try {
 			FileWriter fichero = new FileWriter("registrosCocina.txt",true);	
-			fichero.write(NIdentificacion + ";" + ide + ";" + '\n');
+			fichero.write(NIdentificacion + ";" + ide + ";");
 			fichero.close();
 			
 			}catch(Exception ex) {

@@ -47,11 +47,7 @@ public class ControladorCrearPedido implements ActionListener {
     		mainFrame.initialize();
     		mainFrame.setVisible(true);
         	
-        } else {
-        	
-        	ventana.setVisible(false);
-        	
-        }
+        } 
 	}	
 }
 

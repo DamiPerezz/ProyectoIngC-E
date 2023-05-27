@@ -3,8 +3,6 @@ package View;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 
@@ -12,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 
 
@@ -33,7 +30,6 @@ public class VentanaCrearPedido extends JFrame {
 	public JButton añadirPlato;
 	public JButton menuDelDia;
 	public JButton carrito;
-	
 	public JMenuBar menuBar;
 	public JMenu menu;
 	public ControladorCrearPedido controlador;
@@ -50,29 +46,12 @@ public class VentanaCrearPedido extends JFrame {
 		ventana.setVisible(true);
 		
 		
-		  JMenuBar menuBar = new JMenuBar();
-	        setJMenuBar(menuBar);
-	        
-	        //Añade OPCION a la barra
-	        JMenu mnNewMenu = new JMenu("Opcion");
-	        menuBar.add(mnNewMenu);
-	        
-	        //Añade el salir a la barra con el action listener incorporado para que salga del sistema 
-	        
-	        JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
-	        mntmNewMenuItem.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        		ventana.setVisible(false);
-	        	}
-	        });
-	        
-	        
-	        
-	        mnNewMenu.add(mntmNewMenuItem);
-		
-	        ventana.add(menuBar);
-	
-		
+		//MENU BAR
+		menuBar = new JMenuBar();
+		menu = new JMenu("Atrás");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menuBar.add(menu); // añadimos boton de "Atras" al menubar
+		setJMenuBar(menuBar);
 		
 		//LOS 3 BOTONES
 		añadirPlato = new JButton ("Añadir Plato");
