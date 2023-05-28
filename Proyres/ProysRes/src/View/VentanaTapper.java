@@ -58,11 +58,14 @@ public class VentanaTapper extends JFrame{
 	        JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
 	        mntmNewMenuItem.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
+	        		ventanaDeTapper.dispose();
 	        		setVisible(false);
 	        	}
 	        });
 	        
 	        mnNewMenu.add(mntmNewMenuItem);
+	        ventanaDeTapper.setJMenuBar(menuBar);
+	        ventanaDeTapper.setVisible(true);
 	        
 	}
 	

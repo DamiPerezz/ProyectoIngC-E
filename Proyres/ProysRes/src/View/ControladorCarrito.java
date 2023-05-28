@@ -109,6 +109,7 @@ public class ControladorCarrito implements ActionListener{
 			v.dispose();
 			ventanaTapper.dispose();
 			ventanaTapper.setVisible(false);
+			
 		}
 		if(e.getSource()==ventanaTapper.BotonNoTapper) {
 			ide=-1;
