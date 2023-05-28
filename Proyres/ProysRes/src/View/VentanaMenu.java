@@ -77,6 +77,8 @@ public class VentanaMenu extends JFrame {
 		
 		etiqueta.setText(mensaje);
 		
+		
+		
 	
 		//add(texto);
 	
@@ -84,6 +86,8 @@ public class VentanaMenu extends JFrame {
 
 		
 		add(etiqueta);
+		
+		
 		// JButton
 		añadir = new JButton("Añadir");
 		

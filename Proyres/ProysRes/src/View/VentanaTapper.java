@@ -45,6 +45,7 @@ public class VentanaTapper extends JFrame{
 		ventanaDeTapper.add(BotonNoTapper);
 		ventanaDeTapper.setVisible(true);
 		
+		
 		  JMenuBar menuBar = new JMenuBar();
 	        setJMenuBar(menuBar);
 	        

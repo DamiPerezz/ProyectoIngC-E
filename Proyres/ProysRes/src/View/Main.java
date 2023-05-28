@@ -178,10 +178,10 @@ public class Main {
 		});
 
 		// BOTON AÑADIR TAPER DESDE ADMIN
-
-		JButton btnHomeFromAdmin_1_3 = new JButton("Añadir Taper");
-		btnHomeFromAdmin_1_3.setBounds(262, 140, 194, 46);
-		adminPanel.add(btnHomeFromAdmin_1_3);
+//
+//		JButton btnHomeFromAdmin_1_3 = new JButton("Añadir Taper");
+//		btnHomeFromAdmin_1_3.setBounds(262, 140, 194, 46);
+//		adminPanel.add(btnHomeFromAdmin_1_3);
 
 		// Crea barra de menu
 
