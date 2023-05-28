@@ -101,7 +101,7 @@ public class VentanaMenu extends JFrame {
 	        setJMenuBar(menuBar);
 	        
 	        //Añade OPCION a la barra
-	        JMenu mnNewMenu = new JMenu("Opcion");
+	        JMenu mnNewMenu = new JMenu("Opción");
 	        menuBar.add(mnNewMenu);
 	        
 	        //Añade el salir a la barra con el action listener incorporado para que salga del sistema 

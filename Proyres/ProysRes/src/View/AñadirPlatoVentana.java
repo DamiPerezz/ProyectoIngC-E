@@ -76,8 +76,8 @@ public class AñadirPlatoVentana extends JFrame {
 
 			String[] alergias = JOptionPane
 					.showInputDialog(
-							"Escriba las alergias separado por comas: \n 1. Gluten \n 2. Marisco \n 3. Frutos Secos \n"
-									+ "4. Lactosa \n 5. Huevos \n 6. Pescado \n 7. Soja \n 8. Vegetariano \n")
+							"Escriba las alergias separado por comas: \n - Gluten \n - Marisco \n - Frutos Secos \n"
+									+ "- Lactosa \n - Huevos \n - Pescado \n - Soja \n - Vegetariano \n")
 					.toLowerCase().replaceAll("\\s", "").split(",");
 
 			if (!alergias[0].equals("")) {

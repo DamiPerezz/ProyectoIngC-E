@@ -35,11 +35,11 @@ public class VentanaTapper extends JFrame{
 		ventanaDeTapper = new JFrame ();
 		ventanaDeTapper.setSize(400,400);
 		ventanaDeTapper.setLayout(new FlowLayout());
-		BotonSiTapper = new JButton("Agregar Tapper");
+		BotonSiTapper = new JButton("Agregar Tupper");
 		BotonSiTapper.setSize(100,100);	
 		BotonSiTapper.addActionListener(controlador);
 		ventanaDeTapper.add(BotonSiTapper);
-		BotonNoTapper = new JButton("NO Agregar Tapper");
+		BotonNoTapper = new JButton("NO Agregar Tupper");
 		BotonNoTapper.setSize(100,100);
 		BotonNoTapper.addActionListener(controlador);
 		ventanaDeTapper.add(BotonNoTapper);

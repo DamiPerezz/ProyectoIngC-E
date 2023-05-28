@@ -39,7 +39,7 @@ public class VentanaAlmacen extends JFrame {
 	    ventana.add(numTaper,BorderLayout.CENTER);
 	        
 	        
-	    recargarStock = new JButton("Recargar stock tapper");
+	    recargarStock = new JButton("Recargar stock tupper");
 	    recargarStock.setBounds(50, 50, 200, 30);
 	    recargarStock.addActionListener(controlador);
 	    ventana.add(recargarStock,BorderLayout.SOUTH);

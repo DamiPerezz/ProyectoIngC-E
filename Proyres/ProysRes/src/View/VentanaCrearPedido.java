@@ -54,7 +54,7 @@ public class VentanaCrearPedido extends JFrame {
 	        setJMenuBar(menuBar);
 	        
 	        //Añade OPCION a la barra
-	        JMenu mnNewMenu = new JMenu("Opcion");
+	        JMenu mnNewMenu = new JMenu("Opción");
 	        menuBar.add(mnNewMenu);
 	        
 	        //Añade el salir a la barra con el action listener incorporado para que salga del sistema 
@@ -76,7 +76,7 @@ public class VentanaCrearPedido extends JFrame {
 		
 		//LOS 3 BOTONES
 		añadirPlato = new JButton ("Añadir Plato");
-		menuDelDia = new JButton ("Menu del Día");
+		menuDelDia = new JButton ("Menú del Día");
 		carrito = new JButton ("Carrito");
 		
 		
