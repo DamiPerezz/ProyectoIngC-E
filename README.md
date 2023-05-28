@@ -47,8 +47,4 @@ Configura el build path del proyecto con el externarl JAR de la versión de json
 
 ## Contacto
 
-Si tienes alguna pregunta, sugerencia o problema relacionado con el programa, por favor, ponte en contacto con nuestro equipo de soporte a través de support@clickandeat.com.
-
----
-
 *Este programa fue desarrollado por Damián Pérez Moreno (https://github.com/DamiPerezz), Javier Chouza (https://github.com/Jachpi), Maria Juarez Molera (https://github.com/mariajuarezmo), Sahar Aman (https://github.com/Sahar-Aman) y Fabian Aguirre (https://github.com/Lucho011) 
