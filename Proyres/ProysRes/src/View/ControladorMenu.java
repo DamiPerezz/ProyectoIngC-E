@@ -29,7 +29,7 @@ public class ControladorMenu implements ActionListener {
     private VentanaCrearPedido ventanaCrearPedido;
     private String diaSemana;
     private ArrayList <String> listaNombres = new ArrayList<>();
-    
+    private Menu menuaux;
     
 	public void setPlatosDelDia(ArrayList<String> listaNombres) {
 		
@@ -86,6 +86,10 @@ public class ControladorMenu implements ActionListener {
 //            }
 //
 //            Menu m = new Menu(platos);
+          
+            menuaux = new Menu(); 
+            this.menuaux = men; 
+            
             ControladorCarrito.actualizarPedido(men);
             
          
@@ -96,7 +100,19 @@ public class ControladorMenu implements ActionListener {
     	
     }
    
-    private String obtenerDiaSemanaActual() {
+    public Menu getMenuaux() {
+		return menuaux;
+	}
+
+	public void setMenuaux(Menu menuaux) {
+		this.menuaux = menuaux;
+	}
+
+	
+	
+	
+	
+	private String obtenerDiaSemanaActual() {
     	Calendar calendar = Calendar.getInstance();
         int diaSemana = calendar.get(Calendar.DAY_OF_WEEK);
 
