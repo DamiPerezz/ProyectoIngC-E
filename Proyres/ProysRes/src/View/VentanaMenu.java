@@ -62,6 +62,7 @@ public class VentanaMenu extends JFrame {
 		
 		texto = controlador.leerMenu("menusSemana/menu" + "Lunes" + ".json");
 		
+	
 		String mensaje = "<html> Menú del día : <br>";
 		
 		for ( int i = 0; i < nombres.size(); i ++) {
@@ -85,9 +86,11 @@ public class VentanaMenu extends JFrame {
 		add(etiqueta);
 		// JButton
 		añadir = new JButton("Añadir");
+		
 		añadir.setMnemonic(KeyEvent.VK_M); // activar el boton para poder pulsarle
 		añadir.setPreferredSize(new Dimension(170, 50));
 		add(añadir);
+		añadir.addActionListener(controlador);
 		
 		
 		  JMenuBar menuBar = new JMenuBar();

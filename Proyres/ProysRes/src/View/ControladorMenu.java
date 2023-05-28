@@ -52,6 +52,8 @@ public class ControladorMenu implements ActionListener {
       
     	if (e.getSource() == ventana.añadir) {
     		
+    		
+    		
 //    		
 //            String diaSemana = obtenerDiaSemanaActual();
 //            String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
