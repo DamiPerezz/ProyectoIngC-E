@@ -26,7 +26,8 @@ public class Menu {
 		this.listaPlatos=listaPlatos;
 	}
 	
-
+	
+	
 	public Menu(ArrayList<Plato> listaPlatos  ) {
 		super();
 		

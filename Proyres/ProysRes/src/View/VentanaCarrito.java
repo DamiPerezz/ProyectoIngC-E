@@ -29,6 +29,7 @@ public class VentanaCarrito extends JFrame {
 	public JButton cp;
 	private static ArrayList<String> pedidoActualPlatos = new ArrayList<>();
 	private static ArrayList<String> pedidoActualMenus = new ArrayList<>();
+	private static ArrayList<Menu> menusPedidoActual = new ArrayList<>();
 	private static float precioTotal = 0;
 	
 
@@ -40,6 +41,8 @@ public class VentanaCarrito extends JFrame {
 	}
 
 	public static void actualizarPedido(Menu m) {
+		System.out.println(m);
+		menusPedidoActual.add(m);
 		ArrayList<Plato> listado = new ArrayList<>();
 		listado = m.getListaPlatos();
 		String texto = "";
@@ -119,8 +122,10 @@ public class VentanaCarrito extends JFrame {
 				});
 			}
 			
-			for (String m : pedidoActualMenus) {
-				JLabel listado = new JLabel("<html>" + m + "</html>");
+			for (Menu m : menusPedidoActual) {
+				//System.out.println(m);
+				//JLabel listado = new JLabel("<html>" + m + "</html>");
+				JLabel listado = new JLabel("<html>" +"Menu del "+ m.getDiaSemana()+ ":" + m.getPrecio()+"$" + "</html>" ); 
 				panelCarrito.add(listado, BorderLayout.CENTER);
 
 				JButton platos = new JButton("Quitar menú");

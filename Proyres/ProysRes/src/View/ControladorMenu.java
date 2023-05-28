@@ -16,6 +16,7 @@ import Model.Plato;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -72,18 +73,20 @@ public class ControladorMenu implements ActionListener {
             
             
             String nombreFichero = "menusSemana/menu" + "Lunes" + ".json";
-            String menu = leerMenu(nombreFichero);
-            System.out.println(menu);
-            String[] arrayStrings = menu.split(",");
-            ArrayList<Plato> platos = new ArrayList<>();
-           
-            for (String nombrePlato : arrayStrings) {
-                Plato plato = new Plato(nombrePlato);
-                platos.add(plato);
-            }
-
-            Menu m = new Menu(platos);
-            ControladorCarrito.actualizarPedido(m);
+            String dia = "Lunes";
+            Menu men= SacarInstanciasMenu(dia);
+//            String menu = leerMenu(nombreFichero);
+//            System.out.println(menu);
+//            String[] arrayStrings = menu.split(",");
+//            ArrayList<Plato> platos = new ArrayList<>();
+//           
+//            for (String nombrePlato : arrayStrings) {
+//                Plato plato = new Plato(nombrePlato);
+//                platos.add(plato);
+//            }
+//
+//            Menu m = new Menu(platos);
+            ControladorCarrito.actualizarPedido(men);
             
          
             ventana.setVisible(true);
@@ -176,6 +179,67 @@ public class ControladorMenu implements ActionListener {
 ////System.out.println(platos);
        return menu.toString();
     }
+    
+    //---------------------------------------------------------//
+    // hora de hacerlo a lo Damiano----------------------------//
+    
+    public Menu SacarInstanciasMenu(String dia) {
+		String text = "";
+		String textoCarrito = "";
+		// Leer listaPlatos
+		try {
+			FileReader fichero = new FileReader("menusSemana/menu" + dia + ".json");
+
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				text = sc.nextLine();
+				sc.close();
+			}
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		String txt = text;
+		JSONObject menuJSON = new JSONObject(txt);
+		int price = menuJSON.getInt("precio");
+		String DiaSemana = menuJSON.getString("DiaSemana");
+		JSONArray listaPla = menuJSON.getJSONArray("listaPlatos");
+
+		ArrayList<Plato> listaPlatos = new ArrayList<Plato>();
+
+		// Bucle de instanciar JSONPlato a ArrayList Plato
+		for (int i = 0; i < listaPla.length(); i++) {
+			JSONObject platoJSON = listaPla.getJSONObject(i);
+			int precio = platoJSON.getInt("precio");
+			String nombrePlato = platoJSON.getString("nombrePlato");
+			textoCarrito += "- " + nombrePlato + "<br>";
+
+			int NOPlato = platoJSON.getInt("NOPlato");
+			// Creamos el JSONArray para sacar los valores de INgrediente
+
+			JSONArray lisIng = platoJSON.getJSONArray("listaIngredientes");
+			Ingrediente[] listaIngredientes = new Ingrediente[lisIng.length()];
+
+			for (int j = 0; j < listaIngredientes.length; j++) {
+				String nombre = lisIng.getString(j);
+				Ingrediente ingrediente = new Ingrediente(nombre);
+				listaIngredientes[j] = ingrediente;
+			}
+
+			String Alergia = platoJSON.getString("Alergia");
+
+			Plato p = new Plato(nombrePlato, precio, listaIngredientes, NOPlato, Alergia);
+			listaPlatos.add(p);
+		}
+		Menu menu = new Menu();
+		menu.setDiaSemana(DiaSemana);
+		menu.setPrecio(price);
+		menu.setListaPlatos(listaPlatos);
+
+		return menu;
+
+	}
     
     
 }
