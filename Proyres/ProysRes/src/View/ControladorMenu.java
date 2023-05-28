@@ -29,7 +29,7 @@ public class ControladorMenu implements ActionListener {
     private VentanaCrearPedido ventanaCrearPedido;
     private String diaSemana;
     private ArrayList <String> listaNombres = new ArrayList<>();
-    private Menu menuaux;
+    private double menuPrecio;
     
 	public void setPlatosDelDia(ArrayList<String> listaNombres) {
 		
@@ -87,8 +87,6 @@ public class ControladorMenu implements ActionListener {
 //
 //            Menu m = new Menu(platos);
           
-            menuaux = new Menu(); 
-            this.menuaux = men; 
             
             ControladorCarrito.actualizarPedido(men);
             
@@ -100,12 +98,12 @@ public class ControladorMenu implements ActionListener {
     	
     }
    
-    public Menu getMenuaux() {
-		return menuaux;
+    public double getMenuPrecio() {
+		return menuPrecio;
 	}
 
-	public void setMenuaux(Menu menuaux) {
-		this.menuaux = menuaux;
+	public void setMenuaux(double menuaux) {
+		this.menuPrecio = menuaux;
 	}
 
 	
@@ -164,6 +162,7 @@ public class ControladorMenu implements ActionListener {
         JSONObject menuJSON = new JSONObject(contenido.toString());
         JSONArray platos = menuJSON.getJSONArray("listaPlatos");
         double precioMenu = menuJSON.getDouble("precio");
+        this.menuPrecio = precioMenu;
         
         ArrayList<String> listaNombres = new ArrayList<String>();
         

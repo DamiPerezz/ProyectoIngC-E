@@ -63,9 +63,8 @@ public class VentanaMenu extends JFrame {
 		texto = controlador.leerMenu("menusSemana/menu" + "Lunes" + ".json");
 		
 	
-		controlador.SacarInstanciasMenu("Lunes");
 		
-		String mensaje = "<html> Menú del día : " + controlador.getMenuaux().getPrecio() + " <br>";
+		String mensaje = "<html> Menú del día : " + controlador.getMenuPrecio() + "€" + "<br>";
 		
 		
 		
