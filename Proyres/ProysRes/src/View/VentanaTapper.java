@@ -1,9 +1,14 @@
 package View;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class VentanaTapper extends JFrame{
 	
@@ -40,6 +45,24 @@ public class VentanaTapper extends JFrame{
 		ventanaDeTapper.add(BotonNoTapper);
 		ventanaDeTapper.setVisible(true);
 		
+		  JMenuBar menuBar = new JMenuBar();
+	        setJMenuBar(menuBar);
+	        
+	        //Añade OPCION a la barra
+	        JMenu mnNewMenu = new JMenu("Opción");
+	        menuBar.add(mnNewMenu);
+	        
+	        //Añade el salir a la barra con el action listener incorporado para que salga del sistema 
+	        
+	        JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+	        mntmNewMenuItem.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		setVisible(false);
+	        	}
+	        });
+	        
+	        mnNewMenu.add(mntmNewMenuItem);
+	        
 	}
 	
 	

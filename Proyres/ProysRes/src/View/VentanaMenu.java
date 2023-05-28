@@ -75,6 +75,7 @@ public class VentanaMenu extends JFrame {
 		
 		
 		etiqueta.setText(mensaje);
+		
 	
 		//add(texto);
 	
@@ -111,7 +112,7 @@ public class VentanaMenu extends JFrame {
 	        
 	        	
 		
-	    añadir.addActionListener(controlador);
+	 //   añadir.addActionListener(controlador);
 	  
 		pack(); // Ajusta automáticamente el tamaño de la ventana
 	}

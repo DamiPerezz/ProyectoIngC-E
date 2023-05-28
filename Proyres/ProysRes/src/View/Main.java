@@ -189,7 +189,7 @@ public class Main {
 		frame.setJMenuBar(menuBar);
 
 		// Añade OPCION a la barra
-		JMenu mnNewMenu = new JMenu("Opcion");
+		JMenu mnNewMenu = new JMenu("Opción");
 		menuBar.add(mnNewMenu);
 
 		// Añade el salir a la barra con el action listener incorporado para que salga
@@ -220,7 +220,7 @@ public class Main {
 		});
 		mnNewMenu.add(mntmAdmin);
 		
-		JMenuItem botonAlmacen = new JMenuItem("Almacen");
+		JMenuItem botonAlmacen = new JMenuItem("Almacén");
 		botonAlmacen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				{
