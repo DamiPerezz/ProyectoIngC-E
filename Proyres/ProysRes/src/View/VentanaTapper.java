@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class VentanaTapper extends JFrame{
 	
 	private ControladorCarrito controlador;
-	private JFrame ventanaDeTapper;
+	public JFrame ventanaDeTapper;
 	public JButton BotonSiTapper;
 	public JButton BotonNoTapper;
 	

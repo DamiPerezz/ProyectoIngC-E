@@ -15,6 +15,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import Model.Almacen;
 import Model.Menu;
 import Model.Pedido;
 import Model.Plato;
@@ -106,10 +107,14 @@ public class ControladorCarrito implements ActionListener{
 			listaPlatos.clear();
 			listaMenus.clear();
 			
+			Almacen a = new Almacen();
+			a.setNumTupper(a.getNumTupper()-1);
+			a.GuardarNTupper(a.getNumTupper());
 			
 			v.asegurarVentana();
 			v.dispose();
 			ventanaTapper.dispose();
+			ventanaTapper.setVisible(false);
 		}
 		if(e.getSource()==ventanaTapper.BotonNoTapper) {
 			ide=-1;
@@ -138,7 +143,7 @@ public class ControladorCarrito implements ActionListener{
 			
 			v.asegurarVentana();
 			v.dispose();
-			ventanaTapper.dispose();
+			ventanaTapper.ventanaDeTapper.dispose();
 		}
 		
 		

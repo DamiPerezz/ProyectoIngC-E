@@ -3,6 +3,7 @@ package View;
 import javax.swing.*;
 
 import Model.Alergia;
+import Model.Almacen;
 import Model.Menu;
 import Model.Plato;
 
@@ -218,6 +219,28 @@ public class Main {
 			}
 		});
 		mnNewMenu.add(mntmAdmin);
+		
+		JMenuItem botonAlmacen = new JMenuItem("Almacen");
+		botonAlmacen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				{
+				}
+
+				String password = JOptionPane.showInputDialog(frame, "Enter password:");
+				if (ADMIN_PASSWORD.equals(password)) {
+					Almacen a= new Almacen();
+					VentanaAlmacen aWindow = new VentanaAlmacen();
+					ControladorAlmacen aCtrl = new ControladorAlmacen(aWindow);
+					aWindow.setControlador(aCtrl);
+					aCtrl.setAlmacen(a);
+					aWindow.Iniciar();
+					
+				} else {
+					JOptionPane.showMessageDialog(frame, "Incorrect password!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		mnNewMenu.add(botonAlmacen);
 
 	}
 }
