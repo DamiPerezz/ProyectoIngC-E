@@ -121,7 +121,7 @@ public class Main {
 				((CardLayout) frame.getContentPane().getLayout()).show(frame.getContentPane(), "Home");
 			}
 		});
-		btnHomeFromAdmin.setBounds(0, 10, 100, 23);
+		btnHomeFromAdmin.setBounds(10, 10, 100, 23);
 		adminPanel.add(btnHomeFromAdmin);
 
 		JButton btnExitFromAdmin = new JButton("Exit");
@@ -148,7 +148,7 @@ public class Main {
 		// BOTON PEDIDO ADMIN
 
 		JButton btnHomeFromAdmin_1_1 = new JButton("Añadir Plato");
-		btnHomeFromAdmin_1_1.setBounds(262, 56, 194, 46);
+		btnHomeFromAdmin_1_1.setBounds(155, 56, 194, 46);
 		adminPanel.add(btnHomeFromAdmin_1_1);
 		btnHomeFromAdmin_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,14 +157,14 @@ public class Main {
 //				ventanaPedido.controlador = controladorPedido;
 //				ventanaPedido.Iniciar();
 				Plato.AñadirPlato(); 
-
+				
 			}
 		});
 
 		// BOTON INGREDIENTE DESDE ADMIN
 
 		JButton btnHomeFromAdmin_1_2 = new JButton("Añadir Menú");
-		btnHomeFromAdmin_1_2.setBounds(45, 140, 194, 46);
+		btnHomeFromAdmin_1_2.setBounds(155, 120, 194, 46);
 		adminPanel.add(btnHomeFromAdmin_1_2);
 		btnHomeFromAdmin_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -177,22 +177,32 @@ public class Main {
 				m.AñadirMenuAFichero(m);
 			}
 		});
-
 		
-		JButton btnEstadisticas = new JButton("Estadísticas");
-		btnEstadisticas.setBounds(262, 56, 194, 46);
-		adminPanel.add(btnEstadisticas);
-		btnEstadisticas.addActionListener(new ActionListener() {			
+		JButton btnHomeFromAdmin_1_3 = new JButton("Estadísticas");
+		btnHomeFromAdmin_1_3.setBounds(155, 180, 194, 46);
+		adminPanel.add(btnHomeFromAdmin_1_3);
+		btnHomeFromAdmin_1_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				VentanaCrearPedido ventanaPedido = new VentanaCrearPedido();
-//				ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
-//				ventanaPedido.controlador = controladorPedido;
-//				ventanaPedido.Iniciar();
-				Pedido.AlergiaMasRepetida(); 
-
+				//para imprimir por JOptionPane (no muestra todo)
+				//JOptionPane.showMessageDialog(adminPanel, Pedido.MediaPedidos());
+				
+				//para imprimir por la ventanda de estadistica
+//				VentanaEstadistica ventanaEstadisticas = new VentanaEstadistica();
+//			    int totalPlatos = Pedido.MediaPedidos();
+//			    ventanaEstadisticas.mostrarResultado(totalPlatos);
+//			    ventanaEstadisticas.setVisible(true);
+			    
+			    //para imprimir por la consola
+				System.out.println("Métrica de las Alergias: "
+						+ "\n ------------------------------");
+				Pedido.AlergiaMasRepetida();
+				System.out.println( "\n ");
+				System.out.println("Métrica de los Platos: "
+						+ "\n ------------------------------");
+				Pedido.MediaPedidos();
 			}
 		});
-		
+
 		// BOTON AÑADIR TAPER DESDE ADMIN
 //
 //		JButton btnHomeFromAdmin_1_3 = new JButton("Añadir Taper");

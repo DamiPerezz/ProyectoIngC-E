@@ -25,9 +25,9 @@ public class Pedido {
 
 	public static void main(String[] args) {
 
-		// Pedido r = new Pedido();
+		 Pedido r = new Pedido();
 
-		// r.CrearPedido();
+		 r.CrearPedido();
 
 		AlergiaMasRepetida();
 		MediaPedidos();
@@ -424,31 +424,31 @@ public class Pedido {
 			}
 			sc.close();
 
-			// convertimos todo a un jsonArray para poder recorrer los numeros mas facil
-			JSONArray pedidosArray = new JSONArray(texto.toString());
+			
+			JSONArray pedidosArray = new JSONArray(texto.toString());//convertimos todo a un jsonArray para poder recorrer los numeros mas facil
 
 			int numPedidos = pedidosArray.length();
 
-			// recoore cada pedido y obtiene el número de platos totales
-			for (int i = 0; i < numPedidos; i++) {
+			
+			for (int i = 0; i < numPedidos; i++) {//recoore por cada pedido y obtiene el número de platos totales
 				JSONObject pedido = pedidosArray.getJSONObject(i);
 				JSONArray platosArray = pedido.getJSONArray("listaPlatos");
 				int numPlatos = platosArray.length();
 				totalPlatos += numPlatos;
 			}
 
-			// la media del numero de los platos
-			int mediaPlatos = (int) totalPlatos / numPedidos;
+			
+			int mediaPlatos = (int) totalPlatos / numPedidos;// la media del numero de los platos
 
-			System.out.println("Número total de platos pedidos: " + totalPlatos);
+			System.out.println("Número total de platos pedidos: " + totalPlatos);//las dos primeras no son necesarias pero lo he imprimido para comprobar que me salen bien los calculos
 			System.out.println("Número de pedidos: " + numPedidos);
 			System.out.println("Media de platos por pedido: " + mediaPlatos);
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return totalPlatos;
-
+		
 	}
 
 	public static void AlergiaMasRepetida() {
