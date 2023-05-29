@@ -531,8 +531,8 @@ public class Pedido {
 
 			}
 		}
-		System.out.println("Array" + alergias);
-		System.out.println("La alergia más introducida es : " + alergiamasrepetida);
+		
+		System.out.println("La alergia más frecuente en los pedidos es : " + alergiamasrepetida);
 
 	}
 
