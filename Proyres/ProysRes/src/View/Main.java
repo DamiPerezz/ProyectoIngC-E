@@ -5,6 +5,7 @@ import javax.swing.*;
 import Model.Alergia;
 import Model.Almacen;
 import Model.Menu;
+import Model.Pedido;
 import Model.Plato;
 
 import java.awt.*;
@@ -177,6 +178,21 @@ public class Main {
 			}
 		});
 
+		
+		JButton btnEstadisticas = new JButton("Estadísticas");
+		btnEstadisticas.setBounds(262, 56, 194, 46);
+		adminPanel.add(btnEstadisticas);
+		btnEstadisticas.addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent e) {
+//				VentanaCrearPedido ventanaPedido = new VentanaCrearPedido();
+//				ControladorCrearPedido controladorPedido = new ControladorCrearPedido(ventanaPedido);
+//				ventanaPedido.controlador = controladorPedido;
+//				ventanaPedido.Iniciar();
+				Pedido.AlergiaMasRepetida(); 
+
+			}
+		});
+		
 		// BOTON AÑADIR TAPER DESDE ADMIN
 //
 //		JButton btnHomeFromAdmin_1_3 = new JButton("Añadir Taper");

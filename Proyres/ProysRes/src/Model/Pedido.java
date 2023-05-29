@@ -398,49 +398,6 @@ public class Pedido {
 
 	}
 
-	public static void AlergiaMasRepetida() {
-		String txt = "";
-		try {
-			FileReader fichero = new FileReader("listaPedidos.json");
-			Scanner sc = new Scanner(fichero);
-
-			while (sc.hasNextLine()) {
-				txt += sc.nextLine();
-			}
-
-			sc.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		JSONArray jsonArray = new JSONArray(txt);
-
-		// Recorrer cada objeto en el JSONArray
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			// Obtener la lista de platos
-			JSONArray listaPlatos = jsonObject.getJSONArray("listaPlatos");
-
-			// Recorrer cada plato en la lista
-			for (int j = 0; j < listaPlatos.length(); j++) {
-
-				try {
-					JSONObject plato = listaPlatos.getJSONObject(j);
-					String alergia = plato.getString("alergia");
-					System.out.println("Alergia: " + alergia);
-
-				} catch (Exception e) {
-					System.out.println("null");
-				}
-
-				// Obtener el valor de la alergia
-
-			}
-		}
-
-	}
-
 	public static int MediaPedidos() {
 
 //		String texto = "";
@@ -486,12 +443,97 @@ public class Pedido {
 			System.out.println("Número total de platos pedidos: " + totalPlatos);
 			System.out.println("Número de pedidos: " + numPedidos);
 			System.out.println("Media de platos por pedido: " + mediaPlatos);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return totalPlatos;
-		
+
+	}
+
+	public static void AlergiaMasRepetida() {
+
+		ArrayList<String> alergias = new ArrayList<String>();
+		ArrayList<Integer> veces = new ArrayList<Integer>();
+		boolean serepite = false;
+		String txt = "";
+		int valormasrepetido = -12345678;
+		String alergiamasrepetida = " ";
+
+		try {
+			FileReader fichero = new FileReader("listaPedidos.json");
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				txt += sc.nextLine();
+			}
+
+			sc.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		JSONArray jsonArray = new JSONArray(txt);
+
+		// Recorrer cada objeto en el JSONArray
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			// Obtener la lista de platos
+			JSONArray listaPlatos = jsonObject.getJSONArray("listaPlatos");
+
+			// Recorrer cada plato en la lista
+			for (int j = 0; j < listaPlatos.length(); j++) {
+
+				try {
+					JSONObject plato = listaPlatos.getJSONObject(j);
+					String alergia = plato.getString("alergia");
+					// System.out.println("Alergia: " + alergia);
+
+					if (alergia != null && !alergia.equals("")) {
+
+						serepite = false;
+
+						for (int k = 0; k < alergias.size(); k++) {
+
+							if (alergia.equals(alergias.get(k))) {
+
+								serepite = true;
+
+								veces.set(k, veces.get(k) + 1);
+
+							}
+						}
+
+						if (serepite) {
+
+						} else {
+
+							alergias.add(alergia);
+							veces.add(1);
+						}
+					}
+
+				} catch (Exception e) {
+					// System.out.println("null");
+				}
+
+				// Obtener el valor de la alergia
+
+			}
+		}
+		for (int k = 0; k < veces.size(); k++) {
+
+			if (valormasrepetido < veces.get(k)) {
+
+				valormasrepetido = veces.get(k);
+				alergiamasrepetida = alergias.get(k);
+
+			}
+		}
+		System.out.println("Array" + alergias);
+		System.out.println("La alergia más introducida es : " + alergiamasrepetida);
+
 	}
 
 	public String toString() {
