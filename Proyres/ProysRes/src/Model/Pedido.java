@@ -24,9 +24,12 @@ public class Pedido {
 
 	public static void main(String[] args) {
 
-		Pedido r = new Pedido();
+		// Pedido r = new Pedido();
 
-		r.CrearPedido();
+		// r.CrearPedido();
+
+		AlergiaMasRepetida();
+
 	}
 
 	public void imprimirRecibo() {
@@ -390,6 +393,49 @@ public class Pedido {
 		ControladorCarrito.actualizarPedido(p);
 
 		return p;
+
+	}
+
+	public static void AlergiaMasRepetida() {
+		String txt = "";
+		try {
+			FileReader fichero = new FileReader("listaPedidos.json");
+			Scanner sc = new Scanner(fichero);
+
+			while (sc.hasNextLine()) {
+				txt += sc.nextLine();
+			}
+
+			sc.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		JSONArray jsonArray = new JSONArray(txt);
+	
+		// Recorrer cada objeto en el JSONArray
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			
+			// Obtener la lista de platos
+			JSONArray listaPlatos = jsonObject.getJSONArray("listaPlatos");
+			
+			// Recorrer cada plato en la lista
+			for (int j = 0; j < listaPlatos.length(); j++) {
+
+				try {
+					JSONObject plato = listaPlatos.getJSONObject(j);
+					String alergia = plato.getString("alergia");
+					System.out.println("Alergia: " + alergia);
+
+				} catch (Exception e) {
+					System.out.println("null");
+				}
+
+				// Obtener el valor de la alergia
+
+			}
+		}
 
 	}
 
