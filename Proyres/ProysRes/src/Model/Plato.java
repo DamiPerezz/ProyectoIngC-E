@@ -104,8 +104,18 @@ public class Plato {
 	public static void AñadirPlato() {
 		Plato aux = new Plato();
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		System.out.println("Introduzca nombre del nuevo plato:");
-
 		String plato = sc.nextLine(); // Nombre del Plato
 		System.out.println("Introduzca el precio del nuevo plato:");
 		float precio = sc.nextFloat(); // Precio

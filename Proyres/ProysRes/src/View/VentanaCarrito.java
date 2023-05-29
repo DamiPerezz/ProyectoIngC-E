@@ -76,7 +76,7 @@ public class VentanaCarrito extends JFrame {
 	public void initialize() {
 
 		if (abierta) {
-			System.out.println("esta abierta melon");
+			System.out.println("Ya está abierta");
 		} else {
 
 			abierta = true;
@@ -117,7 +117,12 @@ public class VentanaCarrito extends JFrame {
 
 						controlador.borrarPlato(pedidoActualPlatos.indexOf(s));
 						pedidoActualPlatos.remove(pedidoActualPlatos.indexOf(s));
-						System.out.println("No xd");
+					
+						for (String p: pedidoActualPlatos) {
+							System.out.println(p.toString());
+							
+						}
+						
 					}
 				});
 			}
@@ -139,8 +144,8 @@ public class VentanaCarrito extends JFrame {
 						panelCarrito.remove(platos);
 						panelCarrito.repaint();
 
-						controlador.borrarMenu(pedidoActualMenus.indexOf(m));
-						pedidoActualMenus.remove(pedidoActualMenus.indexOf(m));
+						controlador.borrarMenu(m);
+						menusPedidoActual.remove(m);
 						
 						
 						System.out.println("No xd");
@@ -169,7 +174,7 @@ public class VentanaCarrito extends JFrame {
 	public void actualizarPrecio(float d) {
 		
 		precioTotal -= d;
-		
+		System.out.println(precioTotal);
 	}
 	
 

@@ -218,6 +218,16 @@ public class Menu {
 	
 	public Menu CrearMenu() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		System.out.println("Escoje un dia de la semana para el menu" + "\n" + "Lunes/Martes/Miercoles/Jueves/Viernes/Sabado/Domingo");
 		String dia= sc.next();
 		if (dia=="Lunes" ||dia=="Martes" || dia=="Miercoles" || dia=="Jueves" || dia=="Viernes" || dia=="Sabado" || dia=="Domingo") {
