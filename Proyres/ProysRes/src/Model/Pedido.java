@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class Pedido {
 		// r.CrearPedido();
 
 		AlergiaMasRepetida();
+		MediaPedidos();
 
 	}
 
@@ -412,14 +414,14 @@ public class Pedido {
 		}
 
 		JSONArray jsonArray = new JSONArray(txt);
-	
+
 		// Recorrer cada objeto en el JSONArray
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			
+
 			// Obtener la lista de platos
 			JSONArray listaPlatos = jsonObject.getJSONArray("listaPlatos");
-			
+
 			// Recorrer cada plato en la lista
 			for (int j = 0; j < listaPlatos.length(); j++) {
 
@@ -437,6 +439,59 @@ public class Pedido {
 			}
 		}
 
+	}
+
+	public static int MediaPedidos() {
+
+//		String texto = "";
+//
+//		try {
+//			FileReader fichero = new FileReader("listaPedidos.json");
+//			Scanner sc = new Scanner(fichero);
+//			while (sc.hasNextLine()) {
+//				texto += sc.nextLine();
+//				sc.close();
+//			}
+//		} catch (Exception ex) {
+//			ex.getMessage();
+//		}
+
+		int totalPlatos = 0;
+		try {
+			StringBuilder texto = new StringBuilder();
+
+			FileReader fichero = new FileReader("listaPedidos.json");
+			Scanner sc = new Scanner(fichero);
+			while (sc.hasNextLine()) {
+				texto.append(sc.nextLine());
+			}
+			sc.close();
+
+			// convertimos todo a un jsonArray para poder recorrer los numeros mas facil
+			JSONArray pedidosArray = new JSONArray(texto.toString());
+
+			int numPedidos = pedidosArray.length();
+
+			// recoore cada pedido y obtiene el número de platos totales
+			for (int i = 0; i < numPedidos; i++) {
+				JSONObject pedido = pedidosArray.getJSONObject(i);
+				JSONArray platosArray = pedido.getJSONArray("listaPlatos");
+				int numPlatos = platosArray.length();
+				totalPlatos += numPlatos;
+			}
+
+			// la media del numero de los platos
+			int mediaPlatos = (int) totalPlatos / numPedidos;
+
+			System.out.println("Número total de platos pedidos: " + totalPlatos);
+			System.out.println("Número de pedidos: " + numPedidos);
+			System.out.println("Media de platos por pedido: " + mediaPlatos);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return totalPlatos;
+		
 	}
 
 	public String toString() {
