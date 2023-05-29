@@ -196,6 +196,7 @@ public class Main {
 				System.out.println("Métrica de las Alergias: "
 						+ "\n ------------------------------");
 				Pedido.AlergiaMasRepetida();
+				System.out.println("\n");
 				System.out.println("Métrica de los Platos: "
 						+ "\n ------------------------------");
 				Pedido.MediaPedidos();
